@@ -1,0 +1,518 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "bom-ref": "pkg:npm/%40babel/runtime@7.29.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@babel/runtime",
+      "purl": "pkg:npm/%40babel/runtime@7.29.2",
+      "type": "library",
+      "version": "7.29.2"
+    },
+    {
+      "bom-ref": "pkg:npm/%40boardoor/core@0.1.0-alpha.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@boardoor/core",
+      "purl": "pkg:npm/%40boardoor/core@0.1.0-alpha.0",
+      "type": "library",
+      "version": "0.1.0-alpha.0"
+    },
+    {
+      "bom-ref": "pkg:npm/%40boardoor/ui@0.1.0-alpha.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@boardoor/ui",
+      "purl": "pkg:npm/%40boardoor/ui@0.1.0-alpha.0",
+      "type": "library",
+      "version": "0.1.0-alpha.0"
+    },
+    {
+      "bom-ref": "pkg:npm/boardgame.io@0.50.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "boardgame.io",
+      "properties": [
+        {
+          "name": "boardoor:relationship",
+          "value": "modified-source"
+        },
+        {
+          "name": "boardoor:source",
+          "value": "https://github.com/boardgameio/boardgame.io/tree/2945c30e536517cf819e000f33d9d08bacaac297"
+        },
+        {
+          "name": "boardoor:modifications",
+          "value": "Boardoor extracted and modified the engine, client, and AI implementation; private server code is not part of this package. The Boardoor Debug panel is a new dependency-free implementation and is not copied from the legacy Svelte Debug UI."
+        }
+      ],
+      "purl": "pkg:npm/boardgame.io@0.50.2",
+      "type": "library",
+      "version": "0.50.2"
+    },
+    {
+      "bom-ref": "pkg:npm/eventemitter3@5.0.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "eventemitter3",
+      "purl": "pkg:npm/eventemitter3@5.0.4",
+      "type": "library",
+      "version": "5.0.4"
+    },
+    {
+      "bom-ref": "pkg:npm/flatted@3.4.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "flatted",
+      "purl": "pkg:npm/flatted@3.4.2",
+      "type": "library",
+      "version": "3.4.2"
+    },
+    {
+      "bom-ref": "pkg:npm/html-parse-stringify@3.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "html-parse-stringify",
+      "purl": "pkg:npm/html-parse-stringify@3.0.1",
+      "type": "library",
+      "version": "3.0.1"
+    },
+    {
+      "bom-ref": "pkg:npm/i18next@26.3.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "i18next",
+      "purl": "pkg:npm/i18next@26.3.6",
+      "type": "library",
+      "version": "26.3.6"
+    },
+    {
+      "bom-ref": "pkg:npm/immer@11.1.15",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "immer",
+      "purl": "pkg:npm/immer@11.1.15",
+      "type": "library",
+      "version": "11.1.15"
+    },
+    {
+      "bom-ref": "pkg:npm/lodash.isplainobject@4.0.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "lodash.isplainobject",
+      "purl": "pkg:npm/lodash.isplainobject@4.0.6",
+      "type": "library",
+      "version": "4.0.6"
+    },
+    {
+      "bom-ref": "pkg:npm/nanoid@6.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "nanoid",
+      "purl": "pkg:npm/nanoid@6.0.0",
+      "type": "library",
+      "version": "6.0.0"
+    },
+    {
+      "bom-ref": "pkg:npm/p-queue@9.3.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "p-queue",
+      "purl": "pkg:npm/p-queue@9.3.1",
+      "type": "library",
+      "version": "9.3.1"
+    },
+    {
+      "bom-ref": "pkg:npm/p-timeout@7.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "p-timeout",
+      "purl": "pkg:npm/p-timeout@7.0.1",
+      "type": "library",
+      "version": "7.0.1"
+    },
+    {
+      "bom-ref": "pkg:npm/react-dom@19.2.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "react-dom",
+      "purl": "pkg:npm/react-dom@19.2.7",
+      "type": "library",
+      "version": "19.2.7"
+    },
+    {
+      "bom-ref": "pkg:npm/react-i18next@17.0.9",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "react-i18next",
+      "purl": "pkg:npm/react-i18next@17.0.9",
+      "type": "library",
+      "version": "17.0.9"
+    },
+    {
+      "bom-ref": "pkg:npm/react@19.2.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "react",
+      "purl": "pkg:npm/react@19.2.7",
+      "type": "library",
+      "version": "19.2.7"
+    },
+    {
+      "bom-ref": "pkg:npm/redux@5.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "redux",
+      "purl": "pkg:npm/redux@5.0.1",
+      "type": "library",
+      "version": "5.0.1"
+    },
+    {
+      "bom-ref": "pkg:npm/rfc6902@5.2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "rfc6902",
+      "purl": "pkg:npm/rfc6902@5.2.0",
+      "type": "library",
+      "version": "5.2.0"
+    },
+    {
+      "bom-ref": "pkg:npm/scheduler@0.27.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "scheduler",
+      "purl": "pkg:npm/scheduler@0.27.0",
+      "type": "library",
+      "version": "0.27.0"
+    },
+    {
+      "bom-ref": "pkg:npm/seedrandom@3.0.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "seedrandom",
+      "properties": [
+        {
+          "name": "boardoor:relationship",
+          "value": "modified-source"
+        },
+        {
+          "name": "boardoor:source",
+          "value": "https://github.com/davidbau/seedrandom/blob/4460ad325a0a15273a211e509f03ae0beb99511a/lib/alea.js"
+        },
+        {
+          "name": "boardoor:modifications",
+          "value": "Boardoor inlines Johannes Baagøe's Alea algorithm as distributed by seedrandom, converts it to TypeScript, and exposes state capture and restore for deterministic game and bot execution."
+        }
+      ],
+      "purl": "pkg:npm/seedrandom@3.0.5",
+      "type": "library",
+      "version": "3.0.5"
+    },
+    {
+      "bom-ref": "pkg:npm/tailwindcss@4.3.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "tailwindcss",
+      "properties": [
+        {
+          "name": "boardoor:relationship",
+          "value": "generated-build-input"
+        },
+        {
+          "name": "boardoor:source",
+          "value": "https://github.com/tailwindlabs/tailwindcss/tree/c2b24dd15fed1c59dd521bd86082f520c9f5ad0d/packages/tailwindcss"
+        },
+        {
+          "name": "boardoor:modifications",
+          "value": "Boardoor compiles Tailwind CSS preflight and selected utility rules into dist/styles/ui.css. The generated CSS retains Tailwind's upstream MIT banner; Tailwind is not a runtime package dependency."
+        }
+      ],
+      "purl": "pkg:npm/tailwindcss@4.3.3",
+      "type": "library",
+      "version": "4.3.3"
+    },
+    {
+      "bom-ref": "pkg:npm/use-sync-external-store@1.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "use-sync-external-store",
+      "purl": "pkg:npm/use-sync-external-store@1.6.0",
+      "type": "library",
+      "version": "1.6.0"
+    },
+    {
+      "bom-ref": "pkg:npm/void-elements@3.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "void-elements",
+      "purl": "pkg:npm/void-elements@3.1.0",
+      "type": "library",
+      "version": "3.1.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "dependsOn": [
+        "pkg:npm/%40boardoor/core@0.1.0-alpha.0",
+        "pkg:npm/%40boardoor/ui@0.1.0-alpha.0"
+      ],
+      "ref": "boardoor-sdk-0.1.0-alpha.0"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/%40babel/runtime@7.29.2"
+    },
+    {
+      "dependsOn": [
+        "pkg:npm/boardgame.io@0.50.2",
+        "pkg:npm/flatted@3.4.2",
+        "pkg:npm/i18next@26.3.6",
+        "pkg:npm/immer@11.1.15",
+        "pkg:npm/lodash.isplainobject@4.0.6",
+        "pkg:npm/nanoid@6.0.0",
+        "pkg:npm/p-queue@9.3.1",
+        "pkg:npm/react-dom@19.2.7",
+        "pkg:npm/react-i18next@17.0.9",
+        "pkg:npm/react@19.2.7",
+        "pkg:npm/redux@5.0.1",
+        "pkg:npm/rfc6902@5.2.0",
+        "pkg:npm/seedrandom@3.0.5"
+      ],
+      "ref": "pkg:npm/%40boardoor/core@0.1.0-alpha.0"
+    },
+    {
+      "dependsOn": [
+        "pkg:npm/%40boardoor/core@0.1.0-alpha.0",
+        "pkg:npm/react-dom@19.2.7",
+        "pkg:npm/react-i18next@17.0.9",
+        "pkg:npm/react@19.2.7",
+        "pkg:npm/tailwindcss@4.3.3"
+      ],
+      "ref": "pkg:npm/%40boardoor/ui@0.1.0-alpha.0"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/boardgame.io@0.50.2"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/eventemitter3@5.0.4"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/flatted@3.4.2"
+    },
+    {
+      "dependsOn": [
+        "pkg:npm/void-elements@3.1.0"
+      ],
+      "ref": "pkg:npm/html-parse-stringify@3.0.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/i18next@26.3.6"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/immer@11.1.15"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/lodash.isplainobject@4.0.6"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/nanoid@6.0.0"
+    },
+    {
+      "dependsOn": [
+        "pkg:npm/eventemitter3@5.0.4",
+        "pkg:npm/p-timeout@7.0.1"
+      ],
+      "ref": "pkg:npm/p-queue@9.3.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/p-timeout@7.0.1"
+    },
+    {
+      "dependsOn": [
+        "pkg:npm/react@19.2.7",
+        "pkg:npm/scheduler@0.27.0"
+      ],
+      "ref": "pkg:npm/react-dom@19.2.7"
+    },
+    {
+      "dependsOn": [
+        "pkg:npm/%40babel/runtime@7.29.2",
+        "pkg:npm/html-parse-stringify@3.0.1",
+        "pkg:npm/i18next@26.3.6",
+        "pkg:npm/react-dom@19.2.7",
+        "pkg:npm/react@19.2.7",
+        "pkg:npm/use-sync-external-store@1.6.0"
+      ],
+      "ref": "pkg:npm/react-i18next@17.0.9"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/react@19.2.7"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/redux@5.0.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/rfc6902@5.2.0"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/scheduler@0.27.0"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/seedrandom@3.0.5"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/tailwindcss@4.3.3"
+    },
+    {
+      "dependsOn": [
+        "pkg:npm/react@19.2.7"
+      ],
+      "ref": "pkg:npm/use-sync-external-store@1.6.0"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:npm/void-elements@3.1.0"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "bom-ref": "boardoor-sdk-0.1.0-alpha.0",
+      "type": "application",
+      "name": "boardoor-sdk",
+      "version": "0.1.0-alpha.0"
+    }
+  },
+  "serialNumber": "urn:uuid:4abb5a01-c10c-884d-a6d7-1dbe09ddf362",
+  "specVersion": "1.7",
+  "version": 1
+}

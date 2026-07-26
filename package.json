@@ -1,0 +1,27 @@
+{
+  "name": "boardoor-sdk",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r --if-present run build:artifact",
+    "test:run": "pnpm -r --if-present run test:run",
+    "lint": "oxlint packages/ scripts/",
+    "format:check": "oxfmt --check packages/ scripts/",
+    "sdk:api": "tsx scripts/check-sdk-api.ts --public-repository",
+    "sbom:check": "tsx scripts/check-sbom.ts",
+    "artifact:check": "tsx scripts/check-artifacts.ts",
+    "release:check": "pnpm build && pnpm sdk:api && pnpm sbom:check && tsx scripts/release.ts && pnpm artifact:check"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.1",
+    "npm": "11.5.1",
+    "oxfmt": "0.59.0",
+    "oxlint": "1.74.0",
+    "tsx": "4.23.1",
+    "typescript": "7.0.2",
+    "typescript-api": "npm:typescript@5.9.3"
+  },
+  "engines": {
+    "node": ">=22.22.0 <23"
+  },
+  "packageManager": "pnpm@11.10.0"
+}

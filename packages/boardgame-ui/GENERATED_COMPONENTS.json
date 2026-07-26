@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "package": "@boardoor/ui",
+  "components": [
+    {
+      "bomRef": "pkg:npm/tailwindcss@4.3.3",
+      "name": "tailwindcss",
+      "version": "4.3.3",
+      "license": "MIT",
+      "source": "https://github.com/tailwindlabs/tailwindcss/tree/c2b24dd15fed1c59dd521bd86082f520c9f5ad0d/packages/tailwindcss",
+      "relationship": "generated-build-input",
+      "modifications": "Boardoor compiles Tailwind CSS preflight and selected utility rules into dist/styles/ui.css. The generated CSS retains Tailwind's upstream MIT banner; Tailwind is not a runtime package dependency."
+    }
+  ]
+}

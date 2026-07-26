@@ -1,0 +1,1186 @@
+{
+  "configPath": "publication/manifests/boardoor-sdk.json",
+  "configSha256": "944e67677ba2095beb841ccd36420b4ef841fda75a9c8bb546a8efb2405290be",
+  "files": [
+    {
+      "mode": "0644",
+      "path": ".github/CODEOWNERS",
+      "sha256": "7e81a0ed1b5114523e97f23950a23649e9c8f7f4a1ab5ff1ffb34dec47450b03",
+      "size": 778
+    },
+    {
+      "mode": "0644",
+      "path": ".github/pull_request_template.md",
+      "sha256": "ed547e90db04894e56e639cba1fe9ab72e8fe3f3a061511fc8b871ed3f2b5681",
+      "size": 1275
+    },
+    {
+      "mode": "0644",
+      "path": ".github/repository-settings.yml",
+      "sha256": "54d782b1ecb268f52cb7923b68ae423d95bd76a4e32d42630d4653db1133d34e",
+      "size": 5608
+    },
+    {
+      "mode": "0644",
+      "path": ".github/workflows/ci.yml",
+      "sha256": "4d2fc5deaa739841537f2642fc135510beb6fa38604da9879d9d617408471e64",
+      "size": 1124
+    },
+    {
+      "mode": "0644",
+      "path": ".github/workflows/npm-bootstrap.yml",
+      "sha256": "b884fe03680617671ae2ce68a8c0ac00d8bd4695aeec75a9104c89c0ef414c9d",
+      "size": 10886
+    },
+    {
+      "mode": "0644",
+      "path": ".github/workflows/npm-release.yml",
+      "sha256": "18f8371d568fde88ff6a0460a6f31d9392198aa9a596f222d61545b5920cf261",
+      "size": 8699
+    },
+    {
+      "mode": "0644",
+      "path": ".gitignore",
+      "sha256": "632d2c4d6264ca2edcad1ccb966a09dc702f27f82ec4e0191c4ad0db6717e219",
+      "size": 70
+    },
+    {
+      "mode": "0644",
+      "path": ".oxfmtrc.json",
+      "sha256": "8c9097da3da455223672dbbd28fc46bd162dba2d435dfdf92c08cc3a25b62d7d",
+      "size": 679
+    },
+    {
+      "mode": "0644",
+      "path": ".oxlintrc.json",
+      "sha256": "6ee7344d187650e84af281b680f967e25dc106b2552c4de9239dd86affc7a80a",
+      "size": 2030
+    },
+    {
+      "mode": "0644",
+      "path": "AGENTS.md",
+      "sha256": "ed0c085d9e9f2dd27fe29b054d7766f42c2309088aaba94172d6580fe1f746a2",
+      "size": 1919
+    },
+    {
+      "mode": "0644",
+      "path": "CLAUDE.md",
+      "sha256": "7dc6c59fede50f49cdb3e96a93b83a72f2f8f08345cfb9a88d505509e6b21c9b",
+      "size": 411
+    },
+    {
+      "mode": "0644",
+      "path": "COMPATIBILITY.md",
+      "sha256": "5bcf19064019c45e50d30adffbf32d35f7f4367d6771243864f5e57f44ab1b34",
+      "size": 1062
+    },
+    {
+      "mode": "0644",
+      "path": "CONTRIBUTING.md",
+      "sha256": "45a48fdf615d0f507e3353c89e444ec8b743c236f8f907848f01a7771ad5f702",
+      "size": 1858
+    },
+    {
+      "mode": "0644",
+      "path": "GOVERNANCE.md",
+      "sha256": "1a48204a31ac26d0c2b02471a747e5fa10f1d47817868818461860c4dcdc0c9b",
+      "size": 1008
+    },
+    {
+      "mode": "0644",
+      "path": "LICENSE",
+      "sha256": "8bf6887d678fc43eda3d27e29805be5d039339aeb19b1f1cff88169664036557",
+      "size": 1077
+    },
+    {
+      "mode": "0644",
+      "path": "NOTICE",
+      "sha256": "4ee3874cc304abc2b099c0bb896f9669efc963cc302a093f2b7634eb6ac5a16f",
+      "size": 406
+    },
+    {
+      "mode": "0644",
+      "path": "README.md",
+      "sha256": "96a0449b93f9802489f3b05afef2b63579be751c270e6d6fda4fe2eaf61f08fa",
+      "size": 2418
+    },
+    {
+      "mode": "0644",
+      "path": "RELEASE.md",
+      "sha256": "fead11eba885d04e78c3872f7e971d92db319dcbcb2d6a392a691552f72c8ce0",
+      "size": 6455
+    },
+    {
+      "mode": "0644",
+      "path": "SECURITY.md",
+      "sha256": "a80ea9ec9d7c595582c8af1215ae643be72cb79040921a5ec3061f82902cb5d3",
+      "size": 1153
+    },
+    {
+      "mode": "0644",
+      "path": "STABILITY.md",
+      "sha256": "f01e34d218113c263a45e50a98ae7694b31721fd281352ddd0a060d54f1cf899",
+      "size": 1198
+    },
+    {
+      "mode": "0644",
+      "path": "SUPPORT.md",
+      "sha256": "bb2d8def47768fb7d894493685c72719138548c0f109a94a37807b3eae18266a",
+      "size": 736
+    },
+    {
+      "mode": "0644",
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "cfb94019ff06184e5d2006caac33cbc2c61bed4db6a9c3ff902da07fb22356df",
+      "size": 645
+    },
+    {
+      "mode": "0644",
+      "path": "TUTORIAL.md",
+      "sha256": "8703cf0f66ad733a7358d73e9f2668f5a704e80a8bd4e2fe03c1ab4014a6860a",
+      "size": 2022
+    },
+    {
+      "mode": "0644",
+      "path": "examples/sdk-tutorial/README.md",
+      "sha256": "023e7cccef3ce4e044eea80dd80598ab29c16ee92835facaefd4c4e9e56c624e",
+      "size": 576
+    },
+    {
+      "mode": "0644",
+      "path": "examples/sdk-tutorial/index.html",
+      "sha256": "17c7e0bf1603c39c427c15e2259645aaefce26231e364bbc107a8aae329ce629",
+      "size": 297
+    },
+    {
+      "mode": "0644",
+      "path": "examples/sdk-tutorial/package.json",
+      "sha256": "fbb766643a0a61ec066eb4a277ee25782962e9f49407de8021665360d6876488",
+      "size": 636
+    },
+    {
+      "mode": "0644",
+      "path": "examples/sdk-tutorial/src/App.tsx",
+      "sha256": "cd186382a4a15db4fefa5917daa469f7d028b0ad694792db02b194111f7fa2a0",
+      "size": 1428
+    },
+    {
+      "mode": "0644",
+      "path": "examples/sdk-tutorial/src/game.test.ts",
+      "sha256": "7935872b665bc3cbe08ace55d1d5950868939a441eead1965b8290aa58144235",
+      "size": 1415
+    },
+    {
+      "mode": "0644",
+      "path": "examples/sdk-tutorial/src/game.ts",
+      "sha256": "4296fe78ca03362abd9c8c02f67bf7346ff8fc110262acae74000c60215a6965",
+      "size": 807
+    },
+    {
+      "mode": "0644",
+      "path": "examples/sdk-tutorial/src/main.tsx",
+      "sha256": "43f2da60361e93cf62afd719dd2f490780f84e1d833ad7695094c960dd3b2b44",
+      "size": 278
+    },
+    {
+      "mode": "0644",
+      "path": "examples/sdk-tutorial/src/style.css",
+      "sha256": "10e62c3d8645bd8be224353268cec0a8c3e6b580369c069b9cd5d264522fbbe1",
+      "size": 585
+    },
+    {
+      "mode": "0644",
+      "path": "examples/sdk-tutorial/tsconfig.json",
+      "sha256": "a5a228645ee27c97809b79dc775929154f28343ab857dd59e6bfedad186e7320",
+      "size": 604
+    },
+    {
+      "mode": "0644",
+      "path": "examples/sdk-tutorial/vite.config.ts",
+      "sha256": "efd5952d59c7b239a390fb094d525430ccb9a1b4f4f229b5e891bac32315f642",
+      "size": 136
+    },
+    {
+      "mode": "0644",
+      "path": "package.json",
+      "sha256": "211dd40a812c71c7dbcf1c4e8f72fea38baa0355178fd8627a54f8ee978ef751",
+      "size": 864
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/EMBEDDED_COMPONENTS.json",
+      "sha256": "a02db0e65df637d8b43efd54a1b7e3a6bd7b388629b22b9e8bc23053fb9e1123",
+      "size": 1139
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/LICENSE",
+      "sha256": "c09fca058aac3bad6b11fbf26e817811ac2afc87e7eb8908f3a2698b646a65c3",
+      "size": 1123
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/THIRD_PARTY_NOTICES.md",
+      "sha256": "ecaf656a912fa6325221a15ece4dc1e4a7fb20ad88af97efd383badd0726cecd",
+      "size": 3144
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/etc/README.md",
+      "sha256": "c9f29e06712cc481722dbefbdce298058159c1bff884c944fbdc0ac594cc49e2",
+      "size": 1029
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/etc/boardgame-core-app.api.json",
+      "sha256": "8bbacf55423823a02be7192c6290d0d470e1f004a6db2c428544e4ed2edfbf8c",
+      "size": 6313
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/etc/boardgame-core.api.json",
+      "sha256": "cd783d7ab5fd7e118dd5c290e8298aeea8e7ded9f19cc2fd4998565e40d469e2",
+      "size": 53437
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/etc/pack-inventory.txt",
+      "sha256": "c8d5caf2fd4a234447f52df1e148ca2b5f4e07a361b2d93bf94d5f2c59fba7f3",
+      "size": 3363
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/package.json",
+      "sha256": "2cb2285851120ade5933f8402f6e1cdcbed83e9273cb72aa1ab6a57675f76ca8",
+      "size": 1494
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/package.publish.json",
+      "sha256": "7eb7f3d827a0f00507dab8e653335eb5408b5462977573f532f22b9e43a9603d",
+      "size": 1833
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/__tests__/game-log.test.ts",
+      "sha256": "f8d567b35a20e50f4b7a95b14aff72b0aea21daf1de3f4579154fe191a923a3d",
+      "size": 6354
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/__tests__/package-surface.test.ts",
+      "sha256": "bed32bb6e577ae10bafad1d12c2d4262c425530832e5f221349760f47f82d390",
+      "size": 4096
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/__tests__/replay-recorder.test.ts",
+      "sha256": "c304c97ddfcb25032ef47735cad3cf21a965543f1913748179672fe73772e508",
+      "size": 6700
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/__tests__/replay.test.ts",
+      "sha256": "a74210a5def60c426beb33007022d4d29ac3f182b9afdb5b382514e90c496a11",
+      "size": 9776
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/__tests__/ai.test.ts",
+      "sha256": "81c9dc6cb0df0107950b0f4f9cdea6ea85dcabca5da4eaf0196df0f2455cc9bf",
+      "size": 12163
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/__tests__/bot-weights.test.ts",
+      "sha256": "bfc32b862c553a565eed58becde4efa46ee1d56156983fd74eb112baad539b55",
+      "size": 6935
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/__tests__/determinized-bot.test.ts",
+      "sha256": "912550a2a2d119164fc20b26ec4fb4f5117c1879bedd601fae2753f388cf868a",
+      "size": 4659
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/__tests__/mcts-budget.test.ts",
+      "sha256": "8f75df31853c97945823244faaee73e811cb62d1028589d3daf58f568442b26b",
+      "size": 3110
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/__tests__/move-delay.test.ts",
+      "sha256": "876d5de065ca26a4407c422c7dd6450572cf3eea8202e8f6d0db81cdb0dd9e4d",
+      "size": 4220
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/__tests__/single-move-shortcut.test.ts",
+      "sha256": "81a6933b623da8dfe039e8b101101182342c204d08b2701ba111fbf131c69f1e",
+      "size": 3268
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/ai.ts",
+      "sha256": "09bb0fd4c844571552fbffbd667179e5dbbef39f6665dd2210565dd4f4a0a9e7",
+      "size": 2046
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/bot.ts",
+      "sha256": "52b17f47eb8303dfb9a6e0b6d0d9b06528554173070d6219d9d52b2899e0bdbc",
+      "size": 3421
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/determinized-bot.ts",
+      "sha256": "4d8fd8f1b76443a75d21afb14f23cb459bd403d354dbac4a0531d5f926be9e09",
+      "size": 5328
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/index.ts",
+      "sha256": "fedf03a91b6a0154ec3628b4b445ae04316c49c2c1ef054d4d7081238343ff5b",
+      "size": 301
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/mcts-bot.ts",
+      "sha256": "8a15edb3b7f60d8965e74ad3001c288cbf039c4e343a034cf2bb62d5644fa263",
+      "size": 11422
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/move-delay.ts",
+      "sha256": "2da66cce515e3be8e4ff91c6ca302b0354b552b8b30baa957de7dca48dbe49a9",
+      "size": 2907
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/ai/random-bot.ts",
+      "sha256": "15c9d328b64ec507c0279b25c9c0dd7bb9e6eefd372f3882eb4b200c02147878",
+      "size": 728
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/app/__tests__/create-game-app.test.tsx",
+      "sha256": "130b4fe2889be7de1c261ae8e23f181802d78247d3aa9206ff3844f70f4a5278",
+      "size": 38804
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/app/__tests__/useClientStates.test.tsx",
+      "sha256": "ec736fc9fc47946f1e1b068620a765fb583cdccdcdb23f23ea4f04fe689eb063",
+      "size": 3011
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/app/index.tsx",
+      "sha256": "73adb64f5fba9a5058ffe7c852b9dd83ac13d44dd7999cd18a46e5bdfd1e8799",
+      "size": 35846
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/app/test-utils.tsx",
+      "sha256": "aa4ab8c6337b9f19703817b3721d9b56e5d47aa1258f9389e7fe3b85bc124eb7",
+      "size": 1444
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/app/types.ts",
+      "sha256": "ca7300fdae8f87fadee7af158064fc5f1040440e70b139058cbd94c300e0c3fe",
+      "size": 2393
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/__tests__/manager.test.ts",
+      "sha256": "dd08a80d25581f410010e056b806cfbb3deb8fc96836e798cb8f7cc93f3841e9",
+      "size": 7032
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/client.ts",
+      "sha256": "afaaffef6178a361ec5d3dbaa25ed73c537fb093cea6792148f5bb4dd6f71bca",
+      "size": 16721
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/debug/Debug.ts",
+      "sha256": "79a8586956486ab01dcc80c5866b5d783143a7dc6ae3e3c07a8e69c1d13e5881",
+      "size": 7614
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/manager.ts",
+      "sha256": "34361e7e59bfe20894c8e994235b61e0f1e85e7ceb1d0bf52a977544493c53e2",
+      "size": 5077
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/transport/__tests__/local.test.ts",
+      "sha256": "8ae51e370cb6e98b15f5be61a543d50cf12a551c3de8d9c85c84c92fb3da2379",
+      "size": 24625
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/transport/__tests__/websocket.test.ts",
+      "sha256": "5a11998c883cb050c747a0836a580d47f8690cab3b8cf8d22e9c4f531715df6f",
+      "size": 25936
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/transport/dummy.ts",
+      "sha256": "88b2e2290c5067c33641494b0e517af7a365d28accbf65edc247286c74e1f638",
+      "size": 533
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/transport/local-storage.ts",
+      "sha256": "95d5180756dc3cf0bea75c6250b960f97efa5ef2bf1be0bbb5411101c33588df",
+      "size": 18415
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/transport/local.ts",
+      "sha256": "4d553629fdf7429dedb98948635629d8df9d8589f219229f1fe8b8d3d31710b2",
+      "size": 13066
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/transport/transport.ts",
+      "sha256": "c628e84dfbf1487a6806d61ffba4d4c845dcf151ad02d0b7deba7986009737ef",
+      "size": 3245
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/client/transport/websocket.ts",
+      "sha256": "8add4c0bf3f32d5ebf3d304783e0ea67f78cae9ccc1e2496fc04ebcff88e39ca",
+      "size": 9535
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/__tests__/filter-player-view.test.ts",
+      "sha256": "9ca8969fa0e5e8e950f52a8aafe91c29121f48650c77751a2ffc2c78ce0fd5ab",
+      "size": 6715
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/__tests__/flow.test.ts",
+      "sha256": "a268eb9e9bc9515d09f650e5b8cdbc1a917351fbda0cb1cd0a48637d149cf2fe",
+      "size": 69910
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/__tests__/game.test.ts",
+      "sha256": "3a0d71fbc5428c8afd0a2c3f80da38a5d55e32ce4310c9e8009f5676b86514bd",
+      "size": 7945
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/__tests__/player-view.test.ts",
+      "sha256": "fb9b33430bab0c597c388388f03314dcade65ce88ab09840be55dd7033ca983e",
+      "size": 1289
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/__tests__/reducer.test.ts",
+      "sha256": "f47d6f4764270b5eed7171cf65370cb458b5741bfa4030e9069e727e4c178d88",
+      "size": 32191
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/__tests__/turn-order.test.ts",
+      "sha256": "8236d6469559bab97d6d94b1b0f1f1fb954e2ef4a44f282d49c6a18e72058b16",
+      "size": 30911
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/action-creators.ts",
+      "sha256": "6b753cd7a258553f8b2d52aa8d5b85875711eff6a981098ddcc883c7c2ad2fb0",
+      "size": 4679
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/action-types.ts",
+      "sha256": "ea9310079c190077ca28dce1be8f416f695e06e20278cbc57a6482a3ee06e116",
+      "size": 541
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/backwards-compatibility.ts",
+      "sha256": "267e872a82ea273bdaf5cdb39564e373a1c729397232e77ea70e5722ee07771b",
+      "size": 621
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/constants.ts",
+      "sha256": "7ae5f0e9df31294c63e17011329acca26d164ecb4f52d2035f3a20a47bdef934",
+      "size": 191
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/errors.ts",
+      "sha256": "f308cf84f8b2ef055d93b4206c2f2664ca08deae823fc5b0eeb0606da2586aa9",
+      "size": 1318
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/filter-player-view.ts",
+      "sha256": "8c5829af8a6fa0a4b66574401d8fcbcc2630fb3b9ca9bf64b33110d7d685e1dd",
+      "size": 3319
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/flow.ts",
+      "sha256": "a4187351bba32898539ecc22e4cc74f28736c4306434ba015a4029af20df217f",
+      "size": 25284
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/game-methods.ts",
+      "sha256": "16706dd34632599c230c08727f8e4c6fb77749be53e93bf95aab676b73ff9c1b",
+      "size": 244
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/game.ts",
+      "sha256": "d834f50e19561a6711a7edac06f0e706de2ef4c0d17cee9377daf8878e6bcabc",
+      "size": 3331
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/initialize.ts",
+      "sha256": "55bc84cc9a64f59145f05b2e23d9c1bab8836ac1a53d36e7f1d22bb445bcf1bf",
+      "size": 1749
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/logger.ts",
+      "sha256": "9dd152a049728b049190e91ff92a7e9a31204b3109a80f147c38411fd3e738aa",
+      "size": 516
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/player-view.ts",
+      "sha256": "9ea9b3940ea914b8f7231f5f1b6e0451bd041706d1ba8d79d739037132898f7b",
+      "size": 870
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/reducer.ts",
+      "sha256": "688557d268a45e04c760267604144572e1acf4095ab36f78dc40366a1c3e3c9b",
+      "size": 15106
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/state-migrations.ts",
+      "sha256": "69bf2c0772759301fa4966d6f3822c2265d10f4af00d68068b3aeef03614e6a8",
+      "size": 5350
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/transport-data.ts",
+      "sha256": "ac1467687127eab9fb0a19149fc0f986dcd29390cdaf9917c7c1cfb64b360045",
+      "size": 914
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/core/turn-order.ts",
+      "sha256": "344645b63614e5fbaddc94b64207ca89ff5c83fe9d4df5fd8a2d5890c2a99029",
+      "size": 12594
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/game-log.ts",
+      "sha256": "c11aff21dfdab7266022903e4a162e5320bf9932002e1fd6318c994c61a45f9d",
+      "size": 6872
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/index.ts",
+      "sha256": "3e5f36f95e90fc2930fdeff7c9db479e7784251c1bd91450dbe3efb383401d35",
+      "size": 2875
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/player-label.ts",
+      "sha256": "98d996b9d3b799fb816bb96f2c3f9d1d9d00ebf76eec8fdd99c5f565b65a43e6",
+      "size": 414
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/__tests__/events.test.ts",
+      "sha256": "dea3233e2f26c68aa760ae0dd43928bc8fe8308fc6b06bf0f52769731bc22d6b",
+      "size": 2629
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/__tests__/main.test.ts",
+      "sha256": "572a0bafd2efdd7002cd9a15dc4959ddd0d6c7623b3e57702b846622fc286e6f",
+      "size": 9472
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/__tests__/plugin-immer.test.ts",
+      "sha256": "c972c0275907204e407f1caff306b9a7e10418d81465aab4335285f47231ed22",
+      "size": 2136
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/__tests__/plugin-log.test.ts",
+      "sha256": "367409bcc2ecbe2c99ddab4cb82f75abba11311a531dd7d07f0bee67cbe27a39",
+      "size": 1048
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/__tests__/plugin-player.test.ts",
+      "sha256": "2e9a4abaebe33c2c9dc7e9e6d3cd2055189e2d669a7ee85b1ecf84acecf88348",
+      "size": 4064
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/__tests__/plugin-serializable.test.ts",
+      "sha256": "d0c542be3f74c04e66127d1704453452d433cad7e27542d62b58c1b7e129306b",
+      "size": 917
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/__tests__/random.test.ts",
+      "sha256": "9b6c6285aa56ac6ef374f6f1ba2e519a8360d0594353b42eda5cbd2e51520a18",
+      "size": 4632
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/events/events.ts",
+      "sha256": "ffe35991e6f9a8cec78e410330837a7dc94315d6349053838d7a8f2a6d0aa5c5",
+      "size": 7496
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/main.ts",
+      "sha256": "e1649f52b85bc7593f223677abab15bc91065650f9dbfe4dfbb3b5cefe3cc504",
+      "size": 9995
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/plugin-events.ts",
+      "sha256": "98caf4a6ee4741c92af05eb939bc279b70d0227c4d4c85ccb60d854c73e5b2e4",
+      "size": 1276
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/plugin-immer.ts",
+      "sha256": "e4d28748ceaec7e498470f37f94b9e4b3f5a3269a1115821754c3211c8ff273f",
+      "size": 893
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/plugin-log.ts",
+      "sha256": "b16e100eef1c48660c269e88aa0fef255fc111cf633474ba26e5ca6eeb22f298",
+      "size": 809
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/plugin-player.ts",
+      "sha256": "2126a1e83dad81ad6c3ff82fb61aa86b16cb5395be44900a8ecd923d3120ef71",
+      "size": 2529
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/plugin-random.ts",
+      "sha256": "f9190dd7abbe9a86871dc6270c6f4186951a8eeef04bd9e346d1cddf4bd9bdda",
+      "size": 889
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/plugin-serializable.ts",
+      "sha256": "fc6e16170968ffc9f8aef743276a131c0ae822ff92421404c925e768987ec51f",
+      "size": 1224
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/random/random.alea.ts",
+      "sha256": "ee81f37d270bffb52157cd36313c224150714dd6e72ebb7cfcba4337d9066e1f",
+      "size": 3027
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/plugins/random/random.ts",
+      "sha256": "2e4eaa3be997f9d5f3f6f0b66586cd59759ae094e038077eff80935d45b25370",
+      "size": 4982
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/replay-recorder.ts",
+      "sha256": "1d3ef3ea5ffd4d1ed380c02f746bfd9dcfa36109c9f9bd47d4d7f82e0d7dbbdb",
+      "size": 7872
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/replay.ts",
+      "sha256": "cf5e2a5abc086008741de19ba3477c22f0a2c735ad5bc46f43937fab39f1f1dc",
+      "size": 14728
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/game-harness/__tests__/game-harness.test.ts",
+      "sha256": "0906badd6c496a4f1081b0e12c0013114c6639dcec324893d3ea27097b9d188c",
+      "size": 24699
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/game-harness/__tests__/state-migration.test.ts",
+      "sha256": "779b9c3b11b592e3b7e9458941b3dbdcf1d0db5d2de508abf2936331f146cca6",
+      "size": 12196
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/game-harness/actions.ts",
+      "sha256": "4347bda796592bd8975fbc1e6223d69c63d1707c59efdf210372259bfe0b01ab",
+      "size": 4996
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/game-harness/index.ts",
+      "sha256": "af9951f2b2f75b7f6f5f8a532e94be0e23068f5ac86a345cd42b0b796f5b1c3f",
+      "size": 834
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/game-harness/invariants.ts",
+      "sha256": "5e214e67fd50a62a6860ba45eb19a012a9663e872a207683ce4d4998edeef1fb",
+      "size": 6949
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/game-harness/migration.ts",
+      "sha256": "e3c2641b47cc264b5f339afdf7beaaf2ecd3360bcd0a1d1d549000c0ebeb57ec",
+      "size": 15862
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/game-harness/report.ts",
+      "sha256": "fefc72095a441130c684c6bb77b0607d1ac17856ea53fbabee4d7fbf01d4af83",
+      "size": 2948
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/game-harness/runner.ts",
+      "sha256": "b5b2a68be9f0cc92489612778e242150f42a0f656ddd5e36ec81d6f2923807da",
+      "size": 22568
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/game-harness/state.ts",
+      "sha256": "ef8d03447fb5ce2c3dcca26abd86a9e8353d968d77a16a235a6347a582a07704",
+      "size": 4840
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/game-harness/types.ts",
+      "sha256": "b6aa0bccf0dfbe414041b4c23243b81dcf9186b4f5f09fc9e19454a71db9095e",
+      "size": 5702
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/index.ts",
+      "sha256": "bfe3e44efa56ddd2a0974fcb7d24bca02ee50178f0e99fe610c5ece9ff6a76df",
+      "size": 44
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/testing/mock-random.ts",
+      "sha256": "4746c70c21f2b5cbd94db9752a95a7ce92c5fbe98e02a7b0125afdc429a274d6",
+      "size": 818
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/src/types.ts",
+      "sha256": "4fdb154ef477ef2d49eddb3613546d435bd80021cf39a96d1e19f2b4c8a71dcd",
+      "size": 16515
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/tsconfig.build.json",
+      "sha256": "8c41bc633091f9b6fa344fc659dcf88635c50b2dbf9291d279ed92c675af6d6e",
+      "size": 168
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/tsconfig.json",
+      "sha256": "07346906f370fa720434d0e24aaf520aa7f54d9e0d9f4dc3fe785bd569ecde03",
+      "size": 570
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-core/vitest.config.ts",
+      "sha256": "b72c0d7892f40c03e9aabfc6d7bde8274102736de4c7a00744398caa92d84215",
+      "size": 121
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/GENERATED_COMPONENTS.json",
+      "sha256": "9f96c29a6c2c447eaba4d94dc4e52584e0d31bdef14890cd2dc7c5392fa55831",
+      "size": 612
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/LICENSE",
+      "sha256": "5f098f43d366836bb4da77c6dbfb351f87e1906db4fcc0aaf000806fcea9e9a3",
+      "size": 1078
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/README.md",
+      "sha256": "706ed1e91edfa3c1f2dd39655186b745a3a60b106f8a8a146fec8068cedf3ddb",
+      "size": 2036
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/THIRD_PARTY_NOTICES.md",
+      "sha256": "4d02e21927cb590b35cdb1f8faa31f54a3123205f329aec58cb17e88950d6b6c",
+      "size": 1579
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/etc/README.md",
+      "sha256": "2f50d18929a3bf4c19614fe42a5910b302aa44a7899b3506fb5085ad7d150c48",
+      "size": 526
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/etc/boardgame-ui.api.json",
+      "sha256": "06e5b1256eb8724f3f4d0fa7ab29a8ae88b49116b6a36d357437cd9fbd92a7fe",
+      "size": 8122
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/etc/pack-inventory.txt",
+      "sha256": "aeeb5a771d5bae347432ca2aedf3c0c76ced4b5422682fa2ecc7a645cfa4e523",
+      "size": 1827
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/package.json",
+      "sha256": "39209e7c61d06671d68462bc911b980f318b37ba1dbc39709cd1f09213cc1b4c",
+      "size": 1254
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/package.publish.json",
+      "sha256": "ced21de693d8a4382cff8ec6cace1255eab3027cf679c6c0b133c810d694d876",
+      "size": 1637
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/scripts/build-css.ts",
+      "sha256": "f283cefdfa237f818747c3d3e19141d2f67ccd96efbeb87a008c5d928f188fcc",
+      "size": 1315
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/__tests__/components.test.tsx",
+      "sha256": "b2f228e2e251ffa57586c96f87ea68f39e363d68cd6ae68ede444e929ec1e9ba",
+      "size": 8455
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/__tests__/genre.test.tsx",
+      "sha256": "06bf37881a77a028d0d94a6dfb2be361f002c8c341a35faff4cc6322df0dce77",
+      "size": 3448
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/__tests__/layout.test.ts",
+      "sha256": "3c4718edc22d273a082b63baad1366ccdd70d31a45609a50f451a4065d4e39ed",
+      "size": 1423
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/__tests__/playing-cards.test.ts",
+      "sha256": "4f04c8617e99387ea9e056323968aac9135f139fb0e0cf3636625198e09b7feb",
+      "size": 3508
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/__tests__/useTrickResultHold.test.tsx",
+      "sha256": "5964b8900caa046b533221a62cc0e14ec979e14afa9e10f28b58306c9a0cf3fa",
+      "size": 4199
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/audio/game-sounds.ts",
+      "sha256": "c66c7ef0f33f1be3ee5ffe5eb90f395e100f6e2b0769fc200d874e293114dc71",
+      "size": 2178
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/audio/index.ts",
+      "sha256": "39367cd2af9a5ba4fdabb37b7964ef93abf540eab1433a23dd1ece91d0d449cf",
+      "size": 188
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/audio/synth.ts",
+      "sha256": "3522173c2da4816165d499f2b2e7fa9ba4129650a19b151adab74245438e374b",
+      "size": 5655
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/audio/useGameSounds.ts",
+      "sha256": "7a41fd617bb5f6baaf74a446f2d61160b1aba986b022eb7d1090c7d3bc239453",
+      "size": 1481
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/components/ActionButton.tsx",
+      "sha256": "1748f189e227b1037b64d3b5b2854b55b805fb42bc58340dcfa7f2a230a78d9f",
+      "size": 516
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/components/BettingButtons.tsx",
+      "sha256": "8877658419afc58c0fc2b9d3225944c91c1d2a738ff2de90b71f6e540a2b40aa",
+      "size": 1588
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/components/GameOverOverlay.tsx",
+      "sha256": "c496171819f83522e6fdd9dd5ef4286f11602c2ee66477b35f826aad11a324c1",
+      "size": 2706
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/components/LoadingScreen.tsx",
+      "sha256": "eaa2962ab6af2fd1ffdd5ed1d34bf2086ff90ab5eacd49a90b63223a7e853b95",
+      "size": 507
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/components/ReconnectBanner.tsx",
+      "sha256": "e4e1c8f30a15d008c4ada721f16a10b6a0523712750429a9c3836beef603d74f",
+      "size": 1606
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/components/RoundEndReviewPrompt.tsx",
+      "sha256": "24b246733533bccff599fbf79621e2052682a2837cf32039fbd38c8d16f0ef8e",
+      "size": 466
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/components/ScoreBadge.tsx",
+      "sha256": "d1a7f955e9c1231dc0546f5ee13d13071d6678a7544f780107b4c3a87bd23df6",
+      "size": 851
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/components/SortButtons.tsx",
+      "sha256": "805924e06280294a2dc12dc199a67d4aa6b58a08c87e61e57bf9e69b2fdaaac8",
+      "size": 1225
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/genre/GridBoard.tsx",
+      "sha256": "c996cfabe5af0bfb79d102e49c1d54f825f1b446e2e82d53ac8e45f97ac54761",
+      "size": 2963
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/genre/HandFan.tsx",
+      "sha256": "fdc02e0daec855ea173dd34e3f6e23467618eaa5100c4004c1fddab3670c5d2e",
+      "size": 1966
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/genre/ScorePanel.tsx",
+      "sha256": "bb3fdc3cbf0cf257a026c67953361d3d3eb043acb9ce1cefef961c18bf0accdb",
+      "size": 995
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/genre/TrickTakingTable.tsx",
+      "sha256": "050e6e1363e4bd46de385dafbe1a00a89e1ee6a58ccffca3ad2ebfb00bbc0995",
+      "size": 1664
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/genre/index.ts",
+      "sha256": "a374d764f8651f19670b6787b735d47551d96c2ed56a2293526eddf0012cd69b",
+      "size": 334
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/hooks/useRoundEndReviewGate.ts",
+      "sha256": "c36e8795c22a132a0e616117fda026228a01295932cc1a39a103738430976e4d",
+      "size": 402
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/hooks/useTrickResultHold.ts",
+      "sha256": "3b306e2debc2b5ef054f07c8b35f1bb283bdc2b96e10fe09bf57ed7bff7ccd26",
+      "size": 1481
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/i18n-helper.ts",
+      "sha256": "55667a6523e79e7c359a77031b9b57da2b97c4184f7f5562b3a9d90bf8c9b1e6",
+      "size": 757
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/index.ts",
+      "sha256": "472359dee737bbed9bd8220518705685d51ceffe620163a5a22a47ee94702889",
+      "size": 992
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/layout/index.ts",
+      "sha256": "18f037684b105a536f19e32b828d3b64ed3239fbb23f6a9df119de5c4c5ac678",
+      "size": 80
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/layout/table-positions.ts",
+      "sha256": "cc5c296ca8b3d7f8f1958e3aa08a005eacb2273997eb341f3b41a260e2126751",
+      "size": 854
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/locales/index.ts",
+      "sha256": "43d4e0823f370d866ef5cdef9bf81fe3311f0a972c6a79f8157ec944d8633373",
+      "size": 977
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/playing-cards/helpers.ts",
+      "sha256": "3f4b5b3a37cc8fe0c4047ab5ed6a01fb9b0ebca63a04e3a40a3b29c65cbafdd7",
+      "size": 910
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/playing-cards/index.ts",
+      "sha256": "4fb6f1b9bb9b1ec3163bdcd819c16950a3b3b3b3944517ed8330ae6dc92936a4",
+      "size": 221
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/playing-cards/sort.ts",
+      "sha256": "99bd6c5565e066297b59af74932083915c98caf30f6d118937dae1d687fc667b",
+      "size": 1101
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/playing-cards/types.ts",
+      "sha256": "5d381f7f150f1c3d0b9705a40beff6333e2379250dade5cd7963c90a4338079c",
+      "size": 122
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/share/ShareButton.tsx",
+      "sha256": "416b2d3b9b9bb34623b6ec974f704346a58c71a4b7f0e8a9dca700c3bd3a3924",
+      "size": 1527
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/share/render-share-card.ts",
+      "sha256": "dabca051eaeecf3fbf10370ec863667bc03fe3eb2402eb74cb03621458b2b409",
+      "size": 4655
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/styles/base.css",
+      "sha256": "a351f851c859ca1ddb781eecddc40346f7b76553deb2cc5a39bb46841f19d03e",
+      "size": 441
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/src/styles/ui.css",
+      "sha256": "7686ef924e6d1e304bdf99d361eb36fdfbfe7fee4d658516e5bc310eb3d7eb98",
+      "size": 86
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/tsconfig.build.json",
+      "sha256": "1f94406a5ee98a0eb2fe6ad8531a09fdbd824785926a4805ca5c938aa25326cc",
+      "size": 188
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/tsconfig.json",
+      "sha256": "3aab1117c452737d9930b9a28e36ff0e8614d21b045158dba916bbfe602e147f",
+      "size": 661
+    },
+    {
+      "mode": "0644",
+      "path": "packages/boardgame-ui/vitest.config.ts",
+      "sha256": "eb73e22bd2c1fd664654eecbb5c526c649f0347a116c0508eab62c016dd85274",
+      "size": 122
+    },
+    {
+      "mode": "0644",
+      "path": "pnpm-lock.yaml",
+      "sha256": "869872f574bf473140af1131bb2d4957a43b13011dd1edc7942699ffcf06bb44",
+      "size": 101476
+    },
+    {
+      "mode": "0644",
+      "path": "pnpm-workspace.yaml",
+      "sha256": "3dbbc2f474ed3b79b3fd315232208fe49e579be75ef274c3d8948b216486b9e0",
+      "size": 142
+    },
+    {
+      "mode": "0644",
+      "path": "sbom.cdx.json",
+      "sha256": "51ccfca2927c7ad15509b9360c1e10e7aaf7d9efbf77493f7796a1ea559f88b0",
+      "size": 12044
+    },
+    {
+      "mode": "0644",
+      "path": "scripts/check-artifacts.ts",
+      "sha256": "1a1b09e77a4842f316d7f5160e79917d03e1225a91c8af4b74b77ca4a3f1f8bc",
+      "size": 15550
+    },
+    {
+      "mode": "0644",
+      "path": "scripts/check-sbom.ts",
+      "sha256": "a6657cba546bddecb0c2600bd644acb57f5f6c54a97f619b709b47c8c4c9e60d",
+      "size": 15095
+    },
+    {
+      "mode": "0644",
+      "path": "scripts/check-sdk-api.ts",
+      "sha256": "ba362626aeb47a45fadac61aa36d8b18aa0f3ab686be5ea18576184a5b8547ca",
+      "size": 8238
+    },
+    {
+      "mode": "0644",
+      "path": "scripts/fix-sdk-esm-imports.ts",
+      "sha256": "f9499c292e9a1b2e862a07ebb02db7b8aa379212e36825f50dcc1b7d1a1f8b54",
+      "size": 1627
+    },
+    {
+      "mode": "0644",
+      "path": "scripts/release.ts",
+      "sha256": "a1a5ee516a2d7bee9eddd375533f8be8a494f4c3536bb9870e5de0d87ca2b656",
+      "size": 9047
+    }
+  ],
+  "repository": "boardoor-sdk",
+  "rootSha256": "575f994c29c9c9625fd889d295be47f5999c6e14f9702746b4463607b8529739",
+  "scan": {
+    "rules": [
+      "forbidden-filenames",
+      "regular-files-only",
+      "binary-path-allowlist",
+      "credential-patterns",
+      "private-sdk-surface",
+      "prohibited-tool-coupling",
+      "public-url-hosts"
+    ],
+    "status": "pass"
+  },
+  "schemaVersion": 1,
+  "sourceCommit": "ea352b5b47ae8427e7cd9593e332e0fd818d29db"
+}

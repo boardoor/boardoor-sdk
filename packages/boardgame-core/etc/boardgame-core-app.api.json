@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "packageName": "@boardoor/core/app",
+  "entry": "app/index.d.ts",
+  "stability": "supported",
+  "exports": [
+    {
+      "name": "AudioSettings",
+      "declarations": [
+        "export interface AudioSettings {\n    master: {\n        muted: boolean;\n        volume: number;\n    };\n    notification: {\n        muted: boolean;\n        volume: number;\n    };\n    se: {\n        muted: boolean;\n        volume: number;\n    };\n}"
+      ]
+    },
+    {
+      "name": "createGameApp",
+      "declarations": [
+        "export declare function createGameApp(opts: CreateGameAppOptions): void;"
+      ]
+    },
+    {
+      "name": "CreateGameAppOptions",
+      "declarations": [
+        "export interface CreateGameAppOptions {\n    game: Game;\n    board: ComponentType<{\n        clients: GameClient[];\n        onlinePlayerID?: string;\n    }>;\n    numPlayers?: number;\n    debug?: DebugOption;\n    rootElement?: string;\n    /** Server URL for local dev multiplayer (passed from import.meta.env.VITE_SERVER_URL) */\n    serverUrl?: string;\n    /** Preview key for standalone mode authentication (set via VITE_PREVIEW_KEY at build time) */\n    previewKey?: string;\n    /** Origin of the shell app for postMessage validation (default: 'https://boardoor.com') */\n    shellOrigin?: string;\n    /** When true, delay gameOver postMessage until the board calls postGameOver() on window */\n    delayGameOver?: boolean;\n    /** Game-specific translation resources. Keys: language codes (e.g. \"en\", \"ja\"). Values: flat key-value pairs. */\n    locales?: Record<string, Record<string, string>>;\n}"
+      ]
+    },
+    {
+      "name": "DebugOption",
+      "declarations": [
+        "export type DebugOption = boolean | {\n    impl: unknown;\n    collapseOnLoad?: boolean;\n};"
+      ]
+    },
+    {
+      "name": "GameClient",
+      "declarations": [
+        "export interface GameClient {\n    moves: Record<string, (...args: any[]) => void>;\n    undo: () => void;\n    redo: () => void;\n    subscribe: (cb: () => void) => () => void;\n    getState: () => GameClientState | null;\n    matchData?: Array<{\n        id: number;\n        name?: string;\n        isConnected?: boolean;\n    }>;\n}"
+      ]
+    },
+    {
+      "name": "GameClientState",
+      "declarations": [
+        "export type GameClientState = {\n    G: any;\n    ctx: Ctx;\n    isConnected?: boolean;\n};"
+      ]
+    },
+    {
+      "name": "GameLogStateMessage",
+      "declarations": [
+        "export interface GameLogStateMessage {\n    type: 'gameLogState';\n    enabled: boolean;\n    entries: Array<{\n        id: string;\n        sequence: number;\n        turn: number;\n        playerId?: string;\n        text: string;\n    }>;\n}"
+      ]
+    },
+    {
+      "name": "LocalInitMessage",
+      "declarations": [
+        "export interface LocalInitMessage {\n    type: 'localInit';\n    numPlayers: number;\n    aiStrength: 'weak' | 'medium' | 'strong';\n    setupData?: unknown;\n    language?: string;\n    audioSettings?: AudioSettings;\n    aiDelayMultiplier?: number;\n    /** @deprecated Use audioSettings instead */\n    turnSound?: {\n        muted: boolean;\n        volume: number;\n    };\n}"
+      ]
+    },
+    {
+      "name": "mergeLocales",
+      "declarations": [
+        "export declare function mergeLocales(...sources: Record<string, Record<string, string>>[]): Record<string, Record<string, string>>;"
+      ]
+    },
+    {
+      "name": "playerLabel",
+      "declarations": [
+        "export declare function playerLabel(pid: string, matchData?: MatchDataEntry[], fallback?: string): string;"
+      ]
+    },
+    {
+      "name": "postGameOver",
+      "declarations": [
+        "export declare function postGameOver(): void;"
+      ]
+    },
+    {
+      "name": "useClientStates",
+      "declarations": [
+        "export declare function useClientStates(clients: GameClient[]): (GameClientState | null)[];"
+      ]
+    },
+    {
+      "name": "useMatchData",
+      "declarations": [
+        "export declare function useMatchData(client: GameClient | undefined): GameClient['matchData'];"
+      ]
+    }
+  ],
+  "declarationInventory": [
+    {
+      "path": "app/index.d.ts",
+      "sha256": "b4e2824a93260669f8af6e9d4c011ed220400e2e4c9b6520b417ab61144f5825"
+    },
+    {
+      "path": "app/types.d.ts",
+      "sha256": "6fc5d6d2ded1554acd353f17f3a72ca7f53ea76bdc9fa2c8a832f6726464ec7a"
+    },
+    {
+      "path": "core/action-creators.d.ts",
+      "sha256": "f479bfcc59e0d2115e01bab84f8408bc96ed03d810780b8af2e8dea3a031e4e4"
+    },
+    {
+      "path": "core/action-types.d.ts",
+      "sha256": "f0f27f1f5476a9eb5e654a91c68a447e9fd99ac06e460b58ed5f97c63c3f695f"
+    },
+    {
+      "path": "core/constants.d.ts",
+      "sha256": "40407d48a45241534ea02ad34a3affe31733f770377d24b258286db337740ac7"
+    },
+    {
+      "path": "core/errors.d.ts",
+      "sha256": "a1a3cdb9b709bf395e142c36372a9da544dec8384b966c4b4e2cce410d88eea8"
+    },
+    {
+      "path": "core/flow.d.ts",
+      "sha256": "29180c6a741e83571fafee199175c4116efa97141f9a2ed9f2f6bdaec367b056"
+    },
+    {
+      "path": "core/game-methods.d.ts",
+      "sha256": "3af9d459da7a961f53772dd24d9d76e10f38f03a77411b8dcc300f37ee134abd"
+    },
+    {
+      "path": "core/reducer.d.ts",
+      "sha256": "11df3f92d8dcd1b3a3dd3ae3b17e115a6ba2e62fa24ef0b4f27a6ad921aec0f3"
+    },
+    {
+      "path": "player-label.d.ts",
+      "sha256": "d12f7a4d734a05497d65f0b30e060ebb5c37660865e5b5374474bb233647cd97"
+    },
+    {
+      "path": "plugins/events/events.d.ts",
+      "sha256": "d62f8750cc574099386831c5e4dc385393f9e34478d74c68e55ede3fa27fc2e8"
+    },
+    {
+      "path": "plugins/plugin-events.d.ts",
+      "sha256": "ce5597485cf706b3e5625e285229e70e40e0370eb540c82e2a1670364ffc0d3c"
+    },
+    {
+      "path": "plugins/plugin-log.d.ts",
+      "sha256": "b368603111af0fc06eccea86ca7cdcabe6d25b0d777fd2b74325f1c231cf3d44"
+    },
+    {
+      "path": "plugins/random/random.alea.d.ts",
+      "sha256": "1dfd027616da5bae36f820f36acec2da701c51498834d99df548c714e0956572"
+    },
+    {
+      "path": "plugins/random/random.d.ts",
+      "sha256": "cd7d542be4517a4441dbfdc8aa94e31398a9c6de21ed20528f49c1a4b27ae951"
+    },
+    {
+      "path": "types.d.ts",
+      "sha256": "7b512a2b6646ace7744473402547bfdd95ef5db6d9bd3e29cb5a446d494ab2b5"
+    }
+  ]
+}

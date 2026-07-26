@@ -1,0 +1,39 @@
+:root {
+  color: #172033;
+  background: #f5f2e9;
+  font-family: system-ui, sans-serif;
+  --last-stone-ready: #123456;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.last-stone {
+  width: min(28rem, calc(100% - 3rem));
+  margin: 4rem auto;
+  padding: 2rem;
+  border: 2px solid var(--last-stone-ready);
+  border-radius: 1rem;
+  background: white;
+  text-align: center;
+}
+
+.stones {
+  margin: 2rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.winner {
+  font-size: 1.5rem;
+  font-weight: 700;
+}

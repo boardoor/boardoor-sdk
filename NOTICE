@@ -1,0 +1,7 @@
+Boardoor SDK
+Copyright (c) 2026 Boardoor contributors
+The Boardoor-owned code in this repository is made available under the MIT License.
+
+Package-local THIRD_PARTY_NOTICES files preserve the upstream and embedded-code license notices.
+The repository-root CycloneDX SBOM records the exact reviewed candidate dependency graph.
+Third-party components remain subject to their respective licenses and notices.

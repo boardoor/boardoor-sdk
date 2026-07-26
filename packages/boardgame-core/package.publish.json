@@ -1,0 +1,69 @@
+{
+  "name": "@boardoor/core",
+  "version": "0.1.0-alpha.0",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "LICENSE", "THIRD_PARTY_NOTICES.md", "EMBEDDED_COMPONENTS.json"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boardoor/boardoor-sdk.git",
+    "directory": "packages/boardgame-core"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "boardoor": {
+    "stability": {
+      ".": "supported",
+      "./app": "supported",
+      "./app/test-utils": "experimental",
+      "./testing/game-harness": "experimental"
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./app": {
+      "types": "./dist/app/index.d.ts",
+      "import": "./dist/app/index.js",
+      "default": "./dist/app/index.js"
+    },
+    "./app/test-utils": {
+      "types": "./dist/app/test-utils.d.ts",
+      "import": "./dist/app/test-utils.js",
+      "default": "./dist/app/test-utils.js"
+    },
+    "./testing/game-harness": {
+      "types": "./dist/testing/game-harness/index.d.ts",
+      "import": "./dist/testing/game-harness/index.js",
+      "default": "./dist/testing/game-harness/index.js"
+    }
+  },
+  "dependencies": {
+    "flatted": "^3.4.2",
+    "immer": "^11.1.15",
+    "lodash.isplainobject": "^4.0.6",
+    "nanoid": "^6.0.0",
+    "p-queue": "9.3.1",
+    "redux": "^5.0.1",
+    "rfc6902": "^5.2.0"
+  },
+  "peerDependencies": {
+    "i18next": ">=23",
+    "react": ">=18",
+    "react-dom": ">=18",
+    "react-i18next": ">=14"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true },
+    "react-dom": { "optional": true },
+    "i18next": { "optional": true },
+    "react-i18next": { "optional": true }
+  }
+}

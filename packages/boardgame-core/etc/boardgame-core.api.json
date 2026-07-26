@@ -1,0 +1,834 @@
+{
+  "schemaVersion": 1,
+  "packageName": "@boardoor/core",
+  "entry": "index.d.ts",
+  "stability": "supported",
+  "exports": [
+    {
+      "name": "ActionShape",
+      "stability": "supported",
+      "declarations": [
+        "export declare namespace ActionShape {\n    type StripCredentials<T extends CredentialedActionShape.Any> = StripPayloadCredentials<T>;\n    export type MakeMove = StripCredentials<CredentialedActionShape.MakeMove>;\n    export type GameEvent = StripCredentials<CredentialedActionShape.GameEvent>;\n    export type Plugin = StripCredentials<CredentialedActionShape.Plugin>;\n    export type AutomaticGameEvent = StripCredentials<CredentialedActionShape.AutomaticGameEvent>;\n    export type Sync = ReturnType<typeof ActionCreators.sync>;\n    export type Update = ReturnType<typeof ActionCreators.update>;\n    export type Patch = ReturnType<typeof ActionCreators.patch>;\n    export type Reset = ReturnType<typeof ActionCreators.reset>;\n    export type Undo = StripCredentials<CredentialedActionShape.Undo>;\n    export type Redo = StripCredentials<CredentialedActionShape.Redo>;\n    export type StripTransients = ReturnType<typeof ActionCreators.stripTransients>;\n    export type Any = MakeMove | GameEvent | AutomaticGameEvent | Sync | Update | Patch | Reset | Undo | Redo | Plugin | StripTransients;\n    export {};\n}"
+      ]
+    },
+    {
+      "name": "ActivePlayers",
+      "stability": "supported",
+      "declarations": [
+        "ActivePlayers: {\n    /**\n     * ALL\n     *\n     * The turn stays with one player, but any player can play (in any order)\n     * until the phase ends.\n     */\n    ALL: {\n        all: any;\n    };\n    /**\n     * ALL_ONCE\n     *\n     * The turn stays with one player, but any player can play (once, and in any order).\n     * This is typically used in a phase where you want to elicit a response\n     * from every player in the game.\n     */\n    ALL_ONCE: {\n        all: any;\n        minMoves: number;\n        maxMoves: number;\n    };\n    /**\n     * OTHERS\n     *\n     * The turn stays with one player, and every *other* player can play (in any order)\n     * until the phase ends.\n     */\n    OTHERS: {\n        others: any;\n    };\n    /**\n     * OTHERS_ONCE\n     *\n     * The turn stays with one player, and every *other* player can play (once, and in any order).\n     * This is typically used in a phase where you want to elicit a response\n     * from every *other* player in the game.\n     */\n    OTHERS_ONCE: {\n        others: any;\n        minMoves: number;\n        maxMoves: number;\n    };\n}"
+      ]
+    },
+    {
+      "name": "AiEnumerate",
+      "stability": "supported",
+      "declarations": [
+        "export type AiEnumerate = Array<{\n    event: string;\n    args?: any[];\n    weight?: number;\n} | {\n    move: string;\n    args?: any[];\n    weight?: number;\n} | ActionShape.MakeMove | ActionShape.GameEvent>;"
+      ]
+    },
+    {
+      "name": "AIMoveDelayAction",
+      "stability": "supported",
+      "declarations": [
+        "export type AIMoveDelayAction = ActionShape.MakeMove | ActionShape.GameEvent;"
+      ]
+    },
+    {
+      "name": "appendGameLog",
+      "stability": "supported",
+      "declarations": [
+        "export declare function appendGameLog(G: GameLogStateShape, ctx: {\n    turn: number;\n}, entry: Omit<GameLogEntry, 'id' | 'sequence' | 'turn'>, config: {\n    enabled: boolean;\n    level: GameLogLevel;\n    maxEntries?: number;\n}): void;"
+      ]
+    },
+    {
+      "name": "applyStateMigrations",
+      "stability": "experimental",
+      "declarations": [
+        "export declare function applyStateMigrations<G = unknown>({ state, game, fromVersion, numPlayers, topLevelSlot, onStep, }: ApplyStateMigrationsOptions<G>): ApplyStateMigrationsResult;"
+      ]
+    },
+    {
+      "name": "ApplyStateMigrationsOptions",
+      "stability": "experimental",
+      "declarations": [
+        "export interface ApplyStateMigrationsOptions<G = unknown> {\n    state: State<G>;\n    game: Pick<Game<G>, 'stateSchema'>;\n    fromVersion: number;\n    numPlayers: number;\n    topLevelSlot?: Extract<GameMigrationMeta['slot'], 'state' | 'initialState'>;\n    /** Internal observability hook used by the migration harness. */\n    onStep?: (sample: {\n        fromVersion: number;\n        toVersion: number;\n        slot: GameMigrationMeta['slot'];\n        elapsedMs: number;\n    }) => void;\n}"
+      ]
+    },
+    {
+      "name": "ApplyStateMigrationsResult",
+      "stability": "experimental",
+      "declarations": [
+        "export interface ApplyStateMigrationsResult {\n    state: State<unknown>;\n    promoted: boolean;\n}"
+      ]
+    },
+    {
+      "name": "Bot",
+      "stability": "supported",
+      "declarations": [
+        "export declare abstract class Bot {\n    private enumerateFn;\n    private seed?;\n    protected iterationCounter: number;\n    private _opts;\n    private prngstate?;\n    constructor({ enumerate, seed, }: {\n        enumerate: NonNullable<Game['ai']>['enumerate'];\n        seed?: string | number;\n    });\n    abstract play(state: State, playerID: PlayerID): Promise<{\n        action?: BotAction;\n        metadata?: any;\n    }>;\n    addOpt({ key, range, initial, }: {\n        key: string;\n        range?: {\n            min: number;\n            max: number;\n        };\n        initial: any;\n    }): void;\n    getOpt(key: string): any;\n    setOpt(key: string, value: any): void;\n    opts(): Record<string, {\n        range?: {\n            min: number;\n            max: number;\n        };\n        value: any;\n    }>;\n    enumerate(G: any, ctx: Ctx, playerID: PlayerID): WeightedBotAction[];\n    weightedRandom(actions: WeightedBotAction[]): WeightedBotAction | undefined;\n    random<T extends any = any>(arg: T[]): T;\n    random(arg?: number): number;\n}"
+      ]
+    },
+    {
+      "name": "BotAction",
+      "stability": "supported",
+      "declarations": [
+        "export type BotAction = ActionShape.GameEvent | ActionShape.MakeMove;"
+      ]
+    },
+    {
+      "name": "buildReplayPackage",
+      "stability": "supported",
+      "declarations": [
+        "export declare function buildReplayPackage(steps: Iterable<ReplayRecorderAppendInput>, options: ReplayRecorderBuildOptions): ReplayRecordedPackage;"
+      ]
+    },
+    {
+      "name": "ChatMessage",
+      "stability": "supported",
+      "declarations": [
+        "export interface ChatMessage {\n    id: string;\n    sender: PlayerID;\n    payload: any;\n}"
+      ]
+    },
+    {
+      "name": "Client",
+      "stability": "supported",
+      "declarations": [
+        "export declare function Client<G extends any = any, PluginAPIs extends Record<string, unknown> = Record<string, unknown>>(opts: ClientOpts<G, PluginAPIs>): _ClientImpl<G, PluginAPIs>;"
+      ]
+    },
+    {
+      "name": "CreateGameReducer",
+      "stability": "version-coupled",
+      "declarations": [
+        "export declare function CreateGameReducer({ game, isClient }: {\n    game: Game;\n    isClient?: boolean;\n}): (stateWithTransients: TransientState | null, action: ActionShape.Any) => TransientState;"
+      ]
+    },
+    {
+      "name": "createReplayRecorder",
+      "stability": "supported",
+      "declarations": [
+        "export declare function createReplayRecorder(): ReplayRecorder;"
+      ]
+    },
+    {
+      "name": "CredentialedActionShape",
+      "stability": "supported",
+      "declarations": [
+        "export declare namespace CredentialedActionShape {\n    type MakeMove = ReturnType<typeof ActionCreators.makeMove>;\n    type GameEvent = ReturnType<typeof ActionCreators.gameEvent>;\n    type Plugin = ReturnType<typeof ActionCreators.plugin>;\n    type AutomaticGameEvent = ReturnType<typeof ActionCreators.automaticGameEvent>;\n    type Undo = ReturnType<typeof ActionCreators.undo>;\n    type Redo = ReturnType<typeof ActionCreators.redo>;\n    type Any = MakeMove | GameEvent | AutomaticGameEvent | Undo | Redo | Plugin;\n}"
+      ]
+    },
+    {
+      "name": "Ctx",
+      "stability": "supported",
+      "declarations": [
+        "export interface Ctx {\n    numPlayers: number;\n    playOrder: Array<PlayerID>;\n    playOrderPos: number;\n    activePlayers: null | ActivePlayers;\n    currentPlayer: PlayerID;\n    numMoves?: number;\n    gameover?: any;\n    turn: number;\n    phase: string;\n    _activePlayersMinMoves?: Record<PlayerID, number> | null;\n    _activePlayersMaxMoves?: Record<PlayerID, number> | null;\n    _activePlayersNumMoves?: Record<PlayerID, number>;\n    _prevActivePlayers?: Array<{\n        activePlayers: null | ActivePlayers;\n        _activePlayersMinMoves?: Record<PlayerID, number> | null;\n        _activePlayersMaxMoves?: Record<PlayerID, number> | null;\n        _activePlayersNumMoves?: Record<PlayerID, number>;\n    }>;\n    _nextActivePlayers?: ActivePlayersArg | null;\n    _random?: {\n        seed: string | number;\n    };\n}"
+      ]
+    },
+    {
+      "name": "CURRENT_REPLAY_ENGINE_STATE_VERSION",
+      "stability": "supported",
+      "declarations": [
+        "CURRENT_REPLAY_ENGINE_STATE_VERSION = 1"
+      ]
+    },
+    {
+      "name": "DEFAULT_AI_MOVE_DELAY_MS",
+      "stability": "supported",
+      "declarations": [
+        "DEFAULT_AI_MOVE_DELAY_MS = 600"
+      ]
+    },
+    {
+      "name": "DeterminizedBot",
+      "stability": "supported",
+      "declarations": [
+        "export declare class DeterminizedBot extends Bot {\n    private game;\n    private sampleHiddenState?;\n    private objectives?;\n    private iterations;\n    private playoutDepth;\n    private samples;\n    private timeBudgetMs?;\n    constructor({ enumerate, seed, game, sampleHiddenState, objectives, iterations, playoutDepth, samples, timeBudgetMs, }: {\n        enumerate: NonNullable<Game['ai']>['enumerate'];\n        seed?: string | number;\n        game: Game;\n        sampleHiddenState?: (G: any, playerID: PlayerID) => any;\n        objectives?: (G: any, ctx: Ctx, playerID?: PlayerID) => Record<string, {\n            checker: (G: any, ctx: Ctx) => boolean;\n            weight: number;\n        }>;\n        iterations?: number;\n        playoutDepth?: number;\n        samples?: number;\n        timeBudgetMs?: number;\n    });\n    play(state: State, playerID: PlayerID): Promise<{\n        action?: BotAction;\n        metadata: any;\n    }>;\n}"
+      ]
+    },
+    {
+      "name": "DomainInvariantContext",
+      "stability": "supported",
+      "declarations": [
+        "export interface DomainInvariantContext {\n    slug: string;\n    seed: string;\n    numPlayers: number;\n    setupVariant: string;\n    mode: string;\n    maxSteps: number;\n    step: number;\n}"
+      ]
+    },
+    {
+      "name": "DomainInvariantViolation",
+      "stability": "supported",
+      "declarations": [
+        "export interface DomainInvariantViolation {\n    id: string;\n    message: string;\n    severity?: 'fail' | 'warn';\n    data?: unknown;\n}"
+      ]
+    },
+    {
+      "name": "extractGameLogDelta",
+      "stability": "supported",
+      "declarations": [
+        "export declare function extractGameLogDelta(G: GameLogStateShape, fromSequenceExclusive?: number): GameLogDelta;"
+      ]
+    },
+    {
+      "name": "FilteredMetadata",
+      "stability": "supported",
+      "declarations": [
+        "export type FilteredMetadata = {\n    id: number;\n    name?: string;\n    isConnected?: boolean;\n}[];"
+      ]
+    },
+    {
+      "name": "filterGameLogForPlayer",
+      "stability": "supported",
+      "declarations": [
+        "export declare function filterGameLogForPlayer(entries: GameLogEntry[] | undefined, viewerId: string | undefined): GameLogEntry[];"
+      ]
+    },
+    {
+      "name": "FnContext",
+      "stability": "supported",
+      "declarations": [
+        "export type FnContext<G extends any = any, PluginAPIs extends Record<string, unknown> = Record<string, unknown>> = PluginAPIs & DefaultPluginAPIs & {\n    G: G;\n    ctx: Ctx;\n};"
+      ]
+    },
+    {
+      "name": "Game",
+      "stability": "supported",
+      "declarations": [
+        "export interface Game<G extends any = any, PluginAPIs extends Record<string, unknown> = Record<string, unknown>, SetupData extends any = any> {\n    name?: string;\n    minPlayers?: number;\n    maxPlayers?: number;\n    deltaState?: boolean;\n    disableUndo?: boolean;\n    seed?: string | number;\n    setup?: (context: PluginAPIs & DefaultPluginAPIs & {\n        ctx: Ctx;\n    }, setupData?: SetupData) => G;\n    validateSetupData?: (setupData: SetupData | undefined, numPlayers: number) => string | undefined;\n    moves?: MoveMap<G, PluginAPIs>;\n    phases?: PhaseMap<G, PluginAPIs>;\n    turn?: TurnConfig<G, PluginAPIs>;\n    events?: {\n        endGame?: boolean;\n        endPhase?: boolean;\n        endTurn?: boolean;\n        setPhase?: boolean;\n        endStage?: boolean;\n        setStage?: boolean;\n        pass?: boolean;\n        setActivePlayers?: boolean;\n    };\n    endIf?: (context: FnContext<G, PluginAPIs>) => any;\n    onEnd?: (context: FnContext<G, PluginAPIs>) => void | G;\n    playerView?: (context: {\n        G: G;\n        ctx: Ctx;\n        playerID: PlayerID | null;\n    }) => any;\n    transportView?: TransportView<G>;\n    stateSchema?: GameStateSchema;\n    computeShareResult?: (context: {\n        G: G;\n        ctx: Ctx;\n        playerID: PlayerID;\n    }) => ShareResult;\n    plugins?: Array<Plugin<any, any, G>>;\n    ai?: {\n        enumerate: (G: G, ctx: Ctx, playerID: PlayerID) => AiEnumerate;\n        objectives?: (G: any, ctx: Ctx, playerID?: PlayerID) => Record<string, {\n            checker: (G: any, ctx: Ctx) => boolean;\n            weight: number;\n        }>;\n        sampleHiddenState?: (G: G, playerID: PlayerID) => G;\n        domainInvariants?: (G: G, ctx: Ctx, meta: DomainInvariantContext) => DomainInvariantViolation[];\n        /** Optional async initializer called once before the first bestMove invocation (e.g. load NN weights). */\n        init?: () => Promise<void>;\n        /** Optional direct evaluator that bypasses MCTS. Returns the best move or null. May be async. */\n        bestMove?: (G: G, ctx: Ctx, playerID: PlayerID, strength?: 'medium' | 'strong') => {\n            move: string;\n            args: any[];\n        } | null | Promise<{\n            move: string;\n            args: any[];\n        } | null>;\n        /** Optional per-action pacing override for AI moves. Defaults to 600ms when omitted. */\n        getMoveDelayMs?: (context: {\n            G: G;\n            ctx: Ctx;\n            playerID: PlayerID;\n            action: ActionShape.MakeMove | ActionShape.GameEvent;\n        }) => number;\n    };\n    processMove?: (state: State<G>, action: ActionPayload.MakeMove) => State<G> | typeof INVALID_MOVE;\n    flow?: ReturnType<typeof Flow>;\n}"
+      ]
+    },
+    {
+      "name": "GameLogAudience",
+      "stability": "supported",
+      "declarations": [
+        "export type GameLogAudience = 'public' | 'self' | {\n    playerIds: string[];\n};"
+      ]
+    },
+    {
+      "name": "GameLogDelta",
+      "stability": "supported",
+      "declarations": [
+        "export interface GameLogDelta {\n    entries: GameLogEntry[];\n    fromSequenceExclusive: number;\n    toSequence: number;\n    truncated: boolean;\n}"
+      ]
+    },
+    {
+      "name": "GameLogEntry",
+      "stability": "supported",
+      "declarations": [
+        "export interface GameLogEntry {\n    id: string;\n    sequence: number;\n    turn: number;\n    playerId?: string;\n    publicMessageKey: string;\n    publicParams?: Record<string, unknown>;\n    publicPlayerIds?: Record<string, string>;\n    privateMessageKey?: string;\n    privateParams?: Record<string, unknown>;\n    privatePlayerIds?: Record<string, string>;\n    audience?: GameLogAudience;\n    detailOnly?: boolean;\n}"
+      ]
+    },
+    {
+      "name": "GameLogLevel",
+      "stability": "supported",
+      "declarations": [
+        "export type GameLogLevel = 'action' | 'detail';"
+      ]
+    },
+    {
+      "name": "gameLogMessageParam",
+      "stability": "supported",
+      "declarations": [
+        "export declare function gameLogMessageParam(key: string, params?: Record<string, unknown>): GameLogMessageParam;"
+      ]
+    },
+    {
+      "name": "GameLogMessageParam",
+      "stability": "supported",
+      "declarations": [
+        "export interface GameLogMessageParam {\n    __gameLogMessageKey: string;\n    __gameLogMessageParams?: Record<string, unknown>;\n}"
+      ]
+    },
+    {
+      "name": "GameLogStateShape",
+      "stability": "supported",
+      "declarations": [
+        "export interface GameLogStateShape {\n    gameLog?: GameLogEntry[];\n    gameLogSequence?: number;\n    logConfig?: {\n        enabled: boolean;\n        level: GameLogLevel;\n    };\n}"
+      ]
+    },
+    {
+      "name": "getFilterPlayerView",
+      "stability": "version-coupled",
+      "declarations": [
+        "getFilterPlayerView: (game: Game) => (playerID: string | null, payload: IntermediateTransportData) => TransportData"
+      ]
+    },
+    {
+      "name": "getRemainingAIMoveDelayMs",
+      "stability": "supported",
+      "declarations": [
+        "export declare function getRemainingAIMoveDelayMs(delayMs: number, startedAt: number): number;"
+      ]
+    },
+    {
+      "name": "InitializeGame",
+      "stability": "version-coupled",
+      "declarations": [
+        "export declare function InitializeGame({ game, numPlayers, setupData, }: {\n    game: Game;\n    numPlayers?: number;\n    setupData?: any;\n}): State<any>;"
+      ]
+    },
+    {
+      "name": "IntermediateTransportData",
+      "stability": "version-coupled",
+      "declarations": [
+        "export type IntermediateTransportData = {\n    type: 'update';\n    args: [string, State];\n} | {\n    type: 'patch';\n    args: [string, number, State, State];\n} | CommonTransportData;"
+      ]
+    },
+    {
+      "name": "INVALID_MOVE",
+      "stability": "supported",
+      "declarations": [
+        "INVALID_MOVE = \"INVALID_MOVE\""
+      ]
+    },
+    {
+      "name": "IsLongFormMove",
+      "stability": "version-coupled",
+      "declarations": [
+        "export declare function IsLongFormMove(move: Move): move is LongFormMove;"
+      ]
+    },
+    {
+      "name": "Local",
+      "stability": "supported",
+      "declarations": [
+        "export declare function Local({ bots, persist, storageKey, setupData, aiDelayMultiplier }?: LocalOpts): (transportOpts: TransportOpts) => LocalTransport;"
+      ]
+    },
+    {
+      "name": "LogEntry",
+      "stability": "supported",
+      "declarations": [
+        "export interface LogEntry {\n    action: ActionShape.MakeMove | ActionShape.GameEvent | ActionShape.Undo | ActionShape.Redo;\n    _stateID: number;\n    turn: number;\n    phase: string;\n    redact?: boolean;\n    automatic?: boolean;\n    metadata?: any;\n    patch?: Operation[];\n}"
+      ]
+    },
+    {
+      "name": "MAKE_MOVE",
+      "stability": "version-coupled",
+      "declarations": [
+        "MAKE_MOVE = \"MAKE_MOVE\""
+      ]
+    },
+    {
+      "name": "MCTSBot",
+      "stability": "supported",
+      "declarations": [
+        "export declare class MCTSBot extends Bot {\n    private objectives;\n    private iterationCallback;\n    private reducer;\n    iterations: number | ((G: any, ctx: Ctx, playerID?: PlayerID) => number);\n    playoutDepth?: number | ((G: any, ctx: Ctx, playerID?: PlayerID) => number);\n    timeBudgetMs?: number | ((G: any, ctx: Ctx, playerID?: PlayerID) => number);\n    constructor({ enumerate, seed, objectives, game, iterations, playoutDepth, timeBudgetMs, iterationCallback, }: {\n        enumerate: NonNullable<Game['ai']>['enumerate'];\n        seed?: string | number;\n        game: Game;\n        objectives?: (G: any, ctx: Ctx, playerID?: PlayerID) => Objectives;\n        iterations?: number | ((G: any, ctx: Ctx, playerID?: PlayerID) => number);\n        playoutDepth?: number | ((G: any, ctx: Ctx, playerID?: PlayerID) => number);\n        timeBudgetMs?: number | ((G: any, ctx: Ctx, playerID?: PlayerID) => number);\n        iterationCallback?: (data: {\n            iterationCounter: number;\n            numIterations: number;\n            metadata: Node;\n        }) => void;\n    });\n    private createNode;\n    private select;\n    private expand;\n    playout({ state }: Node, deadline?: number): any;\n    private backpropagate;\n    play(state: State, playerID: PlayerID): Promise<{\n        action?: BotAction;\n        metadata: Node;\n    }>;\n}"
+      ]
+    },
+    {
+      "name": "MockRandom",
+      "stability": "supported",
+      "declarations": [
+        "MockRandom: (overrides?: Partial<Record<keyof RandomAPI, (...args: any[]) => any>>) => Omit<typeof RandomPlugin, 'flush'>"
+      ]
+    },
+    {
+      "name": "MoveFn",
+      "stability": "supported",
+      "declarations": [
+        "export type MoveFn<G extends any = any, PluginAPIs extends Record<string, unknown> = Record<string, unknown>> = (context: FnContext<G, PluginAPIs> & {\n    playerID: PlayerID;\n}, ...args: any[]) => void | G | typeof INVALID_MOVE;"
+      ]
+    },
+    {
+      "name": "Node",
+      "stability": "supported",
+      "declarations": [
+        "export interface Node {\n    /** Game state at this node. */\n    state: State;\n    /** Parent of the node. */\n    parent?: Node;\n    /** Move used to get to this node. */\n    parentAction?: BotAction;\n    /** Unexplored actions. */\n    actions: BotAction[];\n    /** Current objectives. */\n    objectives: Objectives | Objectives[];\n    /** Children of the node. */\n    children: Node[];\n    /** Number of simulations that pass through this node. */\n    visits: number;\n    /** Number of wins for this node. */\n    value: number;\n    /** True when play() stopped because the wall-clock budget expired. */\n    budgetExpired?: boolean;\n    /** Wall-clock time spent in play(), when available. */\n    elapsedMs?: number;\n    /** Number of MCTS iterations completed in play(). */\n    completedIterations?: number;\n}"
+      ]
+    },
+    {
+      "name": "parseReplayPackage",
+      "stability": "supported",
+      "declarations": [
+        "export declare function parseReplayPackage(json: string): ReplayPackage;"
+      ]
+    },
+    {
+      "name": "PhaseConfig",
+      "stability": "supported",
+      "declarations": [
+        "export interface PhaseConfig<G extends any = any, PluginAPIs extends Record<string, unknown> = Record<string, unknown>> {\n    start?: boolean;\n    next?: ((context: FnContext<G, PluginAPIs>) => string | void) | string;\n    onBegin?: (context: FnContext<G, PluginAPIs>) => void | G;\n    onEnd?: (context: FnContext<G, PluginAPIs>) => void | G;\n    endIf?: (context: FnContext<G, PluginAPIs>) => boolean | void | {\n        next: string;\n    };\n    moves?: MoveMap<G, PluginAPIs>;\n    turn?: TurnConfig<G, PluginAPIs>;\n    wrapped?: {\n        endIf?: (state: State<G>) => boolean | void | {\n            next: string;\n        };\n        onBegin?: (state: State<G>) => void | G;\n        onEnd?: (state: State<G>) => void | G;\n        next?: (state: State<G>) => string | void;\n    };\n}"
+      ]
+    },
+    {
+      "name": "PlayerID",
+      "stability": "supported",
+      "declarations": [
+        "export type PlayerID = string;"
+      ]
+    },
+    {
+      "name": "ProcessGameConfig",
+      "stability": "version-coupled",
+      "declarations": [
+        "export declare function ProcessGameConfig(game: Game | ProcessedGame): ProcessedGame;"
+      ]
+    },
+    {
+      "name": "RandomBot",
+      "stability": "supported",
+      "declarations": [
+        "export declare class RandomBot extends Bot {\n    play({ G, ctx }: {\n        G: any;\n        ctx: Ctx;\n    }, playerID: PlayerID): Promise<{\n        action?: BotAction;\n        metadata?: any;\n    }>;\n}"
+      ]
+    },
+    {
+      "name": "redactLog",
+      "stability": "version-coupled",
+      "declarations": [
+        "export declare function redactLog(log: LogEntry[] | undefined, playerID: PlayerID | null): {\n    _stateID: number;\n    turn: number;\n    phase: string;\n    automatic?: boolean;\n    metadata?: any;\n    patch?: import(\"rfc6902\").Operation[];\n    action: {\n        type: typeof import(\"./action-types.js\").MAKE_MOVE;\n        payload: {\n            type: string;\n            playerID: string;\n            args: any;\n        } | {\n            type: string;\n            playerID: string;\n            args: any;\n        } | {\n            type: any;\n            playerID: string;\n            args: any;\n        } | {\n            type: any;\n            playerID: string;\n            args: any;\n        };\n    } | {\n        type: typeof import(\"./action-types.js\").GAME_EVENT;\n        payload: {\n            type: string;\n            playerID: string;\n            args: any;\n        } | {\n            type: string;\n            playerID: string;\n            args: any;\n        } | {\n            type: any;\n            playerID: string;\n            args: any;\n        } | {\n            type: any;\n            playerID: string;\n            args: any;\n        };\n    } | {\n        type: typeof import(\"./action-types.js\").UNDO;\n        payload: {\n            type: string;\n            playerID: string;\n            args: any;\n        } | {\n            type: string;\n            playerID: string;\n            args: any;\n        } | {\n            type: any;\n            playerID: string;\n            args: any;\n        } | {\n            type: any;\n            playerID: string;\n            args: any;\n        };\n    } | {\n        type: typeof import(\"./action-types.js\").REDO;\n        payload: {\n            type: string;\n            playerID: string;\n            args: any;\n        } | {\n            type: string;\n            playerID: string;\n            args: any;\n        } | {\n            type: any;\n            playerID: string;\n            args: any;\n        } | {\n            type: any;\n            playerID: string;\n            args: any;\n        };\n    };\n}[];"
+      ]
+    },
+    {
+      "name": "REDO",
+      "stability": "version-coupled",
+      "declarations": [
+        "REDO = \"REDO\""
+      ]
+    },
+    {
+      "name": "Remote",
+      "stability": "supported",
+      "declarations": [
+        "export declare function Remote({ server, shellOrigin, ticket }: RemoteOpts): (transportOpts: TransportOpts) => WebSocketTransport;"
+      ]
+    },
+    {
+      "name": "REPLAY_INDEX_STATUSES",
+      "stability": "supported",
+      "declarations": [
+        "REPLAY_INDEX_STATUSES: readonly ['pending', 'available', 'failed']"
+      ]
+    },
+    {
+      "name": "REPLAY_PACKAGE_VERSION",
+      "stability": "supported",
+      "declarations": [
+        "REPLAY_PACKAGE_VERSION = 1"
+      ]
+    },
+    {
+      "name": "ReplayAccessPolicy",
+      "stability": "supported",
+      "declarations": [
+        "export type ReplayAccessPolicy = 'participant-pro';"
+      ]
+    },
+    {
+      "name": "ReplayGameLogDeltaMetadata",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayGameLogDeltaMetadata {\n    fromSequenceExclusive: number;\n    toSequence: number;\n    truncated: boolean;\n}"
+      ]
+    },
+    {
+      "name": "ReplayGameLogTruncationMetadata",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayGameLogTruncationMetadata extends ReplayGameLogDeltaMetadata {\n    index: number;\n    stateId: number;\n}"
+      ]
+    },
+    {
+      "name": "ReplayIndexRecord",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayIndexRecord {\n    match_id: string;\n    game: string;\n    status: ReplayIndexStatus;\n    recording_mode: ReplayRecordingMode;\n    access_policy: ReplayAccessPolicy;\n    visibility_policy: 'participants';\n    object_key: string | null;\n    object_size_bytes: number | null;\n    object_sha256: string | null;\n    failure_code: string | null;\n    created_at: number;\n    updated_at: number;\n    captured_at: number | null;\n    available_at: number | null;\n    failed_at: number | null;\n    expires_at: number | null;\n}"
+      ]
+    },
+    {
+      "name": "ReplayIndexStatus",
+      "stability": "supported",
+      "declarations": [
+        "export type ReplayIndexStatus = (typeof REPLAY_INDEX_STATUSES)[number];"
+      ]
+    },
+    {
+      "name": "ReplayManifest",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayManifest {\n    version: typeof REPLAY_PACKAGE_VERSION;\n    matchId: string;\n    slug: string;\n    status: 'finished';\n    createdAt: number;\n    finishedAt: number;\n    numPlayers: number;\n    participants: ReplayParticipant[];\n    resultSummary: unknown;\n    logConfig: {\n        enabled: boolean;\n        level: 'action' | 'detail';\n    };\n    seed?: string | number;\n    /** Legacy display-only fields. Missing state versions mean unknown/v0. */\n    engineVersion?: string;\n    gameVersion?: string;\n    engineStateVersion?: number;\n    gameStateVersion?: number;\n    release?: ReplayReleaseIdentity;\n    recordingMode: ReplayRecordingMode;\n    stepCount: number;\n    visibilityModes: ReplayVisibilityMode[];\n    accessPolicy: ReplayAccessPolicy;\n}"
+      ]
+    },
+    {
+      "name": "ReplayPackage",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayPackage {\n    manifest: ReplayManifest;\n    steps: ReplayStep[];\n}"
+      ]
+    },
+    {
+      "name": "ReplayParticipant",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayParticipant {\n    playerId: string;\n    userId?: string;\n    isAi: boolean;\n}"
+      ]
+    },
+    {
+      "name": "ReplayRecordedPackage",
+      "stability": "supported",
+      "declarations": [
+        "export type ReplayRecordedPackage = ReplayPackage & {\n    recorderMetadata: ReplayRecorderMetadata;\n    steps: ReplayRecordedStep[];\n};"
+      ]
+    },
+    {
+      "name": "ReplayRecordedStep",
+      "stability": "supported",
+      "declarations": [
+        "export type ReplayRecordedStep = ReplayStep & {\n    gameLogDeltaMeta: ReplayGameLogDeltaMetadata;\n};"
+      ]
+    },
+    {
+      "name": "ReplayRecorder",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayRecorder {\n    readonly steps: readonly ReplayRecordedStep[];\n    readonly metadata: ReplayRecorderMetadata;\n    append<G extends GameLogStateShape>(input: ReplayRecorderAppendInput<G>): ReplayRecordedStep;\n    buildPackage(options: ReplayRecorderBuildOptions): ReplayRecordedPackage;\n}"
+      ]
+    },
+    {
+      "name": "ReplayRecorderAppendInput",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayRecorderAppendInput<G extends GameLogStateShape = GameLogStateShape> {\n    state: State<G>;\n    action?: unknown;\n    actorPlayerId?: string;\n    automatic?: boolean;\n    deltalog?: LogEntry[];\n    snapshot?: unknown;\n    gameStateVersion?: number;\n}"
+      ]
+    },
+    {
+      "name": "ReplayRecorderBuildOptions",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayRecorderBuildOptions {\n    matchId: string;\n    slug: string;\n    createdAt: number;\n    finishedAt: number;\n    participants: ReplayParticipant[];\n    resultSummary: unknown;\n    engineVersion?: string;\n    gameVersion?: string;\n    engineStateVersion?: number;\n    gameStateVersion?: number;\n    release?: ReplayReleaseIdentity;\n    logConfig?: {\n        enabled: boolean;\n        level: GameLogLevel;\n    };\n    numPlayers?: number;\n    seed?: string | number;\n    visibilityModes?: ReplayVisibilityMode[];\n}"
+      ]
+    },
+    {
+      "name": "ReplayRecorderMetadata",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayRecorderMetadata {\n    gameLogDeltaTruncated: boolean;\n    truncatedGameLogDeltas: ReplayGameLogTruncationMetadata[];\n}"
+      ]
+    },
+    {
+      "name": "ReplayRecordingMode",
+      "stability": "supported",
+      "declarations": [
+        "export type ReplayRecordingMode = 'snapshot';"
+      ]
+    },
+    {
+      "name": "ReplayReleaseIdentity",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayReleaseIdentity {\n    slug: string;\n    version: string;\n    /** Existing third-party / legacy release provenance. */\n    sourceSHA?: string;\n    serverScriptHash?: string;\n    clientBundleHash?: string;\n    /** First-party build-input authority; these fields are present as one complete group. */\n    authorityKind?: 'first-party-build-inputs-v1';\n    appSourceTreeSHA256?: string;\n    serverAuthoritySHA256?: string;\n    clientBundleSHA256?: string;\n    deliveryConfigSHA256?: string;\n}"
+      ]
+    },
+    {
+      "name": "ReplayStep",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayStep {\n    index: number;\n    stateId: number;\n    turn: number;\n    phase: string | null;\n    actorPlayerId?: string;\n    automatic?: boolean;\n    action: unknown;\n    deltalog: unknown[];\n    gameLogDelta: GameLogEntry[];\n    gameStateVersion?: number;\n    state: unknown;\n}"
+      ]
+    },
+    {
+      "name": "ReplayValidationResult",
+      "stability": "supported",
+      "declarations": [
+        "export interface ReplayValidationResult<T> {\n    ok: boolean;\n    value?: T;\n    errors: string[];\n}"
+      ]
+    },
+    {
+      "name": "ReplayVisibilityMode",
+      "stability": "supported",
+      "declarations": [
+        "export type ReplayVisibilityMode = 'full-reveal';"
+      ]
+    },
+    {
+      "name": "resolveAIMoveDelayMs",
+      "stability": "supported",
+      "declarations": [
+        "export declare function resolveAIMoveDelayMs(game: Game | undefined, state: State, playerID: PlayerID, action: AIMoveDelayAction): number;"
+      ]
+    },
+    {
+      "name": "ResolvedGameLogEntry",
+      "stability": "supported",
+      "declarations": [
+        "export interface ResolvedGameLogEntry {\n    id: string;\n    sequence: number;\n    turn: number;\n    playerId?: string;\n    text: string;\n}"
+      ]
+    },
+    {
+      "name": "resolveGameLogs",
+      "stability": "supported",
+      "declarations": [
+        "export declare function resolveGameLogs(entries: GameLogEntry[] | undefined, viewerId: string | undefined, level: GameLogLevel, t: (key: string, params?: Record<string, unknown>) => string, matchData?: MatchDataEntry[]): ResolvedGameLogEntry[];"
+      ]
+    },
+    {
+      "name": "resolveGameLogText",
+      "stability": "supported",
+      "declarations": [
+        "export declare function resolveGameLogText(entry: GameLogEntry, viewerId: string | undefined, level: GameLogLevel, t: (key: string, params?: Record<string, unknown>) => string, matchData?: MatchDataEntry[]): string | null;"
+      ]
+    },
+    {
+      "name": "serializeReplayPackage",
+      "stability": "supported",
+      "declarations": [
+        "export declare function serializeReplayPackage(pkg: ReplayPackage): string;"
+      ]
+    },
+    {
+      "name": "Server",
+      "stability": "supported",
+      "declarations": [
+        "export declare namespace Server {\n    type GenerateCredentials = (ctx: any) => Promise<string> | string;\n    type AuthenticateCredentials = (credentials: string, playerMetadata: PlayerMetadata) => Promise<boolean> | boolean;\n    type PlayerMetadata = {\n        id: number;\n        name?: string;\n        credentials?: string;\n        data?: any;\n        isConnected?: boolean;\n    };\n    interface MatchData {\n        gameName: string;\n        players: {\n            [id: number]: PlayerMetadata;\n        };\n        setupData?: any;\n        gameover?: any;\n        nextMatchID?: string;\n        unlisted?: boolean;\n        createdAt: number;\n        updatedAt: number;\n    }\n    type App = any;\n}"
+      ]
+    },
+    {
+      "name": "ShareResult",
+      "stability": "supported",
+      "declarations": [
+        "export interface ShareResult {\n    playerRank: number;\n    totalPlayers: number;\n    playerScore?: string;\n}"
+      ]
+    },
+    {
+      "name": "Simulate",
+      "stability": "supported",
+      "declarations": [
+        "export declare function Simulate({ game, bots, state, depth, }: {\n    game: Game;\n    bots: Bot | Record<PlayerID, Bot>;\n    state: State;\n    depth?: number;\n}): Promise<{\n    state: State<any>;\n    metadata: any;\n}>;"
+      ]
+    },
+    {
+      "name": "State",
+      "stability": "supported",
+      "declarations": [
+        "export interface State<G extends any = any> {\n    G: G;\n    ctx: Ctx;\n    deltalog?: Array<LogEntry>;\n    plugins: {\n        [pluginName: string]: PluginState;\n    };\n    _undo: Array<Undo<G>>;\n    _redo: Array<Undo<G>>;\n    _stateID: number;\n}"
+      ]
+    },
+    {
+      "name": "StateMigrationError",
+      "stability": "experimental",
+      "declarations": [
+        "export declare class StateMigrationError extends Error {\n    readonly code: StateMigrationErrorCode;\n    readonly fromVersion: number;\n    readonly targetVersion: number;\n    readonly slot?: GameMigrationMeta['slot'];\n    constructor({ code, message, fromVersion, targetVersion, slot, cause, }: {\n        code: StateMigrationErrorCode;\n        message: string;\n        fromVersion: number;\n        targetVersion: number;\n        slot?: GameMigrationMeta['slot'];\n        cause?: unknown;\n    });\n}"
+      ]
+    },
+    {
+      "name": "StateMigrationErrorCode",
+      "stability": "experimental",
+      "declarations": [
+        "export type StateMigrationErrorCode = 'invalid_schema' | 'version_ahead' | 'missing_migration' | 'migration_threw';"
+      ]
+    },
+    {
+      "name": "Step",
+      "stability": "supported",
+      "declarations": [
+        "export declare function Step(client: {\n    store: Store;\n}, bot: Bot): Promise<{\n    type: typeof import(\"../index.js\").MAKE_MOVE;\n    payload: {\n        type: string;\n        args: any;\n        playerID: string;\n        metadata: any;\n    } | {\n        type: string;\n        args: any;\n        playerID: string;\n        metadata: any;\n    };\n} | {\n    type: typeof import(\"../core/action-types.js\").GAME_EVENT;\n    payload: {\n        type: string;\n        args: any;\n        playerID: string;\n        metadata: any;\n    } | {\n        type: string;\n        args: any;\n        playerID: string;\n        metadata: any;\n    };\n}>;"
+      ]
+    },
+    {
+      "name": "SyncInfo",
+      "stability": "supported",
+      "declarations": [
+        "export interface SyncInfo {\n    state: State;\n    filteredMetadata: FilteredMetadata;\n    initialState: State;\n    log: LogEntry[];\n}"
+      ]
+    },
+    {
+      "name": "TransientHandlingMiddleware",
+      "stability": "version-coupled",
+      "declarations": [
+        "TransientHandlingMiddleware: (store: Store) => (next: Dispatch<ActionShape.Any>) => (action: ActionShape.Any) => {\n    type: typeof Actions.SYNC;\n    state: State<any>;\n    log: LogEntry[];\n    initialState: State<any>;\n    clientOnly: true;\n} | {\n    type: typeof Actions.PATCH;\n    prevStateID: number;\n    stateID: number;\n    patch: import(\"rfc6902\").Operation[];\n    deltalog: LogEntry[];\n    clientOnly: true;\n} | {\n    type: typeof Actions.UPDATE;\n    state: State<any>;\n    deltalog: LogEntry[];\n    clientOnly: true;\n} | {\n    type: typeof Actions.RESET;\n    state: State<any>;\n    clientOnly: true;\n} | {\n    type: typeof Actions.STRIP_TRANSIENTS;\n} | {\n    type: typeof Actions.SYNC;\n    state: State<any>;\n    log: LogEntry[];\n    initialState: State<any>;\n    clientOnly: true;\n    transients: TransientMetadata;\n} | {\n    type: typeof Actions.PATCH;\n    prevStateID: number;\n    stateID: number;\n    patch: import(\"rfc6902\").Operation[];\n    deltalog: LogEntry[];\n    clientOnly: true;\n    transients: TransientMetadata;\n} | {\n    type: typeof Actions.UPDATE;\n    state: State<any>;\n    deltalog: LogEntry[];\n    clientOnly: true;\n    transients: TransientMetadata;\n} | {\n    type: typeof Actions.RESET;\n    state: State<any>;\n    clientOnly: true;\n    transients: TransientMetadata;\n} | {\n    type: typeof Actions.STRIP_TRANSIENTS;\n    transients: TransientMetadata;\n} | {\n    type: typeof Actions.MAKE_MOVE;\n    transients: TransientMetadata;\n    payload: Omit<{\n        type: string;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n} | {\n    type: typeof Actions.GAME_EVENT;\n    transients: TransientMetadata;\n    payload: Omit<{\n        type: string;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n} | {\n    type: typeof Actions.GAME_EVENT;\n    automatic: boolean;\n    transients: TransientMetadata;\n    payload: Omit<{\n        type: string;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n} | {\n    type: typeof Actions.UNDO;\n    transients: TransientMetadata;\n    payload: Omit<{\n        type: any;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n} | {\n    type: typeof Actions.REDO;\n    transients: TransientMetadata;\n    payload: Omit<{\n        type: any;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n} | {\n    type: typeof Actions.PLUGIN;\n    transients: TransientMetadata;\n    payload: Omit<{\n        type: string;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n} | (Omit<{\n    type: typeof Actions.MAKE_MOVE;\n    payload: {\n        type: string;\n        args: any;\n        playerID: string;\n        credentials: string;\n    };\n}, \"payload\"> & {\n    payload: Omit<{\n        type: string;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n}) | (Omit<{\n    type: typeof Actions.GAME_EVENT;\n    payload: {\n        type: string;\n        args: any;\n        playerID: string;\n        credentials: string;\n    };\n}, \"payload\"> & {\n    payload: Omit<{\n        type: string;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n}) | (Omit<{\n    type: typeof Actions.UNDO;\n    payload: {\n        type: any;\n        args: any;\n        playerID: string;\n        credentials: string;\n    };\n}, \"payload\"> & {\n    payload: Omit<{\n        type: any;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n}) | (Omit<{\n    type: typeof Actions.REDO;\n    payload: {\n        type: any;\n        args: any;\n        playerID: string;\n        credentials: string;\n    };\n}, \"payload\"> & {\n    payload: Omit<{\n        type: any;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n}) | (Omit<{\n    type: typeof Actions.PLUGIN;\n    payload: {\n        type: string;\n        args: any;\n        playerID: string;\n        credentials: string;\n    };\n}, \"payload\"> & {\n    payload: Omit<{\n        type: string;\n        args: any;\n        playerID: string;\n        credentials: string;\n    }, \"credentials\">;\n})"
+      ]
+    },
+    {
+      "name": "Transport",
+      "stability": "supported",
+      "declarations": [
+        "export declare abstract class Transport {\n    protected gameName: string;\n    protected playerID: PlayerID | null;\n    protected matchID: string;\n    protected credentials?: string;\n    protected numPlayers: number;\n    /** Callback to pass transport data back to the client. */\n    private transportDataCallback;\n    /** Callback to let the client know when the connection status has changed. */\n    private connectionStatusCallback;\n    isConnected: boolean;\n    constructor({ transportDataCallback, gameName, playerID, matchID, credentials, numPlayers, }: TransportOpts);\n    /** Subscribe to connection state changes. */\n    subscribeToConnectionStatus(fn: () => void): void;\n    /** Transport implementations should call this when they connect/disconnect. */\n    protected setConnectionStatus(isConnected: boolean): void;\n    /** Transport implementations should call this when they receive data from a master. */\n    protected notifyClient(data: TransportData): void;\n    /** Called by the client to connect the transport. */\n    abstract connect(): void;\n    /** Called by the client to disconnect the transport. */\n    abstract disconnect(): void;\n    /** Called by the client to dispatch an action via the transport. */\n    abstract sendAction(state: State, action: CredentialedActionShape.Any): void;\n    /** Called by the client to dispatch a chat message via the transport. */\n    abstract sendChatMessage(matchID: string, chatMessage: ChatMessage): void;\n    /** Called by the client to request a sync action from the transport. */\n    abstract requestSync(): void;\n    /** Called by the client to update the matchID it wants to connect to. */\n    abstract updateMatchID(id: string): void;\n    /** Called by the client to update the playerID it is playing as. */\n    abstract updatePlayerID(id: PlayerID): void;\n    /** Called by the client to update the credentials it is using. */\n    abstract updateCredentials(credentials?: string): void;\n}"
+      ]
+    },
+    {
+      "name": "TransportData",
+      "stability": "version-coupled",
+      "declarations": [
+        "export type TransportData = {\n    type: 'update';\n    args: [string, State, LogEntry[]];\n} | {\n    type: 'patch';\n    args: [string, number, number, Operation[], LogEntry[]];\n} | CommonTransportData;"
+      ]
+    },
+    {
+      "name": "TurnOrder",
+      "stability": "supported",
+      "declarations": [
+        "TurnOrder: {\n    /**\n     * DEFAULT\n     *\n     * The default round-robin turn order.\n     */\n    DEFAULT: {\n        first: ({ ctx }: FnContext) => number;\n        next: ({ ctx }: FnContext) => number;\n    };\n    /**\n     * RESET\n     *\n     * Similar to DEFAULT, but starts from 0 each time.\n     */\n    RESET: {\n        first: () => number;\n        next: ({ ctx }: FnContext) => number;\n    };\n    /**\n     * CONTINUE\n     *\n     * Similar to DEFAULT, but starts with the player who ended the last phase.\n     */\n    CONTINUE: {\n        first: ({ ctx }: FnContext) => number;\n        next: ({ ctx }: FnContext) => number;\n    };\n    /**\n     * ONCE\n     *\n     * Another round-robin turn order, but goes around just once.\n     * The phase ends after all players have played.\n     */\n    ONCE: {\n        first: () => number;\n        next: ({ ctx }: FnContext) => number;\n    };\n    /**\n     * CUSTOM\n     *\n     * Identical to DEFAULT, but also sets playOrder at the\n     * beginning of the phase.\n     *\n     * @param {Array} playOrder - The play order.\n     */\n    CUSTOM: (playOrder: string[]) => {\n        playOrder: () => string[];\n        first: () => number;\n        next: ({ ctx }: FnContext) => number;\n    };\n    /**\n     * CUSTOM_FROM\n     *\n     * Identical to DEFAULT, but also sets playOrder at the\n     * beginning of the phase to a value specified by a field\n     * in G.\n     *\n     * @param {string} playOrderField - Field in G.\n     */\n    CUSTOM_FROM: (playOrderField: string) => {\n        playOrder: ({ G }: FnContext) => any;\n        first: () => number;\n        next: ({ ctx }: FnContext) => number;\n    };\n}"
+      ]
+    },
+    {
+      "name": "UNDO",
+      "stability": "version-coupled",
+      "declarations": [
+        "UNDO = \"UNDO\""
+      ]
+    },
+    {
+      "name": "validateReplayPackage",
+      "stability": "supported",
+      "declarations": [
+        "export declare function validateReplayPackage(value: unknown): ReplayValidationResult<ReplayPackage>;"
+      ]
+    },
+    {
+      "name": "WeightedBotAction",
+      "stability": "supported",
+      "declarations": [
+        "export type WeightedBotAction = BotAction & {\n    weight?: number;\n};"
+      ]
+    }
+  ],
+  "declarationInventory": [
+    {
+      "path": "ai/ai.d.ts",
+      "sha256": "31d13ec00733f80d3ae785c8c833f24e6dec8bc800300164f51ad3dd3d42b2a2"
+    },
+    {
+      "path": "ai/bot.d.ts",
+      "sha256": "3a8feb27fc9eae16358c5b92bfcd0c7154e6c8ebc2a4abbdcf75fe1e7f0ca36d"
+    },
+    {
+      "path": "ai/determinized-bot.d.ts",
+      "sha256": "c5b2bbe4c8092185ebfe958f68b36501e9ea80b1841e50cef6e1c138b0c61398"
+    },
+    {
+      "path": "ai/index.d.ts",
+      "sha256": "ad1935d737722ec912569a368a8baf8d837e9b68267b0dfa2ae306c6bff7a80d"
+    },
+    {
+      "path": "ai/mcts-bot.d.ts",
+      "sha256": "c1f6ea8ee8d9e73c4f8e4f65a774c5df85bb901a909845175cc54a116a171a4e"
+    },
+    {
+      "path": "ai/move-delay.d.ts",
+      "sha256": "027cb74b8472904616f95b4939bc854bfc79bc62c618f0ac0e6b952ca23f376b"
+    },
+    {
+      "path": "ai/random-bot.d.ts",
+      "sha256": "9799b21c6c5f9516a1b97e917e99d9795b8a869c20775b5e81f6da0f6077db55"
+    },
+    {
+      "path": "client/client.d.ts",
+      "sha256": "6e28b56bd6bd28853d6ed64b9e7e5026f0f4f5ff5abd99ff7cfb5e700dc3d557"
+    },
+    {
+      "path": "client/transport/local.d.ts",
+      "sha256": "948c5e840243405fd7e108d0d12079edd1d6d0ee308db2af54ef39ea5145a679"
+    },
+    {
+      "path": "client/transport/transport.d.ts",
+      "sha256": "fe170259d06accde9f43d2a6823f29c33bab57feb4072f0b176ca2f06678013f"
+    },
+    {
+      "path": "client/transport/websocket.d.ts",
+      "sha256": "cd5d5598da25fee33c784edd1a1c34708bfbef3e69809f7f46ae0c3e07210b5a"
+    },
+    {
+      "path": "core/action-creators.d.ts",
+      "sha256": "f479bfcc59e0d2115e01bab84f8408bc96ed03d810780b8af2e8dea3a031e4e4"
+    },
+    {
+      "path": "core/action-types.d.ts",
+      "sha256": "f0f27f1f5476a9eb5e654a91c68a447e9fd99ac06e460b58ed5f97c63c3f695f"
+    },
+    {
+      "path": "core/constants.d.ts",
+      "sha256": "40407d48a45241534ea02ad34a3affe31733f770377d24b258286db337740ac7"
+    },
+    {
+      "path": "core/errors.d.ts",
+      "sha256": "a1a3cdb9b709bf395e142c36372a9da544dec8384b966c4b4e2cce410d88eea8"
+    },
+    {
+      "path": "core/filter-player-view.d.ts",
+      "sha256": "a250f30bef8a6518e2003aedd0d2bb414a7ddc2c7d782d393290829b7146c068"
+    },
+    {
+      "path": "core/flow.d.ts",
+      "sha256": "29180c6a741e83571fafee199175c4116efa97141f9a2ed9f2f6bdaec367b056"
+    },
+    {
+      "path": "core/game-methods.d.ts",
+      "sha256": "3af9d459da7a961f53772dd24d9d76e10f38f03a77411b8dcc300f37ee134abd"
+    },
+    {
+      "path": "core/game.d.ts",
+      "sha256": "b14f31c1b2247d74f4b92652e4837bb3f2ec3562c7031a3fead1f317dbefa77d"
+    },
+    {
+      "path": "core/initialize.d.ts",
+      "sha256": "cbbc0cd29d83d9e0b5c99314896ee721ae503e861fb9370c941805d2a7392cc5"
+    },
+    {
+      "path": "core/reducer.d.ts",
+      "sha256": "11df3f92d8dcd1b3a3dd3ae3b17e115a6ba2e62fa24ef0b4f27a6ad921aec0f3"
+    },
+    {
+      "path": "core/state-migrations.d.ts",
+      "sha256": "de61253a1a9a95f065a8c9c09bdca64c0b86553eddd01f1a612c366a20d07c6b"
+    },
+    {
+      "path": "core/transport-data.d.ts",
+      "sha256": "1d57d87d83b8e9a9c56d5f95431a2f584371f45303f7afafb8f4ff5ae8b44b8e"
+    },
+    {
+      "path": "core/turn-order.d.ts",
+      "sha256": "b088e1a766dcf393c31c016953e65181ca2432a276a3cad98c8a8ffbce649fd7"
+    },
+    {
+      "path": "game-log.d.ts",
+      "sha256": "7ae8f80fb5a0547e0095553d2848ba560cf60d2a6d4bd4bd33d3771405933a67"
+    },
+    {
+      "path": "index.d.ts",
+      "sha256": "8113eb464f39448f6709aca019f39ed1530b2a668c619951e0ef794c70f76ca8"
+    },
+    {
+      "path": "player-label.d.ts",
+      "sha256": "d12f7a4d734a05497d65f0b30e060ebb5c37660865e5b5374474bb233647cd97"
+    },
+    {
+      "path": "plugins/events/events.d.ts",
+      "sha256": "d62f8750cc574099386831c5e4dc385393f9e34478d74c68e55ede3fa27fc2e8"
+    },
+    {
+      "path": "plugins/plugin-events.d.ts",
+      "sha256": "ce5597485cf706b3e5625e285229e70e40e0370eb540c82e2a1670364ffc0d3c"
+    },
+    {
+      "path": "plugins/plugin-log.d.ts",
+      "sha256": "b368603111af0fc06eccea86ca7cdcabe6d25b0d777fd2b74325f1c231cf3d44"
+    },
+    {
+      "path": "plugins/plugin-random.d.ts",
+      "sha256": "5a2d243a366b05e15e1228df7a6e56607bb408e7abda64360257405976eb7524"
+    },
+    {
+      "path": "plugins/random/random.alea.d.ts",
+      "sha256": "1dfd027616da5bae36f820f36acec2da701c51498834d99df548c714e0956572"
+    },
+    {
+      "path": "plugins/random/random.d.ts",
+      "sha256": "cd7d542be4517a4441dbfdc8aa94e31398a9c6de21ed20528f49c1a4b27ae951"
+    },
+    {
+      "path": "replay-recorder.d.ts",
+      "sha256": "f8dc9426577e383e1d675aae8f6441c794c14bda87e2b0f484e98ee073b6e9a6"
+    },
+    {
+      "path": "replay.d.ts",
+      "sha256": "1511945b0d243f1a846c5d3a7bf3d1c949b83a2b1104ae43cb8f22b2ba024e6a"
+    },
+    {
+      "path": "testing/index.d.ts",
+      "sha256": "faded43ad14d1cca2cdc2339b0f791c72cb20beaf092cb988721d2bd1a978a38"
+    },
+    {
+      "path": "testing/mock-random.d.ts",
+      "sha256": "367581ffe74307cf49b64dbbac88c60dbed628fe9935c03d665130c96a049bc6"
+    },
+    {
+      "path": "types.d.ts",
+      "sha256": "7b512a2b6646ace7744473402547bfdd95ef5db6d9bd3e29cb5a446d494ab2b5"
+    }
+  ]
+}

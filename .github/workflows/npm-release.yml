@@ -1,0 +1,190 @@
+name: npm release
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Publish exactly one package so a partial two-package release can resume safely
+        required: true
+        type: choice
+        options:
+          - core
+          - ui
+      expected_commit:
+        description: Full reviewed commit SHA expected at the tip of main
+        required: true
+        type: string
+      expected_version:
+        description: Exact package version recorded in the owner release packet
+        required: true
+        type: string
+      expected_tarball_sha256:
+        description: SHA-256 emitted by the reviewed package-specific pack
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build and pack ${{ inputs.package }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out main without credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Verify reviewed release source before executing repository code
+        shell: bash
+        env:
+          EXPECTED_RELEASE_COMMIT: ${{ inputs.expected_commit }}
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_REF}" != 'refs/heads/main' ]]; then
+            echo 'release workflow must be dispatched from main' >&2
+            exit 1
+          fi
+          if [[ ! "${EXPECTED_RELEASE_COMMIT}" =~ ^[0-9a-f]{40}$ ]]; then
+            echo 'expected_commit must be a full lowercase commit SHA' >&2
+            exit 1
+          fi
+          actual_commit="$(git rev-parse HEAD)"
+          if [[ "${actual_commit}" != "${EXPECTED_RELEASE_COMMIT}" ]]; then
+            echo 'main tip does not match the reviewed release commit' >&2
+            exit 1
+          fi
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
+        with:
+          version: 11.10.0
+          run_install: false
+      - name: Set up Node.js without a dependency cache
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 22.22.0
+          package-manager-cache: false
+      - name: Install frozen dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Test, build, and verify the complete SDK candidate
+        run: pnpm test:run && pnpm release:check
+      - name: Pack only the selected package
+        run: pnpm exec tsx scripts/release.ts --pack "${{ inputs.package }}"
+      - name: Verify selected package identity and reviewed tarball digest
+        shell: bash
+        env:
+          PACKAGE_SELECTOR: ${{ inputs.package }}
+          EXPECTED_VERSION: ${{ inputs.expected_version }}
+          EXPECTED_TARBALL_SHA256: ${{ inputs.expected_tarball_sha256 }}
+        run: |
+          set -euo pipefail
+          [[ "${EXPECTED_VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]] ||
+            { echo 'expected_version must be an exact version' >&2; exit 1; }
+          [[ "${EXPECTED_TARBALL_SHA256}" =~ ^[0-9a-f]{64}$ ]] ||
+            { echo 'expected_tarball_sha256 must be 64 lowercase hex characters' >&2; exit 1; }
+          mapfile -t tarballs < <(find .release/artifacts -maxdepth 1 -type f -name '*.tgz' -print)
+          [[ "${#tarballs[@]}" == 1 ]] ||
+            { echo 'package-specific build must produce exactly one tarball' >&2; exit 1; }
+          tarball="${tarballs[0]}"
+          package_name="$(tar -xOf "${tarball}" package/package.json | jq -r .name)"
+          package_version="$(tar -xOf "${tarball}" package/package.json | jq -r .version)"
+          case "${PACKAGE_SELECTOR}" in
+            core) expected_name='@boardoor/core' ;;
+            ui) expected_name='@boardoor/ui' ;;
+            *) echo 'unexpected package selector' >&2; exit 1 ;;
+          esac
+          [[ "${package_name}" == "${expected_name}" && "${package_version}" == "${EXPECTED_VERSION}" ]] ||
+            { echo 'packed package identity differs from reviewed inputs' >&2; exit 1; }
+          echo "${EXPECTED_TARBALL_SHA256}  ${tarball}" | sha256sum --check --strict
+      - name: Upload immutable package tarball
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: npm-${{ inputs.package }}-${{ inputs.expected_commit }}
+          path: .release/artifacts/*.tgz
+          if-no-files-found: error
+          retention-days: 1
+          include-hidden-files: true
+
+  publish:
+    name: publish ${{ inputs.package }}
+    needs: build
+    runs-on: ubuntu-latest
+    environment: npm-release
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Download the exact build artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: npm-${{ inputs.package }}-${{ inputs.expected_commit }}
+          path: release-artifact
+      - name: Set up Node.js without a dependency cache
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          # Node 24.6.0 bundles npm 11.5.1, the first npm CLI with Trusted Publishing support.
+          node-version: 24.6.0
+          package-manager-cache: false
+      - name: Verify the bundled npm CLI with Trusted Publishing support
+        run: test "$(npm --version)" = '11.5.1'
+      - name: Verify immutable artifact and registry state
+        id: registry
+        shell: bash
+        env:
+          PACKAGE_SELECTOR: ${{ inputs.package }}
+          EXPECTED_VERSION: ${{ inputs.expected_version }}
+          EXPECTED_TARBALL_SHA256: ${{ inputs.expected_tarball_sha256 }}
+        run: |
+          set -euo pipefail
+          [[ -z "${NODE_AUTH_TOKEN:-}${NPM_TOKEN:-}" ]] ||
+            { echo 'steady-state Trusted Publishing job must not receive an npm token' >&2; exit 1; }
+          mapfile -t tarballs < <(find release-artifact -maxdepth 1 -type f -name '*.tgz' -print)
+          [[ "${#tarballs[@]}" == 1 ]] ||
+            { echo 'publish job requires exactly one downloaded tarball' >&2; exit 1; }
+          tarball="${tarballs[0]}"
+          case "${PACKAGE_SELECTOR}" in
+            core) expected_name='@boardoor/core' ;;
+            ui) expected_name='@boardoor/ui' ;;
+            *) echo 'unexpected package selector' >&2; exit 1 ;;
+          esac
+          package_name="$(tar -xOf "${tarball}" package/package.json | jq -r .name)"
+          package_version="$(tar -xOf "${tarball}" package/package.json | jq -r .version)"
+          [[ "${package_name}" == "${expected_name}" && "${package_version}" == "${EXPECTED_VERSION}" ]] ||
+            { echo 'downloaded package identity differs from reviewed inputs' >&2; exit 1; }
+          echo "${EXPECTED_TARBALL_SHA256}  ${tarball}" | sha256sum --check --strict
+          if published_url="$(npm view "${expected_name}@${EXPECTED_VERSION}" dist.tarball --json 2>/dev/null |
+            jq -er .)"; then
+            curl --fail --silent --show-error --location "${published_url}" --output published.tgz
+            echo "${EXPECTED_TARBALL_SHA256}  published.tgz" | sha256sum --check --strict
+            echo 'already_published=true' >>"${GITHUB_OUTPUT}"
+            echo 'The exact reviewed package is already published; treating this dispatch as an idempotent resume.'
+          else
+            echo 'already_published=false' >>"${GITHUB_OUTPUT}"
+          fi
+          echo "tarball=${tarball}" >>"${GITHUB_OUTPUT}"
+      - name: Publish only the immutable tarball through OIDC
+        if: steps.registry.outputs.already_published != 'true'
+        env:
+          NPM_CONFIG_PROVENANCE: 'true'
+        run: >-
+          npm publish "${{ steps.registry.outputs.tarball }}"
+          --access public --tag next --provenance --ignore-scripts
+      - name: Verify the registry returned the reviewed tarball
+        shell: bash
+        env:
+          PACKAGE_SELECTOR: ${{ inputs.package }}
+          EXPECTED_VERSION: ${{ inputs.expected_version }}
+          EXPECTED_TARBALL_SHA256: ${{ inputs.expected_tarball_sha256 }}
+        run: |
+          set -euo pipefail
+          case "${PACKAGE_SELECTOR}" in
+            core) expected_name='@boardoor/core' ;;
+            ui) expected_name='@boardoor/ui' ;;
+            *) echo 'unexpected package selector' >&2; exit 1 ;;
+          esac
+          published_url="$(npm view "${expected_name}@${EXPECTED_VERSION}" dist.tarball --json | jq -er .)"
+          curl --fail --silent --show-error --location "${published_url}" --output published.tgz
+          echo "${EXPECTED_TARBALL_SHA256}  published.tgz" | sha256sum --check --strict

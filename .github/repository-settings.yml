@@ -1,0 +1,116 @@
+schema_version: 1
+template_status: local_preparation_not_live_evidence
+repository: boardoor-sdk
+default_branch: main
+live_application_required: true
+ruleset:
+  scope: repository
+  target: branch
+  enforcement: active
+  include:
+    - refs/heads/main
+  bypass_actors: []
+  required:
+    pull_request: true
+    approvals: 0
+    code_owner_review: false
+    conversation_resolution: true
+    deletion_blocked: true
+    force_push_blocked: true
+    direct_push_blocked: true
+    required_status_checks:
+      - 'CI / verify'
+      # Add the observed DCO check only after the live unsigned/signed canary.
+  dco:
+    app_required: true
+    standard: DCO-1.1
+    selected_repository_only: true
+    exact_live_check_name: TO_BE_RECORDED_FROM_LIVE_DCO_CANARY
+    replace_placeholder_with_observed_required_check: true
+    unsigned_commit_must_fail: true
+    signed_off_commit_must_pass: true
+  routine_bypass_allowed: false
+repository_security:
+  private_vulnerability_reporting: required
+actions:
+  default_token: read_only
+  allow_actions_to_create_or_approve_pull_requests: false
+  fork_pull_request_approval: all_external_contributors
+  self_hosted_runner_for_fork_code: forbidden
+release_environment:
+  name: npm-release
+  required_reviewers_minimum: 0
+  prevent_self_review: false
+  live_approval: owner_workflow_dispatch
+  deployment_branch_policy: main_only
+  administrator_bypass: false
+  trusted_publishing_relationship: required_live_setup
+  reviewed_commit_input: full_sha_required
+bootstrap_environment:
+  name: npm-bootstrap
+  purpose: first_public_version_before_trusted_publishing_can_be_configured
+  required_reviewers_minimum: 0
+  prevent_self_review: false
+  live_approval: owner_workflow_dispatch
+  deployment_branch_policy: main_only
+  administrator_bypass: false
+  temporary_secret: NPM_BOOTSTRAP_TOKEN
+  secret_requirements:
+    - granular_access_token
+    - boardoor_organization_access
+    - boardoor_package_scope_read_write
+    - bypass_2fa_for_automation
+    - shortest_practical_expiration
+  mandatory_teardown:
+    - delete_environment_secret_after_both_packages_exist
+    - revoke_granular_access_token
+    - configure_trusted_publishing_for_each_package
+    - disallow_token_based_package_publishing
+release_script_contract:
+  build_command: pnpm exec tsx scripts/release.ts --pack core|ui
+  publish_command: npm publish <reviewed-immutable-tarball> --access public --tag next --provenance
+  required_dispatch_inputs:
+    - package
+    - expected_commit
+    - expected_version
+    - expected_tarball_sha256
+  fixed_initial_dist_tag: next
+  unit_of_resume: one_package
+  fail_closed_checks:
+    - exact_main_sha_checked_before_dependency_install
+    - package_versions_match_reviewed_candidate
+    - fixed_next_dist_tag
+    - package_projection_and_release_checks_run_without_id_token
+    - build_pack_uses_lock_integrity_pinned_npm_11_5_1
+    - build_and_pack_job_has_no_id_token
+    - publish_job_has_no_checkout_or_dependency_install
+    - publish_job_uses_node_24_6_0_bundled_npm_11_5_1
+    - publish_job_only_receives_reviewed_immutable_tarball
+    - steady_publish_rejects_npm_tokens
+    - steady_publish_uses_trusted_publishing
+    - trusted_publisher_allowed_action_is_npm_publish_only
+    - registry_tarball_sha256_matches_reviewed_candidate
+verification:
+  - confirm_ruleset_effective_via_api_or_settings_snapshot
+  - confirm_codeowners_team_exists_and_is_accessible
+  - confirm_dco_app_publisher_permissions_selection_and_installer
+  - add_exact_live_dco_check_name_after_canary
+  - prove_unsigned_commit_fails_and_signed_off_commit_passes
+  - prove_self_authored_pr_mergeable_only_after_ci_dco_and_conversation_resolution
+  - record_external_pr_owner_review_operating_evidence
+  - confirm_private_vulnerability_reporting_is_reachable
+  - confirm_no_repository_or_environment_secret_reaches_fork_ci
+  - confirm_workflow_dispatch_actor_is_the_authorized_owner
+  - prove_bootstrap_core_and_ui_registry_tarballs_match_reviewed_sha256
+  - prove_bootstrap_token_deleted_and_revoked
+  - prove_trusted_publishing_bound_separately_for_core_and_ui
+  - prove_token_based_package_publishing_disabled_after_bootstrap
+notes:
+  - This checklist does not configure GitHub, install an App, create a team, or prove effective settings.
+  - A package must exist before npm Trusted Publishing can be configured; npm-bootstrap is a bounded, temporary exception for each package's first version.
+  - If core succeeds and ui fails, do not republish core; correct the cause and resume by dispatching ui only with the same reviewed commit, version, and digest.
+  - The owner may select a different first-publish method, but that is a recorded HOLD decision and must preserve exact tarball, provenance, protected approval, and immediate credential revocation evidence.
+  - Initial operation is intentionally single-operator: CODEOWNERS routes ownership but is not a required review, and owner workflow_dispatch is the live npm approval. CI, DCO, conversation resolution, direct-push protection, and no routine bypass remain mandatory.
+  - When a reviewer who will actively review routine changes joins, strengthen both repositories to one required approval plus required CODEOWNER review and both npm environments to one required reviewer with prevent_self_review enabled. Record and canary the effective settings before relying on the stronger gate.
+  - The npm-release environment and per-package npm Trusted Publishing relationships require separate live setup and verification after bootstrap.
+  - Private candidate/artifact parity is an activation-runbook gate completed before release dispatch.

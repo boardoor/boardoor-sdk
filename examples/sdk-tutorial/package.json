@@ -1,0 +1,28 @@
+{
+  "name": "last-stone-sdk-tutorial",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "test:run": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@boardoor/core": "0.1.0-alpha.0",
+    "@boardoor/ui": "0.1.0-alpha.0",
+    "i18next": "26.3.6",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-i18next": "17.0.9"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.3",
+    "typescript": "7.0.2",
+    "vite": "8.1.3",
+    "vitest": "4.1.10"
+  }
+}

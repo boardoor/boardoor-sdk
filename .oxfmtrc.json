@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 100,
+  "tabWidth": 2,
+  "sortImports": {},
+  "sortTailwindcss": {},
+  "ignorePatterns": [
+    "build",
+    "dist",
+    "dist-games",
+    "node_modules",
+    ".react-router",
+    ".wrangler",
+    "**/.wrangler/**",
+    "*.gen.ts",
+    "packages/boardgame-core/etc/*.api.json",
+    "packages/boardgame-core/etc/archive/**",
+    "packages/boardgame-core/etc/candidate/**",
+    "packages/boardgame-ui/etc/*.api.json",
+    "scripts/game-factory/model-repair/templates/**",
+    "worker-configuration.d.ts",
+    "cloudflare-env.d.ts"
+  ]
+}

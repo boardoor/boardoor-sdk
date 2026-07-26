@@ -1,0 +1,11 @@
+packages:
+  - 'packages/*'
+  - 'examples/*'
+
+linkWorkspacePackages: true
+
+overrides:
+  '@babel/runtime': 7.29.2
+
+allowBuilds:
+  esbuild: true

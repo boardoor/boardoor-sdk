@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "packageName": "@boardoor/ui",
+  "entry": "index.d.ts",
+  "stability": "public-alpha",
+  "exports": [
+    {
+      "name": "ActionButton",
+      "declarations": [
+        "export declare function ActionButton(props: ButtonHTMLAttributes<HTMLButtonElement>): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "BetActionButton",
+      "declarations": [
+        "export declare function BetActionButton({ tone, className, ...rest }: {\n    tone: BetTone;\n} & ButtonHTMLAttributes<HTMLButtonElement>): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "GameOverOverlay",
+      "declarations": [
+        "export declare function GameOverOverlay({ confirmFirst, titleClassName, panelClassName, winnerText, onConfirm, shareData, children, }: {\n    confirmFirst?: boolean;\n    titleClassName?: string;\n    panelClassName?: string;\n    winnerText: string;\n    /** Called when user clicks \"Show Results\" (only relevant with confirmFirst) */\n    onConfirm?: () => void;\n    shareData?: ShareCardData;\n    children?: ReactNode;\n}): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "GridBoard",
+      "declarations": [
+        "export declare function GridBoard({ rows, columns, mode, renderCell, onCellClick, isCellDisabled, cellLabel, className, }: GridBoardProps): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "GridBoardMode",
+      "declarations": [
+        "export type GridBoardMode = 'cell' | 'intersection';"
+      ]
+    },
+    {
+      "name": "HandFan",
+      "declarations": [
+        "export declare function HandFan<T>({ cards, getCardKey, renderCard, onCardClick, isCardDisabled, cardLabel, selectedIndices, className, }: HandFanProps<T>): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "LoadingScreen",
+      "declarations": [
+        "export declare function LoadingScreen(): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "PresetButton",
+      "declarations": [
+        "export declare function PresetButton({ label, value, onClick, }: {\n    label: string;\n    value: number;\n    onClick: (v: number) => void;\n}): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "ReconnectBanner",
+      "declarations": [
+        "export declare function ReconnectBanner({ show, failed }: {\n    show: boolean;\n    failed?: boolean;\n}): import(\"react\").JSX.Element | null;"
+      ]
+    },
+    {
+      "name": "renderShareCard",
+      "declarations": [
+        "export declare function renderShareCard(data: ShareCardData, lang?: string): Promise<Blob>;"
+      ]
+    },
+    {
+      "name": "RoundEndReviewPrompt",
+      "declarations": [
+        "export declare function RoundEndReviewPrompt({ label, onClick }: {\n    label: string;\n    onClick: () => void;\n}): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "ScoreBadge",
+      "declarations": [
+        "export declare function ScoreBadge({ isActive, children, className, onClick, }: {\n    isActive: boolean;\n    children: ReactNode;\n    className?: string;\n    onClick?: () => void;\n}): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "ScoreEntry",
+      "declarations": [
+        "export interface ScoreEntry {\n    id: string;\n    label: string;\n    score: string | number;\n    symbol?: string;\n    isActive?: boolean;\n    isMe?: boolean;\n}"
+      ]
+    },
+    {
+      "name": "ScorePanel",
+      "declarations": [
+        "export declare function ScorePanel({ entries, className }: ScorePanelProps): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "ShareButton",
+      "declarations": [
+        "export declare function ShareButton({ data }: {\n    data: ShareCardData;\n}): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "ShareCardData",
+      "declarations": [
+        "export interface ShareCardData {\n    gameName: string;\n    playerRank: number;\n    totalPlayers: number;\n    playerScore?: string;\n    gameDate: Date;\n    iconDataUrl?: string;\n}"
+      ]
+    },
+    {
+      "name": "SortButtons",
+      "declarations": [
+        "export declare function SortButtons({ mode, setMode }: {\n    mode: SortMode;\n    setMode: (m: SortMode) => void;\n}): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "SortMode",
+      "declarations": [
+        "export type SortMode = 'suit' | 'rank';"
+      ]
+    },
+    {
+      "name": "StepperButton",
+      "declarations": [
+        "export declare function StepperButton({ className, ...rest }: ButtonHTMLAttributes<HTMLButtonElement>): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "TableSeatPosition",
+      "declarations": [
+        "export type TableSeatPosition = 'bottom' | 'top' | 'left' | 'right';"
+      ]
+    },
+    {
+      "name": "TrickTakingTable",
+      "declarations": [
+        "export declare function TrickTakingTable({ numPlayers, bottomPlayer, renderSeat, renderCenter, className, }: TrickTakingTableProps): import(\"react\").JSX.Element;"
+      ]
+    },
+    {
+      "name": "useRoundEndReviewGate",
+      "declarations": [
+        "export declare function useRoundEndReviewGate(isPending: boolean): {\n    isRoundEndReviewOpen: boolean;\n    shouldShowRoundEndReviewPrompt: boolean;\n    openRoundEndReview: () => void;\n};"
+      ]
+    },
+    {
+      "name": "useTrickResultHold",
+      "declarations": [
+        "export declare function useTrickResultHold(currentTrickLength: number, hasLastTrick: boolean, holdMs?: number): boolean;"
+      ]
+    }
+  ],
+  "declarationInventory": [
+    {
+      "path": "components/ActionButton.d.ts",
+      "sha256": "3c160f3b2e61ba5777fe7b84bfd2e613d02d7055e8fee093b85b5f01cc9f237d"
+    },
+    {
+      "path": "components/BettingButtons.d.ts",
+      "sha256": "956610767e9e06c687dc8a538d02d62625221c3a6a20ba6625362c43740ad560"
+    },
+    {
+      "path": "components/GameOverOverlay.d.ts",
+      "sha256": "3110ffe351d99150f71624a8483fff256c39bc3c19ac52d760549d9e134fa549"
+    },
+    {
+      "path": "components/LoadingScreen.d.ts",
+      "sha256": "2f5dacaa8394c51ccd5c494bb83e5b0603cde870f40c597f9619b9331aca9c82"
+    },
+    {
+      "path": "components/ReconnectBanner.d.ts",
+      "sha256": "b8bdc8d63e2743f390b2eb25e79c1430cd6337d79dfde15955444db5205d9cca"
+    },
+    {
+      "path": "components/RoundEndReviewPrompt.d.ts",
+      "sha256": "fc43ef035294658acf44b3c32b5f264cf23c1bede74a1653fb322f6034562e25"
+    },
+    {
+      "path": "components/ScoreBadge.d.ts",
+      "sha256": "0e29105ab36c98c008a8ddb459e4ec0aab19db8e7489302fa5766e5e5bd9cc4c"
+    },
+    {
+      "path": "components/SortButtons.d.ts",
+      "sha256": "d53c57e444426c4418081931dc25aa388080510ffb9090bd09a58cf604d8edb6"
+    },
+    {
+      "path": "genre/GridBoard.d.ts",
+      "sha256": "b80ae93decd2f71dea371dcc13811fea986942df191ff379d5e4ed9fb5cef5f5"
+    },
+    {
+      "path": "genre/HandFan.d.ts",
+      "sha256": "949620eaba16d6724f3d7fd1159c4df547a1afe882413dcb7d2c88f934e5e729"
+    },
+    {
+      "path": "genre/ScorePanel.d.ts",
+      "sha256": "ad6614f70eb31f5a60a8fc3168ca97b95b39919fc508fd271722ce38eba613c5"
+    },
+    {
+      "path": "genre/TrickTakingTable.d.ts",
+      "sha256": "e96fd53129944f0ccfcc8017eef362b90f7229cdd4aaae92f53e15087efa4e65"
+    },
+    {
+      "path": "genre/index.d.ts",
+      "sha256": "bd871cfec63c21aecc2d6947b67503444b872d8d6cae642447a2d7cd5c635ba0"
+    },
+    {
+      "path": "hooks/useRoundEndReviewGate.d.ts",
+      "sha256": "10c555a722f65543000ec143fffba2fdf3168390a4404abbbacce2759ba64a2d"
+    },
+    {
+      "path": "hooks/useTrickResultHold.d.ts",
+      "sha256": "d81a863dd09b58e12614d980c094e4ef0c09bb2bd7eb08dc25cb3c036e22f8b2"
+    },
+    {
+      "path": "index.d.ts",
+      "sha256": "e419c097c814941043158b3b77c3d0a3ca02d748583b514c765839b55c11afbf"
+    },
+    {
+      "path": "share/ShareButton.d.ts",
+      "sha256": "abb29c38fc3abee9c2b72551cfc1d703261314b3379b0fd640991081b96ec4e2"
+    },
+    {
+      "path": "share/render-share-card.d.ts",
+      "sha256": "64df1cd19bd105cebdbe8bbe15b06e1181ece894327551fde27f836b7f6ad232"
+    }
+  ]
+}

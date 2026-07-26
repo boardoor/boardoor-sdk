@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "package": "@boardoor/core",
+  "components": [
+    {
+      "bomRef": "pkg:npm/boardgame.io@0.50.2",
+      "name": "boardgame.io",
+      "version": "0.50.2",
+      "license": "MIT",
+      "source": "https://github.com/boardgameio/boardgame.io/tree/2945c30e536517cf819e000f33d9d08bacaac297",
+      "relationship": "modified-source",
+      "modifications": "Boardoor extracted and modified the engine, client, and AI implementation; private server code is not part of this package. The Boardoor Debug panel is a new dependency-free implementation and is not copied from the legacy Svelte Debug UI."
+    },
+    {
+      "bomRef": "pkg:npm/seedrandom@3.0.5",
+      "name": "seedrandom",
+      "version": "3.0.5",
+      "license": "MIT",
+      "source": "https://github.com/davidbau/seedrandom/blob/4460ad325a0a15273a211e509f03ae0beb99511a/lib/alea.js",
+      "relationship": "modified-source",
+      "modifications": "Boardoor inlines Johannes Baagøe's Alea algorithm as distributed by seedrandom, converts it to TypeScript, and exposes state capture and restore for deterministic game and bot execution."
+    }
+  ]
+}
