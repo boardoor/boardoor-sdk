@@ -164,7 +164,9 @@ jobs:
           else
             echo 'already_published=false' >>"${GITHUB_OUTPUT}"
           fi
-          echo "tarball=${tarball}" >>"${GITHUB_OUTPUT}"
+          # Absolute path: npm treats a bare "dir/file.tgz" argument as a GitHub
+          # user/repo shorthand and tries to git-clone it instead of publishing.
+          echo "tarball=$(realpath -- "${tarball}")" >>"${GITHUB_OUTPUT}"
       - name: Publish only the immutable tarball through OIDC
         if: steps.registry.outputs.already_published != 'true'
         env:
