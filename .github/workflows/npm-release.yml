@@ -187,6 +187,19 @@ jobs:
             ui) expected_name='@boardoor/ui' ;;
             *) echo 'unexpected package selector' >&2; exit 1 ;;
           esac
-          published_url="$(npm view "${expected_name}@${EXPECTED_VERSION}" dist.tarball --json | jq -er .)"
+          # The registry does not serve a version the instant publish returns, so poll
+          # instead of failing the release on propagation lag. The digest assertion
+          # below is unchanged and still fail-closed.
+          published_url=''
+          for attempt in $(seq 1 30); do
+            if published_url="$(npm view "${expected_name}@${EXPECTED_VERSION}" dist.tarball --json 2>/dev/null | jq -er .)"; then
+              break
+            fi
+            published_url=''
+            echo "registry has not served ${expected_name}@${EXPECTED_VERSION} yet; attempt ${attempt}"
+            sleep 10
+          done
+          [[ -n "${published_url}" ]] ||
+            { echo 'registry never served the published version' >&2; exit 1; }
           curl --fail --silent --show-error --location "${published_url}" --output published.tgz
           echo "${EXPECTED_TARBALL_SHA256}  published.tgz" | sha256sum --check --strict
