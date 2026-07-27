@@ -5,7 +5,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist", "LICENSE", "THIRD_PARTY_NOTICES.md", "EMBEDDED_COMPONENTS.json"],
+  "files": ["dist", "LICENSE", "THIRD_PARTY_NOTICES.md", "EMBEDDED_COMPONENTS.json", "README.md"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/boardoor/boardoor-sdk.git",

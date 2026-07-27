@@ -45,7 +45,7 @@ const candidates: Candidate[] = [
     packageDirectory: 'packages/boardgame-core',
     publishManifest: 'packages/boardgame-core/package.publish.json',
     inventory: 'packages/boardgame-core/etc/pack-inventory.txt',
-    packageFiles: ['LICENSE', 'THIRD_PARTY_NOTICES.md', 'EMBEDDED_COMPONENTS.json'],
+    packageFiles: ['LICENSE', 'THIRD_PARTY_NOTICES.md', 'EMBEDDED_COMPONENTS.json', 'README.md'],
   },
   {
     kind: 'ui',
