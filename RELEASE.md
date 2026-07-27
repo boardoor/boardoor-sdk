@@ -24,8 +24,9 @@ the first versions were published by registering the package with a throwaway `0
 the Trusted Publisher on the now-existing package, publishing the real version over OIDC through
 `npm-release.yml`, and unpublishing the placeholder. **No bypass token was ever issued**, and the
 `npm-bootstrap.yml` workflow it would have used has been removed. The empty `npm-bootstrap`
-environment still exists in the live repository settings and requires owner deletion; it has no
-release role, secrets, or administrator bypass.
+environment was deleted on 2026-07-27 after confirming that it had no secrets or administrator
+bypass. Its two failed historical deployment records remain available as audit evidence and have no
+release role.
 
 The publication provenance records show that both packages were published through GitHub Actions
 OIDC from this repository and `npm-release.yml`. That historical evidence does not prove that the
