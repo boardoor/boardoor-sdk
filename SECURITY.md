@@ -22,19 +22,17 @@ available, do not substitute a public issue or pull request.
 
 ## Repository security controls
 
-As observed on 2026-07-27, repository secret scanning/user alerts, push protection, non-provider
-patterns, and validity checks are disabled and remain exact owner enablement remediations.
-Dependabot vulnerability alerts are enabled, while Dependabot security updates are disabled
-pending an explicit owner decision between automated security-update pull requests and a documented
-manual dependency-security triage policy. The checked-in settings record describes the desired
-controls and outstanding decisions; it does not make them active.
+Live repository security state verified on 2026-07-27: secret scanning/user alerts enabled; push protection enabled; non-provider patterns disabled; validity checks disabled.
+The two disabled controls require GitHub Team with GitHub Secret Protection and are unavailable
+under the current repository plan. They remain desired controls if that capability becomes
+available.
 
-GitHub Actions currently permits all actions and does not enforce SHA pinning at the repository
-setting, although the checked-in workflows use full commit SHAs. Enabling repository SHA-pinning
-enforcement and applying the recorded selected-actions policy are owner remediations. That policy
-must permit GitHub-owned actions and `pnpm/action-setup` or the current CI and release workflows
-will stop.
+Dependabot vulnerability alerts are enabled. The manual dependency-security policy was selected on
+2026-07-27. Automated Dependabot security-update pull requests remain disabled. Maintainers review
+dependency advisories and available security releases, open a signed-off update pull request when
+action is needed, and record any deliberate deferral with its risk and next review point.
 
-If the owner selects manual dependency-security handling, maintainers review dependency advisories
-and available security releases, open a signed-off update pull request when action is needed, and
-record any deliberate deferral with its risk and next review point.
+GitHub Actions selected-actions policy and repository SHA pinning were verified active on
+2026-07-27. GitHub-owned actions are allowed, verified Marketplace creators are not allowed as a
+blanket class, and the only third-party pattern is `pnpm/action-setup@*`. Workflows continue to pin
+every `uses:` entry to a full commit SHA.

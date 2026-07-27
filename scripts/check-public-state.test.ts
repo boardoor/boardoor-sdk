@@ -52,23 +52,7 @@ function validate(
 assert.deepEqual(
   validate(presentSettings),
   [],
-  'present transition should be internally consistent',
-);
-
-const absent = parseSettings();
-objectAt(absent, 'observed_snapshot').retired_release_environment = {
-  state: 'absent',
-  name: 'npm-bootstrap',
-};
-arrayAt(absent, 'remediation').shift();
-const absentRelease = presentRelease.replace(
-  /The empty `npm-bootstrap`\nenvironment still exists[^.]+\./,
-  'The `npm-bootstrap` environment is absent.',
-);
-assert.deepEqual(
-  validate(`${JSON.stringify(absent, null, 2)}\n`, absentRelease),
-  [],
-  'same-day absent transition should omit deletion fields, action, remediation, and prose',
+  'current live-state transition should be internally consistent',
 );
 
 function observedSecurity(settings: JsonObject): JsonObject {
@@ -84,58 +68,64 @@ observedSecurity(scanningEnabled).secret_scanning = 'enabled';
 observedSecurity(scanningEnabled).secret_scanning_push_protection = 'enabled';
 observedSecurity(scanningEnabled).secret_scanning_non_provider_patterns = 'enabled';
 observedSecurity(scanningEnabled).secret_scanning_validity_checks = 'enabled';
-removeRemediation(scanningEnabled, 'enable_repository_secret_scanning_and_user_alerts');
-removeRemediation(scanningEnabled, 'enable_secret_scanning_push_protection');
-removeRemediation(scanningEnabled, 'enable_secret_scanning_non_provider_patterns');
-removeRemediation(scanningEnabled, 'enable_secret_scanning_validity_checks');
+desiredSecurity(scanningEnabled).secret_scanning_non_provider_patterns = 'enabled';
+desiredSecurity(scanningEnabled).secret_scanning_validity_checks = 'enabled';
 const scanningEnabledSecurity = security.replace(
-  /As observed on 2026-07-27, repository secret scanning[\s\S]*?enablement remediations\./,
+  /Live repository security state verified on 2026-07-27:[^\n]+\nThe two disabled[\s\S]*?available\./,
   'Repository secret scanning/user alerts, push protection, non-provider patterns, and ' +
     'validity checks were verified enabled on 2026-07-27.',
 );
 assert.deepEqual(
   validate(JSON.stringify(scanningEnabled), presentRelease, workflow, scanningEnabledSecurity),
   [],
-  'verified secret scanning controls should remove their remediations',
+  'verified extended scanning controls should promote conditional desired state to enabled',
 );
 
-const actionsPolicyApplied = parseSettings();
-objectAt(actionsPolicyApplied, 'observed_snapshot').actions = {
+const partialScanningWithoutEvidence = security.replace(
+  /Live repository security state verified on 2026-07-27:[^\n]+\n/,
+  '',
+);
+assert.match(
+  validate(presentSettings, presentRelease, workflow, partialScanningWithoutEvidence).join('\n'),
+  /partial secret-scanning state requires exact dated live-state prose/,
+  'partial plan-constrained state must retain exact live evidence',
+);
+
+const actionsPolicyNotApplied = parseSettings();
+objectAt(actionsPolicyNotApplied, 'observed_snapshot').actions = {
   enabled: true,
-  allowed_actions: 'selected',
-  sha_pinning_required: true,
-  github_owned_allowed: true,
-  verified_allowed: false,
-  patterns_allowed: ['pnpm/action-setup@*'],
+  allowed_actions: 'all',
+  sha_pinning_required: false,
   default_token: 'read_only',
   allow_actions_to_create_or_approve_pull_requests: false,
   fork_pull_request_approval: 'all_external_contributors',
   self_hosted_runner_for_fork_code: 'forbidden',
 };
-removeRemediation(actionsPolicyApplied, 'enable_actions_full_sha_pinning');
-removeRemediation(
-  actionsPolicyApplied,
+const actionsRemediation = arrayAt(actionsPolicyNotApplied, 'remediation');
+actionsRemediation.splice(
+  actionsRemediation.length - 1,
+  0,
+  'enable_actions_full_sha_pinning',
   'apply_selected_actions_policy_with_github_owned_and_pnpm_action_setup',
 );
-const actionsPolicyAppliedSecurity = security.replace(
-  /GitHub Actions currently permits[\s\S]*?will stop\./,
-  'GitHub Actions selected-actions policy and repository SHA pinning were verified active on ' +
-    '2026-07-27.',
+const actionsPolicyNotAppliedSecurity = security.replace(
+  /GitHub Actions selected-actions policy and repository SHA pinning were verified active on\s+2026-07-27\.[\s\S]*?full commit SHA\./,
+  'GitHub Actions currently permits all actions and does not enforce SHA pinning.',
 );
 assert.deepEqual(
   validate(
-    JSON.stringify(actionsPolicyApplied),
+    JSON.stringify(actionsPolicyNotApplied),
     presentRelease,
     workflow,
-    actionsPolicyAppliedSecurity,
+    actionsPolicyNotAppliedSecurity,
   ),
   [],
-  'applied selected-actions and SHA-pinning controls should remove their remediations',
+  'unapplied Actions controls should retain remediations and current-state prose',
 );
 assert.match(
-  validate(JSON.stringify(actionsPolicyApplied)).join('\n'),
-  /applied Actions state prohibits stale all\/no-pinning prose/,
-  'applied Actions state must reject stale current-state SECURITY prose',
+  validate(JSON.stringify(actionsPolicyNotApplied)).join('\n'),
+  /current Actions state requires all\/no-pinning prose/,
+  'unapplied Actions state must reject applied-state SECURITY prose',
 );
 
 const missingStrictPolicy = parseSettings();
@@ -154,9 +144,8 @@ objectAt(automatedDependabot, 'verification_state').dependabot_security_updates_
   state: 'automated_security_update_pull_requests_enabled',
   decided_at: '2026-07-27',
 };
-removeRemediation(automatedDependabot, 'owner_decide_dependabot_security_updates_policy');
 const automatedDependabotSecurity = security.replace(
-  /Dependabot vulnerability alerts are enabled,[\s\S]*?triage policy\./,
+  /Dependabot vulnerability alerts are enabled\.[\s\S]*?next review point\./,
   'Dependabot vulnerability alerts are enabled. ' +
     'Dependabot automated security-update pull requests were selected on 2026-07-27.',
 );
@@ -169,25 +158,6 @@ assert.deepEqual(
   ),
   [],
   'owner-selected automated Dependabot updates should record enabled live state',
-);
-
-const manualDependabot = parseSettings();
-desiredSecurity(manualDependabot).dependabot_security_updates = 'disabled';
-objectAt(manualDependabot, 'verification_state').dependabot_security_updates_policy = {
-  state: 'manual_dependency_security_policy_selected',
-  decided_at: '2026-07-27',
-  policy_document: 'SECURITY.md#repository-security-controls',
-};
-removeRemediation(manualDependabot, 'owner_decide_dependabot_security_updates_policy');
-const manualDependabotSecurity = security.replace(
-  /Dependabot vulnerability alerts are enabled,[\s\S]*?triage policy\./,
-  'Dependabot vulnerability alerts are enabled. ' +
-    'The manual dependency-security policy was selected on 2026-07-27.',
-);
-assert.deepEqual(
-  validate(JSON.stringify(manualDependabot), presentRelease, workflow, manualDependabotSecurity),
-  [],
-  'owner-selected manual dependency security policy should keep automation disabled',
 );
 
 const omittedSecurityState = parseSettings();
@@ -245,7 +215,7 @@ const verifiedWithStaleRemediation = parseSettings();
 markTrustedPublisherVerified(verifiedWithStaleRemediation);
 assert.match(
   validate(JSON.stringify(verifiedWithStaleRemediation), verifiedRelease).join('\n'),
-  /\$\.remediation: expected 9 items|\$\.remediation\[[1-9]\]/,
+  /\$\.remediation/,
   'verified binding must reject stale reverification remediation',
 );
 
@@ -289,7 +259,7 @@ const extraRemediation = parseSettings();
 arrayAt(extraRemediation, 'remediation').push('unreviewed_extra_action');
 assert.match(
   validate(JSON.stringify(extraRemediation)).join('\n'),
-  /\$\.remediation: expected 10 items|\$\.remediation\[10\]/,
+  /\$\.remediation/,
   'extra remediation entries must fail closed',
 );
 

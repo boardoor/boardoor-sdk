@@ -158,8 +158,12 @@ type RepositorySettings = {
       dependabot_security_updates: 'owner_decision_required_do_not_apply' | 'enabled' | 'disabled';
       secret_scanning: 'enabled';
       secret_scanning_push_protection: 'enabled';
-      secret_scanning_non_provider_patterns: 'enabled';
-      secret_scanning_validity_checks: 'enabled';
+      secret_scanning_non_provider_patterns:
+        | 'enabled'
+        | 'enabled_when_github_team_with_secret_protection_available';
+      secret_scanning_validity_checks:
+        | 'enabled'
+        | 'enabled_when_github_team_with_secret_protection_available';
     };
     actions: ActionsDefaults & {
       enabled: true;
@@ -359,10 +363,6 @@ function expectedSettings(dynamic: DynamicState): RepositorySettings {
       ? ['enable_repository_secret_scanning_and_user_alerts']
       : []),
     ...(dynamic.pushProtection === 'disabled' ? ['enable_secret_scanning_push_protection'] : []),
-    ...(dynamic.nonProviderPatterns === 'disabled'
-      ? ['enable_secret_scanning_non_provider_patterns']
-      : []),
-    ...(dynamic.validityChecks === 'disabled' ? ['enable_secret_scanning_validity_checks'] : []),
     ...(dynamic.dependabotPolicy === 'owner_decision_required'
       ? ['owner_decide_dependabot_security_updates_policy']
       : []),
@@ -453,8 +453,14 @@ function expectedSettings(dynamic: DynamicState): RepositorySettings {
               : 'disabled',
         secret_scanning: 'enabled',
         secret_scanning_push_protection: 'enabled',
-        secret_scanning_non_provider_patterns: 'enabled',
-        secret_scanning_validity_checks: 'enabled',
+        secret_scanning_non_provider_patterns:
+          dynamic.nonProviderPatterns === 'enabled'
+            ? 'enabled'
+            : 'enabled_when_github_team_with_secret_protection_available',
+        secret_scanning_validity_checks:
+          dynamic.validityChecks === 'enabled'
+            ? 'enabled'
+            : 'enabled_when_github_team_with_secret_protection_available',
       },
       actions: {
         ...actionDefaults,
@@ -600,6 +606,10 @@ function realVerificationDate(value: unknown): value is string {
     date.getUTCSeconds() === Number(second) &&
     date.getUTCMilliseconds() === milliseconds
   );
+}
+
+function includesNormalizedProse(document: string, expected: string): boolean {
+  return document.replace(/\s+/g, ' ').includes(expected.replace(/\s+/g, ' '));
 }
 
 export function validatePublicState(input: ValidationInput): string[] {
@@ -771,11 +781,21 @@ export function validatePublicState(input: ValidationInput): string[] {
       );
     }
   } else if (scanningStates.every((value) => value === 'enabled')) {
-    if (!input.security.includes(enabledScanningProse)) {
+    if (!includesNormalizedProse(input.security, enabledScanningProse)) {
       violations.push('SECURITY.md: enabled secret-scanning controls require dated verification');
     }
   } else {
-    violations.push('SECURITY.md: partial secret-scanning transition requires an explicit schema');
+    const partialScanningProse =
+      `Live repository security state verified on ${String(observedAt)}: ` +
+      `secret scanning/user alerts ${String(secretScanning)}; ` +
+      `push protection ${String(pushProtection)}; ` +
+      `non-provider patterns ${String(nonProviderPatterns)}; ` +
+      `validity checks ${String(validityChecks)}.`;
+    if (!includesNormalizedProse(input.security, partialScanningProse)) {
+      violations.push(
+        'SECURITY.md: partial secret-scanning state requires exact dated live-state prose',
+      );
+    }
   }
 
   const pendingDependabotProse =
@@ -793,7 +813,7 @@ export function validatePublicState(input: ValidationInput): string[] {
       dependabotPolicyState === 'automated_security_update_pull_requests_enabled'
         ? `Dependabot automated security-update pull requests were selected on ${decisionDate}.`
         : `The manual dependency-security policy was selected on ${decisionDate}.`;
-    if (!input.security.includes(requiredDecisionProse)) {
+    if (!includesNormalizedProse(input.security, requiredDecisionProse)) {
       violations.push('SECURITY.md: decided Dependabot policy requires dated decision prose');
     }
   }
@@ -811,7 +831,7 @@ export function validatePublicState(input: ValidationInput): string[] {
     if (currentActionsProse.test(input.security)) {
       violations.push('SECURITY.md: applied Actions state prohibits stale all/no-pinning prose');
     }
-    if (!input.security.includes(appliedActionsProse)) {
+    if (!includesNormalizedProse(input.security, appliedActionsProse)) {
       violations.push('SECURITY.md: applied Actions state requires dated verification prose');
     }
   } else {
@@ -829,7 +849,8 @@ export function validatePublicState(input: ValidationInput): string[] {
     }
     const verifiedDate = String(verifiedAt).slice(0, 10);
     if (
-      !input.release.includes(
+      !includesNormalizedProse(
+        input.release,
         `The live npm Trusted Publisher bindings were verified on ${verifiedDate}.`,
       )
     ) {
