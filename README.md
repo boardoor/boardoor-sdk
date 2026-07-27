@@ -35,9 +35,20 @@ own `debug.impl`.
 1. Confirm the support, release, stability, and compatibility documents against the reviewed
    candidate.
 2. Run the secret, provenance, license, SBOM, URL, build, test, and clean-checkout gates.
-3. Apply and independently verify the settings in
-   [`.github/repository-settings.yml`](.github/repository-settings.yml). A checked-in file cannot
-   activate GitHub settings or install the DCO App.
+3. Apply only `desired_configuration_now` and the applicable `remediation` entries from
+   [`.github/repository-settings.json`](.github/repository-settings.json), then independently
+   verify them against the authoritative live GitHub and npm settings and APIs. The dated
+   `observed_snapshot` is evidence to review, not configuration to apply. Apply
+   `future_reviewer_configuration` only after an active reviewer joins and its canary succeeds. A
+   checked-in file cannot activate settings or install the DCO App.
+
+Repository security-control state, owner decisions, and transition remediations are maintained in
+the exact settings record and the state-dependent [security policy](SECURITY.md), not in this
+overview. Do not infer that a mutable live control is active or pending from README prose.
+
+`PUBLICATION_MANIFEST.json` is immutable evidence for the initial public export at its recorded
+commit and path set. It is not an inventory of the current tree and must not be regenerated during
+later public maintenance.
 
 ## Policies
 
