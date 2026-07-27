@@ -1,5 +1,6 @@
 EMBEDDED_COMPONENTS.json
 LICENSE
+README.md
 THIRD_PARTY_NOTICES.md
 dist/ai/ai.d.ts
 dist/ai/ai.js
