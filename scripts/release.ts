@@ -26,7 +26,7 @@ const packages: PackageConfig[] = [
     selector: 'core',
     directory: 'packages/boardgame-core',
     expectedName: '@boardoor/core',
-    packageFiles: ['LICENSE', 'THIRD_PARTY_NOTICES.md', 'EMBEDDED_COMPONENTS.json'],
+    packageFiles: ['LICENSE', 'THIRD_PARTY_NOTICES.md', 'EMBEDDED_COMPONENTS.json', 'README.md'],
     expectedExports: {
       '.': {
         types: './dist/index.d.ts',
@@ -155,9 +155,10 @@ function assertProjection(source: JsonObject, published: JsonObject, config: Pac
     published.type !== 'module' ||
     published.main !== './dist/index.js' ||
     published.types !== './dist/index.d.ts' ||
+    stable(published.files ?? null) !== stable(['dist', ...config.packageFiles]) ||
     stable(published.exports ?? null) !== stable(config.expectedExports)
   ) {
-    throw new Error(`${config.directory}: published ESM entrypoints drifted`);
+    throw new Error(`${config.directory}: published files or ESM entrypoints drifted`);
   }
   const publishConfig = record(published.publishConfig);
   if (publishConfig.access !== 'public' || publishConfig.provenance !== true) {
