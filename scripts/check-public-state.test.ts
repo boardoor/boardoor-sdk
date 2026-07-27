@@ -84,10 +84,7 @@ observedSecurity(scanningEnabled).secret_scanning = 'enabled';
 observedSecurity(scanningEnabled).secret_scanning_push_protection = 'enabled';
 observedSecurity(scanningEnabled).secret_scanning_non_provider_patterns = 'enabled';
 observedSecurity(scanningEnabled).secret_scanning_validity_checks = 'enabled';
-removeRemediation(
-  scanningEnabled,
-  'enable_repository_secret_scanning_and_user_alerts',
-);
+removeRemediation(scanningEnabled, 'enable_repository_secret_scanning_and_user_alerts');
 removeRemediation(scanningEnabled, 'enable_secret_scanning_push_protection');
 removeRemediation(scanningEnabled, 'enable_secret_scanning_non_provider_patterns');
 removeRemediation(scanningEnabled, 'enable_secret_scanning_validity_checks');
@@ -233,10 +230,7 @@ function markTrustedPublisherVerified(settings: JsonObject): void {
 
 const verifiedBinding = parseSettings();
 markTrustedPublisherVerified(verifiedBinding);
-removeRemediation(
-  verifiedBinding,
-  'reverify_each_current_npm_trusted_publisher_binding',
-);
+removeRemediation(verifiedBinding, 'reverify_each_current_npm_trusted_publisher_binding');
 const verifiedRelease = presentRelease.replace(
   /The owner must reverify each live\s+npm binding before the next release\./,
   'The live npm Trusted Publisher bindings were verified on 2026-07-27.',
@@ -306,8 +300,10 @@ assert.match(
 );
 
 const leakedFuture = parseSettings();
-objectAt(leakedFuture, 'desired_configuration_now').future_reviewer_configuration =
-  objectAt(leakedFuture, 'future_reviewer_configuration');
+objectAt(leakedFuture, 'desired_configuration_now').future_reviewer_configuration = objectAt(
+  leakedFuture,
+  'future_reviewer_configuration',
+);
 assert.match(
   validate(JSON.stringify(leakedFuture)).join('\n'),
   /\$\.desired_configuration_now\.future_reviewer_configuration: unknown key/,

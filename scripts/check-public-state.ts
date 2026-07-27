@@ -155,10 +155,7 @@ type RepositorySettings = {
     repository_security: {
       private_vulnerability_reporting: 'enabled';
       dependabot_alerts: 'enabled';
-      dependabot_security_updates:
-        | 'owner_decision_required_do_not_apply'
-        | 'enabled'
-        | 'disabled';
+      dependabot_security_updates: 'owner_decision_required_do_not_apply' | 'enabled' | 'disabled';
       secret_scanning: 'enabled';
       secret_scanning_push_protection: 'enabled';
       secret_scanning_non_provider_patterns: 'enabled';
@@ -202,8 +199,7 @@ type RepositorySettings = {
   };
   release_script_contract: {
     build_command: 'pnpm exec tsx scripts/release.ts --pack core|ui';
-    publish_command:
-      'npm publish <reviewed-immutable-tarball> --access public --tag next --provenance';
+    publish_command: 'npm publish <reviewed-immutable-tarball> --access public --tag next --provenance';
     required_dispatch_inputs: [
       'package',
       'expected_commit',
@@ -321,10 +317,7 @@ function expectedSettings(dynamic: DynamicState): RepositorySettings {
       ? {
           state: 'owner_reverification_required',
           next_action: 'reverify_each_current_npm_trusted_publisher_binding',
-          required_evidence: [
-            'exact_core_and_ui_binding_tuple',
-            'token_based_publishing_disabled',
-          ],
+          required_evidence: ['exact_core_and_ui_binding_tuple', 'token_based_publishing_disabled'],
         }
       : {
           state: 'verified',
@@ -358,24 +351,18 @@ function expectedSettings(dynamic: DynamicState): RepositorySettings {
             policy_document: 'SECURITY.md#repository-security-controls',
           };
   const remediation = [
-    ...(dynamic.bootstrap === 'present'
-      ? ['delete_the_empty_npm_bootstrap_environment']
-      : []),
+    ...(dynamic.bootstrap === 'present' ? ['delete_the_empty_npm_bootstrap_environment'] : []),
     ...(dynamic.binding === 'owner_reverification_required'
       ? ['reverify_each_current_npm_trusted_publisher_binding']
       : []),
     ...(dynamic.secretScanning === 'disabled'
       ? ['enable_repository_secret_scanning_and_user_alerts']
       : []),
-    ...(dynamic.pushProtection === 'disabled'
-      ? ['enable_secret_scanning_push_protection']
-      : []),
+    ...(dynamic.pushProtection === 'disabled' ? ['enable_secret_scanning_push_protection'] : []),
     ...(dynamic.nonProviderPatterns === 'disabled'
       ? ['enable_secret_scanning_non_provider_patterns']
       : []),
-    ...(dynamic.validityChecks === 'disabled'
-      ? ['enable_secret_scanning_validity_checks']
-      : []),
+    ...(dynamic.validityChecks === 'disabled' ? ['enable_secret_scanning_validity_checks'] : []),
     ...(dynamic.dependabotPolicy === 'owner_decision_required'
       ? ['owner_decide_dependabot_security_updates_policy']
       : []),
@@ -589,8 +576,7 @@ function realCalendarDate(value: unknown): value is string {
 function realVerificationDate(value: unknown): value is string {
   if (realCalendarDate(value)) return true;
   if (typeof value !== 'string') return false;
-  const match =
-    /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,3}))?Z$/.exec(value);
+  const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,3}))?Z$/.exec(value);
   if (!match) return false;
   const [, year, month, day, hour, minute, second, fraction = '0'] = match;
   const milliseconds = Number(fraction.padEnd(3, '0'));
@@ -647,7 +633,7 @@ export function validatePublicState(input: ValidationInput): string[] {
     return [
       'repository settings verification_state.current_trusted_publisher_binding.state ' +
         'must be owner_reverification_required or verified',
-      ];
+    ];
   }
   const observedSnapshot = record.observed_snapshot as Record<string, unknown> | undefined;
   const repositorySecurity = observedSnapshot?.repository_security as
@@ -674,7 +660,7 @@ export function validatePublicState(input: ValidationInput): string[] {
     return [
       'repository settings observed_snapshot.repository_security.' +
         'secret_scanning_push_protection must be disabled or enabled',
-      ];
+    ];
   }
   if (nonProviderPatterns !== 'disabled' && nonProviderPatterns !== 'enabled') {
     return [
@@ -697,9 +683,7 @@ export function validatePublicState(input: ValidationInput): string[] {
     ];
   }
   if (typeof actionsShaPinning !== 'boolean') {
-    return [
-      'repository settings observed_snapshot.actions.sha_pinning_required must be boolean',
-    ];
+    return ['repository settings observed_snapshot.actions.sha_pinning_required must be boolean'];
   }
   const dependabotPolicy = verificationState?.dependabot_security_updates_policy as
     | Record<string, unknown>
@@ -770,12 +754,7 @@ export function validatePublicState(input: ValidationInput): string[] {
     violations,
   );
 
-  const scanningStates = [
-    secretScanning,
-    pushProtection,
-    nonProviderPatterns,
-    validityChecks,
-  ];
+  const scanningStates = [secretScanning, pushProtection, nonProviderPatterns, validityChecks];
   const disabledScanningProse =
     /repository secret scanning\/user alerts, push protection, non-provider\s+patterns, and /i;
   const disabledValidityProse = /validity checks are disabled/i;
