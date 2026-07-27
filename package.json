@@ -6,7 +6,7 @@
     "test:run": "pnpm -r --if-present run test:run",
     "lint": "oxlint packages/ scripts/",
     "format:check": "oxfmt --check packages/ scripts/",
-    "sdk:api": "tsx scripts/check-sdk-api.ts --public-repository",
+    "sdk:api": "tsx scripts/check-sdk-api.ts",
     "sbom:check": "tsx scripts/check-sbom.ts",
     "artifact:check": "tsx scripts/check-artifacts.ts",
     "release:check": "pnpm build && pnpm sdk:api && pnpm sbom:check && tsx scripts/release.ts && pnpm artifact:check"

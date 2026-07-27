@@ -5,4 +5,5 @@
 The checked-in JSON report is generated with the repository TypeScript compiler API. It records the root
 exports plus a SHA-256 inventory of the clean declaration closure.
 
-Update the report intentionally with `pnpm sdk:api:update`; CI uses `pnpm sdk:artifacts` and fails on drift.
+Update the report intentionally with `pnpm sdk:api --update`; CI runs `pnpm release:check`, which
+fails on drift.

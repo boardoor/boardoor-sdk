@@ -3,8 +3,8 @@
 Alpha support is best effort. There is no response-time SLA, fixed support window, or release
 cadence.
 
-Once the public repository is active, use its normal issue channel for reproducible defects,
-documentation problems, and feature requests. Do not use public issues for vulnerabilities; use
+Use this repository's issue channel for reproducible defects, documentation problems, and feature
+requests. Do not use public issues for vulnerabilities; use
 [private vulnerability reporting](SECURITY.md). Support covers installation and documented SDK
 surfaces, not private platform operations, production incidents, credentials, deployment, or game
 catalog admission.

@@ -1,14 +1,13 @@
 # Release policy
 
-> This is a local preparation document. No release, package publication, source-authority
-> promotion, or protected environment is implied.
-
-- Public packages use SemVer and begin with prereleases such as `0.1.0-alpha.0` on the `next`
-  dist-tag only after publication is authorized.
+- Public packages use SemVer and begin with prereleases. `@boardoor/core@0.1.0-alpha.0` and
+  `@boardoor/ui@0.1.0-alpha.0` were published on 2026-07-26 with OIDC provenance. Both carry the
+  `next` tag; `latest` also points at them only because no other version exists yet, and it moves
+  to the first stable release.
 - Alpha releases may contain breaking changes. Each breaking change requires a changelog entry
   and migration note.
-- `@boardoor/core` and private `@boardoor/core-server` share an exact tested candidate identity;
-  the private server is not published from this repository.
+- `@boardoor/core` and the private `@boardoor/core-server` share an exact tested identity; the
+  private server is not published from this repository and is not a public surface.
 - `@boardoor/ui` versions independently and must declare a supported core range plus an exact
   tested tuple in [COMPATIBILITY.md](COMPATIBILITY.md).
 - Security fixes use the same artifact, provenance, compatibility, review, and protected-release
@@ -17,48 +16,18 @@
   typecheck/test/build evidence, an alpha upgrade exercise, a demonstrated migration procedure,
   and a finalized supported surface and known-limitations record.
 
-## First publication bootstrap
+## How the first version was published
 
-npm Trusted Publishing is configured from an existing package's settings, so it cannot authorize
-the first version of a new package. The first `@boardoor/core` and `@boardoor/ui` versions therefore
-use the separate, manual `npm-bootstrap.yml` workflow only after the owner records the source
-authority promotion and explicitly approves this bounded exception.
+npm configures Trusted Publishing from an existing package's settings, so it cannot authorize the
+very first version of a new package. Rather than create a publishing token for that one operation,
+the first versions were published by registering the package with a throwaway `0.0.0`, configuring
+the Trusted Publisher on the now-existing package, publishing the real version over OIDC through
+`npm-release.yml`, and unpublishing the placeholder. **No bypass token was ever issued**, and the
+`npm-bootstrap.yml` workflow it would have used has been removed along with its environment.
 
-The default bootstrap method is a short-lived npm granular access token stored only as the
-`NPM_BOOTSTRAP_TOKEN` secret of the protected `npm-bootstrap` environment. Grant it Boardoor
-organization access and explicit read/write access to the `@boardoor` package scope (organization
-access alone does not grant package publishing), enable automation 2FA bypass only for this use,
-and choose the shortest practical expiry. The build job has no npm token or OIDC permission. It checks the
-full reviewed `main` SHA before installing dependencies, runs all release checks, packs only the
-selected package, and uploads that immutable tarball. The publish job receives only that artifact
-and the environment secret; it neither checks out source nor installs repository dependencies.
-The published registry tarball must match the reviewed SHA-256.
-
-Build and pack use the exact `npm@11.5.1` development dependency resolved by the frozen public
-lockfile; `scripts/release.ts` rejects any other npm CLI. This keeps owner-reviewed local and CI
-tarball bytes from drifting with a runner's bundled npm patch. The publish-only job performs no
-package installation: it uses Node 24.6.0's bundled npm 11.5.1 and fails if that exact version is
-not present. Both publish paths use `--ignore-scripts`.
-
-Bootstrap is resumed per package. Publish `core`, verify its registry tarball, then publish `ui`.
-If `core` succeeds and `ui` fails, do not bump or republish `core`; correct the cause and dispatch
-only `ui` with the same reviewed commit, version, and tarball digest. If a registry version already
-exists, the workflow succeeds only when its tarball has the exact expected SHA-256.
-The UI bootstrap also requires the reviewed `core` tarball SHA-256. Its build job downloads the
-exact registry tarball without credentials and rejects the UI publish when that digest differs,
-rather than accepting version existence alone.
-
-After both packages exist:
-
-1. configure the `npm-release.yml` Trusted Publishing relationship separately in each package;
-2. delete `NPM_BOOTSTRAP_TOKEN` from GitHub;
-3. revoke the npm granular access token; and
-4. configure the packages to disallow token-based publishing.
-
-Keep screenshots/API receipts for all four actions. Do not use `npm-bootstrap.yml` again. The owner
-may choose a different first-publish method, but that remains a recorded decision gate and must
-preserve protected approval, exact reviewed tarball identity, provenance, and immediate credential
-revocation evidence.
+Both packages then had Trusted Publishing bound to this repository and `npm-release.yml`, with the
+`npm publish` action only, and token-based publishing disallowed. Every later release uses the
+steady workflow below.
 
 ## Steady releases
 
@@ -73,9 +42,8 @@ downloads and validates only the reviewed artifact and publishes it with provena
 It then verifies that the registry tarball has the reviewed SHA-256.
 
 `@boardoor/core` and `@boardoor/ui` are independent resume units. A completed package is never
-republished because the other package failed. Exact private consumer/artifact parity is the
-preceding activation-runbook gate and is not re-created from private evidence in this public
-repository.
+republished because the other package failed. Verification against private consumers happens
+before a release is dispatched and is not reproduced from private evidence in this repository.
 
 Initial operation is explicitly single-operator: the authorized owner's manual workflow dispatch
 is the live publication approval, both environments have zero required reviewers, and

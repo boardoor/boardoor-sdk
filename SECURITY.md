@@ -3,12 +3,8 @@
 ## Reporting a vulnerability
 
 Use this repository's GitHub **Private vulnerability reporting** form, available from the
-repository's **Security** tab after maintainers enable it. Do not disclose suspected
-vulnerabilities in a public issue, discussion, pull request, or commit.
-
-If private vulnerability reporting is not visibly enabled, do not publish sensitive details.
-Wait until maintainers activate and verify the private GitHub reporting route. This template does
-not provide or imply a private email address.
+repository's **Security** tab. Do not disclose suspected vulnerabilities in a public issue,
+discussion, pull request, or commit. There is no separate reporting email address.
 
 ## Scope and response
 

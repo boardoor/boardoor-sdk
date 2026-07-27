@@ -13,5 +13,5 @@ Changes to governance, licensing, protected repository surfaces, release authori
 API, or compatibility policy require maintainer review. Routine bypass of required rules is not
 part of this model.
 
-This document is a local template. Team membership, repository rules, DCO installation, and
-authority promotion require separate live verification and are not established by this file.
+Release authority is separate from repository membership and is not granted by merging a pull
+request.

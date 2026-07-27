@@ -70,7 +70,7 @@ describe('replay package validation', () => {
     expect(REPLAY_INDEX_STATUSES).toEqual(['pending', 'available', 'failed']);
   });
 
-  it('exports a replay index record shape aligned with the D1 row schema', () => {
+  it('exports a replay index record shape suitable for a row-oriented store', () => {
     const row = {
       match_id: 'match-1',
       game: 'reversi',

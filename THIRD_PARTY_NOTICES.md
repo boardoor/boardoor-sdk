@@ -7,4 +7,4 @@ and does not embed the legacy Svelte Debug UI.
 The authoritative license texts and embedded-code notices travel with each package in
 `packages/boardgame-core/THIRD_PARTY_NOTICES.md` and
 `packages/boardgame-ui/THIRD_PARTY_NOTICES.md`. The exact resolved dependency inventory for this
-candidate is recorded in [`sbom.cdx.json`](sbom.cdx.json).
+release is recorded in [`sbom.cdx.json`](sbom.cdx.json).

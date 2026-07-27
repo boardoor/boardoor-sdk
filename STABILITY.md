@@ -14,5 +14,5 @@ Alpha-supported surfaces can still change incompatibly before stable release; br
 require release notes and migration guidance. Experimental surfaces have weaker compatibility
 expectations and may change or be removed in alpha releases.
 
-This table must be checked against the exact reviewed export and API report before publication.
+This table is checked against the exact API report on every release.
 See [RELEASE.md](RELEASE.md) and [COMPATIBILITY.md](COMPATIBILITY.md).

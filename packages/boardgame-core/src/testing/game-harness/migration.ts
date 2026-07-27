@@ -14,7 +14,7 @@ const DEFAULT_MAX_STEP_MS = 50;
 const DEFAULT_MAX_CHAIN_MS = 500;
 const REJECTED_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 
-/** Run D-018 Slice 0 checks without persistence or runtime wiring. */
+/** Check a migration against fixtures without persistence or runtime wiring. */
 export function runStateMigrationHarness<G>({
   slug,
   game,

@@ -75,7 +75,6 @@ const entries: Entry[] = [
 
 const root = process.cwd();
 const update = process.argv.includes('--update');
-const publicRepository = process.argv.includes('--public-repository');
 const violations: string[] = [];
 const removedInternalReport = path.join(
   root,
@@ -85,32 +84,6 @@ if (existsSync(removedInternalReport)) {
   violations.push(
     '@boardoor/core/internal: obsolete API report exists; remove boardgame-core-internal.api.json',
   );
-}
-for (const historicalEvidence of publicRepository
-  ? []
-  : ([
-      {
-        path: 'packages/boardgame-core/etc/archive/d017-gate2-internal-seam/boardgame-core-internal.api.json',
-        sha256: '5cc2b73e4d610e34ec1657c9a02841e8e0cdfae1dd5f31dfa8d75a08a80c6303',
-      },
-      {
-        path: 'packages/boardgame-core/etc/archive/d017-gate2-internal-seam/candidate-record.json',
-        sha256: '23f11346e549fc6f2c675b5e4a208c342a9fd6c77f0cd2d499dc3dd9bab34de6',
-      },
-      {
-        path: 'packages/boardgame-core/etc/archive/d017-gate2-internal-seam/prepublish-attestation.json',
-        sha256: '625ef785e0975201793fa17d5b6ea45a59cb93a8a529d5bf1b23b34aabcba910',
-      },
-    ] as const)) {
-  const evidencePath = path.join(root, historicalEvidence.path);
-  if (!existsSync(evidencePath)) {
-    violations.push(`historical SDK evidence is missing: ${historicalEvidence.path}`);
-    continue;
-  }
-  const actual = createHash('sha256').update(readFileSync(evidencePath)).digest('hex');
-  if (actual !== historicalEvidence.sha256) {
-    violations.push(`historical SDK evidence drifted: ${historicalEvidence.path}`);
-  }
 }
 
 function filesBelow(directory: string): string[] {
@@ -228,7 +201,7 @@ for (const entry of entries) {
     writeFileSync(reportPath, expected);
   } else if (!existsSync(reportPath) || readFileSync(reportPath, 'utf8') !== expected) {
     violations.push(
-      `${entry.packageName}: API report drifted; run pnpm sdk:api:update intentionally`,
+      `${entry.packageName}: API report drifted; run pnpm sdk:api --update intentionally`,
     );
   }
 }
