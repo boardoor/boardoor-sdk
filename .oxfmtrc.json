@@ -17,8 +17,6 @@
     "**/.wrangler/**",
     "*.gen.ts",
     "packages/boardgame-core/etc/*.api.json",
-    "packages/boardgame-core/etc/archive/**",
-    "packages/boardgame-core/etc/candidate/**",
     "packages/boardgame-ui/etc/*.api.json",
     "scripts/game-factory/model-repair/templates/**",
     "worker-configuration.d.ts",

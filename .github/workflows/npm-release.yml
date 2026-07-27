@@ -15,7 +15,7 @@ on:
         required: true
         type: string
       expected_version:
-        description: Exact package version recorded in the owner release packet
+        description: Exact package version to publish
         required: true
         type: string
       expected_tarball_sha256:

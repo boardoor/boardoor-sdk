@@ -1,5 +1,4 @@
 schema_version: 1
-template_status: local_preparation_not_live_evidence
 repository: boardoor-sdk
 default_branch: main
 live_application_required: true
@@ -46,26 +45,6 @@ release_environment:
   administrator_bypass: false
   trusted_publishing_relationship: required_live_setup
   reviewed_commit_input: full_sha_required
-bootstrap_environment:
-  name: npm-bootstrap
-  purpose: first_public_version_before_trusted_publishing_can_be_configured
-  required_reviewers_minimum: 0
-  prevent_self_review: false
-  live_approval: owner_workflow_dispatch
-  deployment_branch_policy: main_only
-  administrator_bypass: false
-  temporary_secret: NPM_BOOTSTRAP_TOKEN
-  secret_requirements:
-    - granular_access_token
-    - boardoor_organization_access
-    - boardoor_package_scope_read_write
-    - bypass_2fa_for_automation
-    - shortest_practical_expiration
-  mandatory_teardown:
-    - delete_environment_secret_after_both_packages_exist
-    - revoke_granular_access_token
-    - configure_trusted_publishing_for_each_package
-    - disallow_token_based_package_publishing
 release_script_contract:
   build_command: pnpm exec tsx scripts/release.ts --pack core|ui
   publish_command: npm publish <reviewed-immutable-tarball> --access public --tag next --provenance
@@ -102,15 +81,13 @@ verification:
   - confirm_no_repository_or_environment_secret_reaches_fork_ci
   - confirm_workflow_dispatch_actor_is_the_authorized_owner
   - prove_bootstrap_core_and_ui_registry_tarballs_match_reviewed_sha256
-  - prove_bootstrap_token_deleted_and_revoked
   - prove_trusted_publishing_bound_separately_for_core_and_ui
   - prove_token_based_package_publishing_disabled_after_bootstrap
 notes:
-  - This checklist does not configure GitHub, install an App, create a team, or prove effective settings.
-  - A package must exist before npm Trusted Publishing can be configured; npm-bootstrap is a bounded, temporary exception for each package's first version.
-  - If core succeeds and ui fails, do not republish core; correct the cause and resume by dispatching ui only with the same reviewed commit, version, and digest.
-  - The owner may select a different first-publish method, but that is a recorded HOLD decision and must preserve exact tarball, provenance, protected approval, and immediate credential revocation evidence.
+  - This file records the settings this repository runs under. A checked-in file cannot configure GitHub, install an App, or create a team, so the settings are applied and verified against the live repository.
+  - The first version of each package was published over OIDC after registering the package name; no publishing token was issued, and the bootstrap workflow and environment have been removed.
+  - core and ui are independent resume units: if one succeeds and the other fails, do not republish the successful package; correct the cause and dispatch only the failed one with the same reviewed commit, version, and digest.
   - Initial operation is intentionally single-operator: CODEOWNERS routes ownership but is not a required review, and owner workflow_dispatch is the live npm approval. CI, DCO, conversation resolution, direct-push protection, and no routine bypass remain mandatory.
   - When a reviewer who will actively review routine changes joins, strengthen both repositories to one required approval plus required CODEOWNER review and both npm environments to one required reviewer with prevent_self_review enabled. Record and canary the effective settings before relying on the stronger gate.
-  - The npm-release environment and per-package npm Trusted Publishing relationships require separate live setup and verification after bootstrap.
+  - Each package binds npm Trusted Publishing to this repository and .github/workflows/npm-release.yml, allowing only the npm publish action, with token-based publishing disallowed.
   - Private candidate/artifact parity is an activation-runbook gate completed before release dispatch.

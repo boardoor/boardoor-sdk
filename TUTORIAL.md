@@ -23,32 +23,17 @@ The example has its own `package.json`, TypeScript config, and Vite config. It d
 `workspace:`, `catalog:`, root TypeScript config, project references, repository source imports,
 platform URLs, or static assets.
 
-## Run the local candidate proof
+## Install and run
 
-The SDK packages are not published yet, so the repository-local proof substitutes packed
-candidate tarballs for the exact versions in the example:
-
-```bash
-pnpm sdk:build
-pnpm exec tsx scripts/sdk-clean-room.test.ts
-pnpm exec tsx scripts/check-sdk-clean-room.ts
-```
-
-The final command copies the tutorial outside the workspace, installs from the checked frozen lock
-in offline mode, then runs:
+Install the exact versions from the registry and run the example's own checks:
 
 ```bash
+pnpm install --frozen-lockfile
 pnpm typecheck
 pnpm test:run
 pnpm build
 ```
 
-The test lock is updated only when the exact dependency or artifact set intentionally changes:
-
-```bash
-pnpm exec tsx scripts/check-sdk-clean-room.ts --update-lock
-```
-
-After publication is separately authorized, a clean external repository can install the exact
-versions in the tutorial manifest from the registry. Publication and that external pilot are
-residual gates, not accomplishments claimed by this local tutorial.
+`@boardoor/core` and `@boardoor/ui` resolve from npm at the exact versions the tutorial manifest
+pins. Both were published with OIDC provenance, so `npm audit signatures` binds the release back to
+this repository and the workflow that built it.

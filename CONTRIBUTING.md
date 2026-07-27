@@ -1,7 +1,7 @@
 # Contributing
 
-This file is a local template for the future public repository. Until that repository exists and
-its rules are verified, it does not open a contribution channel.
+Contributions are welcome through pull requests. Using or contributing to these packages does not
+grant release or npm authority.
 
 ## Pull requests
 
@@ -29,8 +29,7 @@ Signed-off-by: Contributor Name <contributor@example.com>
 ```
 
 Use `git commit --signoff`. By adding the trailer, you certify the DCO 1.1 for that contribution.
-The DCO GitHub App must enforce this on every commit once installed and verified; the checked-in
-template cannot install or activate the App.
+The DCO check is required on every pull request; a commit without a matching trailer fails it.
 
 ## Local checks
 
