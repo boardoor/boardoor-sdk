@@ -9,7 +9,8 @@
     "sdk:api": "tsx scripts/check-sdk-api.ts",
     "sbom:check": "tsx scripts/check-sbom.ts",
     "artifact:check": "tsx scripts/check-artifacts.ts",
-    "release:check": "pnpm build && pnpm sdk:api && pnpm sbom:check && tsx scripts/release.ts && pnpm artifact:check"
+    "public-state:check": "tsx scripts/check-public-state.test.ts && tsx scripts/check-public-state.ts",
+    "release:check": "pnpm build && pnpm sdk:api && pnpm sbom:check && tsx scripts/release.ts && pnpm artifact:check && pnpm public-state:check"
   },
   "devDependencies": {
     "@types/node": "26.1.1",

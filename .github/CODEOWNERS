@@ -1,9 +1,6 @@
-# Local template. On the live default branch this routes ownership and review requests.
-# It becomes an enforced approval gate only when an active reviewer joins and the ruleset
-# separately enables required CODEOWNER review.
-
 * @boardoor/maintainers
 /.github/CODEOWNERS @boardoor/maintainers
+/.github/repository-settings.json @boardoor/maintainers
 /.github/workflows/** @boardoor/maintainers
 /SECURITY.md @boardoor/maintainers
 /GOVERNANCE.md @boardoor/maintainers

@@ -1,0 +1,222 @@
+{
+  "format": "boardoor-repository-settings-json-v1",
+  "schema_version": 3,
+  "repository": "boardoor-sdk",
+  "default_branch": "main",
+  "observed_at": "2026-07-27",
+  "authority": {
+    "live_github_settings_and_apis": "authoritative",
+    "live_npm_settings_and_registry": "authoritative",
+    "checked_in_snapshot": "non_applying_record"
+  },
+  "observed_snapshot": {
+    "ruleset": {
+      "scope": "repository",
+      "target": "branch",
+      "enforcement": "active",
+      "include": ["refs/heads/main"],
+      "bypass_actors": [],
+      "pull_request": true,
+      "approvals": 0,
+      "code_owner_review": false,
+      "conversation_resolution": true,
+      "deletion_blocked": true,
+      "force_push_blocked": true,
+      "direct_push_blocked": true,
+      "routine_bypass_allowed": false,
+      "strict_required_status_checks_policy": true,
+      "required_status_checks": ["verify", "DCO"]
+    },
+    "dco": {
+      "exact_live_check_name": "DCO",
+      "live_ruleset_required": true
+    },
+    "repository_security": {
+      "private_vulnerability_reporting": "enabled",
+      "dependabot_alerts": "enabled",
+      "dependabot_security_updates": "disabled",
+      "secret_scanning": "disabled",
+      "secret_scanning_push_protection": "disabled",
+      "secret_scanning_non_provider_patterns": "disabled",
+      "secret_scanning_validity_checks": "disabled"
+    },
+    "actions": {
+      "enabled": true,
+      "allowed_actions": "all",
+      "sha_pinning_required": false,
+      "default_token": "read_only",
+      "allow_actions_to_create_or_approve_pull_requests": false,
+      "fork_pull_request_approval": "all_external_contributors",
+      "self_hosted_runner_for_fork_code": "forbidden"
+    },
+    "release_environment": {
+      "name": "npm-release",
+      "required_reviewers": 0,
+      "prevent_self_review": false,
+      "deployment_branch_policy": "main_only",
+      "administrator_bypass": false,
+      "repository_secrets": 0,
+      "environment_secrets": 0
+    },
+    "initial_publication": {
+      "method": "github_actions_oidc_trusted_publishing",
+      "core_and_ui_provenance_observed": true
+    },
+    "retired_release_environment": {
+      "state": "present",
+      "name": "npm-bootstrap",
+      "repository_secrets": 0,
+      "environment_secrets": 0,
+      "administrator_bypass": false,
+      "next_action": "delete_environment"
+    }
+  },
+  "verification_state": {
+    "current_trusted_publisher_binding": {
+      "state": "owner_reverification_required",
+      "next_action": "reverify_each_current_npm_trusted_publisher_binding",
+      "required_evidence": [
+        "exact_core_and_ui_binding_tuple",
+        "token_based_publishing_disabled"
+      ]
+    },
+    "dependabot_security_updates_policy": {
+      "state": "owner_decision_required",
+      "options": [
+        "enable_automated_security_update_pull_requests",
+        "document_manual_security_update_policy"
+      ],
+      "next_action": "owner_select_dependency_security_update_policy"
+    },
+    "required_evidence": [
+      "confirm_ruleset_effective_via_api_or_settings_snapshot",
+      "confirm_codeowners_team_exists_and_is_accessible",
+      "confirm_dco_app_publisher_permissions_selection_and_installer",
+      "prove_unsigned_commit_fails_and_signed_off_commit_passes",
+      "prove_self_authored_pr_mergeable_only_after_ci_dco_and_conversation_resolution",
+      "record_external_pr_owner_review_operating_evidence",
+      "confirm_private_vulnerability_reporting_is_reachable",
+      "confirm_no_repository_or_environment_secret_reaches_fork_ci",
+      "confirm_workflow_dispatch_actor_is_the_authorized_owner",
+      "prove_bootstrap_core_and_ui_registry_tarballs_match_reviewed_sha256"
+    ]
+  },
+  "desired_configuration_now": {
+    "ruleset": {
+      "scope": "repository",
+      "target": "branch",
+      "enforcement": "active",
+      "include": ["refs/heads/main"],
+      "bypass_actors": [],
+      "pull_request": true,
+      "approvals": 0,
+      "code_owner_review": false,
+      "conversation_resolution": true,
+      "deletion_blocked": true,
+      "force_push_blocked": true,
+      "direct_push_blocked": true,
+      "routine_bypass_allowed": false,
+      "strict_required_status_checks_policy": true,
+      "required_status_checks": ["verify", "DCO"]
+    },
+    "dco": {
+      "app_required": true,
+      "standard": "DCO-1.1",
+      "selected_repository_only": true,
+      "unsigned_commit_must_fail": true,
+      "signed_off_commit_must_pass": true
+    },
+    "repository_security": {
+      "private_vulnerability_reporting": "enabled",
+      "dependabot_alerts": "enabled",
+      "dependabot_security_updates": "owner_decision_required_do_not_apply",
+      "secret_scanning": "enabled",
+      "secret_scanning_push_protection": "enabled",
+      "secret_scanning_non_provider_patterns": "enabled",
+      "secret_scanning_validity_checks": "enabled"
+    },
+    "actions": {
+      "enabled": true,
+      "allowed_actions": "selected",
+      "sha_pinning_required": true,
+      "github_owned_allowed": true,
+      "verified_allowed": false,
+      "patterns_allowed": ["pnpm/action-setup@*"],
+      "default_token": "read_only",
+      "allow_actions_to_create_or_approve_pull_requests": false,
+      "fork_pull_request_approval": "all_external_contributors",
+      "self_hosted_runner_for_fork_code": "forbidden"
+    },
+    "release_environment": {
+      "name": "npm-release",
+      "live_approval": "owner_workflow_dispatch",
+      "required_reviewers": 0,
+      "prevent_self_review": false,
+      "deployment_branch_policy": "main_only",
+      "administrator_bypass": false,
+      "repository_secrets": 0,
+      "environment_secrets": 0,
+      "reviewed_commit_input": "full_sha_required"
+    },
+    "trusted_publishing": {
+      "packages": ["@boardoor/core", "@boardoor/ui"],
+      "repository": "boardoor/boardoor-sdk",
+      "workflow_filename": "npm-release.yml",
+      "environment": "npm-release",
+      "allowed_action": "npm_publish_only",
+      "token_based_publishing": "disabled"
+    }
+  },
+  "future_reviewer_configuration": {
+    "activation_condition": "active_reviewer_joined",
+    "repository_approvals": 1,
+    "code_owner_review": true,
+    "npm_release_required_reviewers": 1,
+    "npm_release_prevent_self_review": true,
+    "canary_before_claiming_active": true
+  },
+  "release_script_contract": {
+    "build_command": "pnpm exec tsx scripts/release.ts --pack core|ui",
+    "publish_command": "npm publish <reviewed-immutable-tarball> --access public --tag next --provenance",
+    "required_dispatch_inputs": [
+      "package",
+      "expected_commit",
+      "expected_version",
+      "expected_tarball_sha256"
+    ],
+    "fixed_initial_dist_tag": "next",
+    "unit_of_dispatch": "one_package",
+    "existing_version_policy": "fail_closed_until_pinned_provenance_identity_verifier",
+    "fail_closed_checks": [
+      "exact_main_sha_checked_before_dependency_install",
+      "package_versions_match_reviewed_candidate",
+      "fixed_next_dist_tag",
+      "package_projection_and_release_checks_run_without_id_token",
+      "build_pack_uses_lock_integrity_pinned_npm_11_5_1",
+      "build_and_pack_job_has_no_id_token",
+      "publish_job_has_no_checkout_or_dependency_install",
+      "publish_job_uses_node_24_6_0_bundled_npm_11_5_1",
+      "publish_job_only_receives_reviewed_immutable_tarball",
+      "steady_publish_rejects_npm_tokens",
+      "new_version_publish_uses_trusted_publishing",
+      "registry_tarball_sha256_matches_reviewed_candidate",
+      "preexisting_version_blocks_automatic_resume"
+    ]
+  },
+  "release_prerequisites": [
+    "private_candidate_and_packed_artifact_parity_before_dispatch",
+    "private_evidence_not_copied_into_public_repository"
+  ],
+  "remediation": [
+    "delete_the_empty_npm_bootstrap_environment",
+    "reverify_each_current_npm_trusted_publisher_binding",
+    "enable_repository_secret_scanning_and_user_alerts",
+    "enable_secret_scanning_push_protection",
+    "enable_secret_scanning_non_provider_patterns",
+    "enable_secret_scanning_validity_checks",
+    "owner_decide_dependabot_security_updates_policy",
+    "enable_actions_full_sha_pinning",
+    "apply_selected_actions_policy_with_github_owned_and_pnpm_action_setup",
+    "select_and_pin_a_cryptographic_provenance_identity_policy_verifier"
+  ]
+}

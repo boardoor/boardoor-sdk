@@ -159,16 +159,14 @@ jobs:
             jq -er .)"; then
             curl --fail --silent --show-error --location "${published_url}" --output published.tgz
             echo "${EXPECTED_TARBALL_SHA256}  published.tgz" | sha256sum --check --strict
-            echo 'already_published=true' >>"${GITHUB_OUTPUT}"
-            echo 'The exact reviewed package is already published; treating this dispatch as an idempotent resume.'
-          else
-            echo 'already_published=false' >>"${GITHUB_OUTPUT}"
+            echo 'The exact package version already exists.' >&2
+            echo 'Automatic resume is blocked until a pinned verifier cryptographically validates its provenance identity against the reviewed commit and workflow.' >&2
+            exit 1
           fi
           # Absolute path: npm treats a bare "dir/file.tgz" argument as a GitHub
           # user/repo shorthand and tries to git-clone it instead of publishing.
           echo "tarball=$(realpath -- "${tarball}")" >>"${GITHUB_OUTPUT}"
       - name: Publish only the immutable tarball through OIDC
-        if: steps.registry.outputs.already_published != 'true'
         env:
           NPM_CONFIG_PROVENANCE: 'true'
         run: >-
