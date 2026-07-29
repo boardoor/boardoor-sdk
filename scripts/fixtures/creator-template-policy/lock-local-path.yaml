@@ -1,0 +1,4 @@
+lockfileVersion: '9.0'
+packages:
+  fixture@1.2.3:
+    resolution: { directory: ../fixture, type: directory }

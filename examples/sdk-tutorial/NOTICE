@@ -1,0 +1,7 @@
+Last Stone SDK tutorial
+Copyright (c) 2026 Boardoor contributors
+The tutorial source is made available under the accompanying MIT License.
+
+The installed @boardoor/core and @boardoor/ui packages carry their own licenses and
+THIRD_PARTY_NOTICES files. Production bundles may contain code or generated CSS from those
+packages; retain and review their applicable notices when redistributing a built game.

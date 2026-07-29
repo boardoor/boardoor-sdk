@@ -14,6 +14,18 @@ release and provenance on npm.
 Private platform services, credentials, deployment configuration, authentication, billing,
 storage, and `@boardoor/core-server` are out of scope.
 
+## Create a game
+
+Follow the [Last Stone creator tutorial](TUTORIAL.md) to copy a standalone template into a new
+directory, define rules and game state, enumerate AI moves, test reducer behavior, render the game
+with `@boardoor/ui`, build it, and run a local preview. The template pins the published
+`@boardoor/core@0.1.0-alpha.0` and `@boardoor/ui@0.1.0-alpha.0` compatibility tuple and does not
+depend on a private platform checkout.
+
+Games proposed for public review follow the separate
+[public game contribution process](CONTRIBUTING.md#public-game-contributions). Review does not
+promise catalog admission, hosting, deployment, or production support.
+
 ## Core debug panel
 
 `@boardoor/core` includes a small, dependency-free Boardoor Debug panel for local development. It

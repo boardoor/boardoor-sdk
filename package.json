@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "build": "pnpm -r --if-present run build:artifact",
-    "test:run": "pnpm -r --if-present run test:run",
+    "test:run": "pnpm -r --if-present run test:run && pnpm creator:check",
+    "creator:policy:test": "tsx scripts/check-creator-template-policy.test.ts",
+    "creator:check": "pnpm creator:policy:test && tsx scripts/check-creator-template.ts",
     "lint": "oxlint packages/ scripts/",
     "format:check": "oxfmt --check packages/ scripts/",
     "sdk:api": "tsx scripts/check-sdk-api.ts",

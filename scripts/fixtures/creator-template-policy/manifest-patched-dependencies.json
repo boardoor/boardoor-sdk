@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@boardoor/core": "0.1.0-alpha.0",
+    "@boardoor/ui": "0.1.0-alpha.0",
+    "fixture": "1.2.3"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "fixture@1.2.3": "patches/fixture.patch"
+    }
+  }
+}
