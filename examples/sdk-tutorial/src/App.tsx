@@ -2,7 +2,7 @@ import { Client } from '@boardoor/core';
 import { ActionButton } from '@boardoor/ui';
 import { useEffect, useMemo, useState } from 'react';
 
-import { LastStone } from './game.ts';
+import { chooseBestMove, LastStone } from './game.ts';
 
 export function App() {
   const client = useMemo(() => {
@@ -23,6 +23,7 @@ export function App() {
   if (!state) return <main className="last-stone">Preparing the game…</main>;
 
   const winner = state.ctx.gameover?.winner as string | undefined;
+  const suggestion = chooseBestMove(state.G, state.ctx, state.ctx.currentPlayer);
   return (
     <main className="last-stone">
       <h1>Last Stone</h1>
@@ -37,6 +38,11 @@ export function App() {
             <ActionButton disabled={state.G.remaining < 2} onClick={() => client.moves.take(2)}>
               Take two
             </ActionButton>
+            {suggestion && (
+              <ActionButton className="hint" onClick={() => client.moves.take(suggestion.args[0])}>
+                Suggested: take {suggestion.args[0]}
+              </ActionButton>
+            )}
           </div>
         </>
       ) : (
