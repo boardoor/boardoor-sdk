@@ -174,8 +174,8 @@ function stage(): Array<{ config: PackageConfig; directory: string }> {
     encoding: 'utf8',
     env: npmEnvironment('/nonexistent'),
   }).trim();
-  if (npmVersion !== '11.5.1') {
-    throw new Error(`release staging requires pinned npm 11.5.1, found ${npmVersion}`);
+  if (npmVersion !== '12.0.2') {
+    throw new Error(`release staging requires pinned npm 12.0.2, found ${npmVersion}`);
   }
   const stageRoot = resolve(root, '.release');
   if (dirname(stageRoot) !== root || !stageRoot.startsWith(`${root}${sep}`)) {

@@ -294,8 +294,8 @@ try {
       encoding: 'utf8',
       env: npmEnvironment,
     }).trim();
-    if (npmVersion !== '11.5.1') {
-      violations.push(`artifact validation requires pinned npm 11.5.1, found ${npmVersion}`);
+    if (npmVersion !== '12.0.2') {
+      violations.push(`artifact validation requires pinned npm 12.0.2, found ${npmVersion}`);
     }
   }
   for (const candidate of candidates) {
