@@ -225,7 +225,9 @@ function pack(staged: Array<{ config: PackageConfig; directory: string }>, selec
       env: npmEnvironment(resolve(root, '.release')),
     },
   );
-  const records = JSON.parse(output) as Array<{ filename?: string }>;
+  // npm 12 reports `pack --json` as an object keyed by package name; npm 11 emitted an array.
+  // `Object.values` reads either shape, so the single-tarball assertion below stays the contract.
+  const records = Object.values(JSON.parse(output) as Record<string, { filename?: string }>);
   if (records.length !== 1 || !records[0]?.filename) {
     throw new Error(`${selected.config.expectedName}: npm pack returned an unexpected result`);
   }
