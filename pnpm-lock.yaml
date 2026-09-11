@@ -37,10 +37,10 @@ importers:
     dependencies:
       '@boardoor/core':
         specifier: 0.1.0-alpha.0
-        version: link:../../packages/boardgame-core
+        version: 0.1.0-alpha.0(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react-i18next@17.0.9(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(react@19.2.7)
       '@boardoor/ui':
         specifier: 0.1.0-alpha.0
-        version: link:../../packages/boardgame-ui
+        version: 0.1.0-alpha.0(@boardoor/core@0.1.0-alpha.0(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react-i18next@17.0.9(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react-i18next@17.0.9(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(react@19.2.7)
       i18next:
         specifier: 26.3.6
         version: 26.3.6(typescript@7.0.2)
@@ -184,6 +184,31 @@ packages:
   '@babel/runtime@7.29.2':
     resolution: {integrity: sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==}
     engines: {node: '>=6.9.0'}
+
+  '@boardoor/core@0.1.0-alpha.0':
+    resolution: {integrity: sha512-El/Rh1IKBNanGEYo0ISaNvJ4TPDF26BnXgr6nP0qNG8hsvfmg4sVPRAODm9ZyM15QoPqcePaYrIAgDAh9UAkCg==}
+    peerDependencies:
+      i18next: '>=23'
+      react: '>=18'
+      react-dom: '>=18'
+      react-i18next: '>=14'
+    peerDependenciesMeta:
+      i18next:
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+      react-i18next:
+        optional: true
+
+  '@boardoor/ui@0.1.0-alpha.0':
+    resolution: {integrity: sha512-Wx4o4XYPv+7WsTZAu8YZHsaO0mlyALZNW0INwrDN4bFd7CUrIU7dO4br7y/Rdrg+3Lv8+B2xQdvuB0aRcP5V4A==}
+    peerDependencies:
+      '@boardoor/core': 0.1.0-alpha.0
+      react: '>=18'
+      react-dom: '>=18'
+      react-i18next: '>=14'
 
   '@bramus/specificity@2.4.2':
     resolution: {integrity: sha512-ctxtJ/eA+t+6q2++vj5j7FYX3nRu311q1wfYH3xjlLOsczhlhxAg2FWNUXhpGvAw3BWo1xBcvOV6/YLc2r5FJw==}
@@ -1717,6 +1742,28 @@ snapshots:
   '@asamuzakjp/nwsapi@2.3.9': {}
 
   '@babel/runtime@7.29.2': {}
+
+  '@boardoor/core@0.1.0-alpha.0(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react-i18next@17.0.9(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(react@19.2.7)':
+    dependencies:
+      flatted: 3.4.2
+      immer: 11.1.15
+      lodash.isplainobject: 4.0.6
+      nanoid: 6.0.0
+      p-queue: 9.3.1
+      redux: 5.0.1
+      rfc6902: 5.2.0
+    optionalDependencies:
+      i18next: 26.3.6(typescript@7.0.2)
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
+      react-i18next: 17.0.9(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@7.0.2)
+
+  '@boardoor/ui@0.1.0-alpha.0(@boardoor/core@0.1.0-alpha.0(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react-i18next@17.0.9(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react-i18next@17.0.9(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(react@19.2.7)':
+    dependencies:
+      '@boardoor/core': 0.1.0-alpha.0(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react-i18next@17.0.9(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(react@19.2.7)
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
+      react-i18next: 17.0.9(i18next@26.3.6(typescript@7.0.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@7.0.2)
 
   '@bramus/specificity@2.4.2':
     dependencies:

@@ -1,6 +1,6 @@
 {
   "name": "@boardoor/ui",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -50,7 +50,7 @@
     "./styles/ui.css": "./dist/styles/ui.css"
   },
   "peerDependencies": {
-    "@boardoor/core": "0.1.0-alpha.0",
+    "@boardoor/core": "0.1.0-alpha.1",
     "react": ">=18",
     "react-dom": ">=18",
     "react-i18next": ">=14"
