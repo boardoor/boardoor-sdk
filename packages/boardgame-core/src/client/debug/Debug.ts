@@ -36,7 +36,10 @@ const buttonStyle: Partial<CSSStyleDeclaration> = {
   background: '#27272a',
   border: '1px solid #71717a',
   borderRadius: '0.25rem',
-  color: 'inherit',
+  // Not `inherit`: the toggle is a sibling of the panel, not a child, so outside
+  // the panel's own `color` it would take the host page's text colour and paint
+  // dark-on-dark against this background. A light theme drops it to ~1.4:1.
+  color: '#fafafa',
   cursor: 'pointer',
   font: 'inherit',
   padding: '0.3rem 0.5rem',
