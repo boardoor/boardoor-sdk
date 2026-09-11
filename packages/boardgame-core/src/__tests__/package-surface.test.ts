@@ -40,7 +40,7 @@ describe('@boardoor/core package surface', () => {
   it('uses self-owned semver for the private package', () => {
     const pkg = JSON.parse(readPackageFile('package.json')) as { version: string };
 
-    expect(pkg.version).toBe('0.1.0-alpha.0');
+    expect(pkg.version).toBe('0.1.0-alpha.1');
   });
 
   it('does not expose ts-toolbelt in package metadata or source imports', () => {

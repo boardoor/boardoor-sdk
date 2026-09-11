@@ -12,3 +12,9 @@ attestation on npm rather than treating this table as the authority.
 The private `@boardoor/core-server` consumes the same exact core version and is verified against
 it before release, but it is not a public package or source surface. The UI range is not widened
 without testing and recording each additional combination.
+
+The next release candidate is `@boardoor/core@0.1.0-alpha.1` with
+`@boardoor/ui@0.1.0-alpha.1`; UI supports exactly `0.1.0-alpha.1`.
+Packed-artifact consumer typecheck/build, game tests, server compatibility tests,
+and six-case hard-UI verification passed for this tuple. Registry installation
+verification remains required after publication. It is not yet published.

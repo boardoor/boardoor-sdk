@@ -16,7 +16,7 @@
       "version": "7.29.2"
     },
     {
-      "bom-ref": "pkg:npm/%40boardoor/core@0.1.0-alpha.0",
+      "bom-ref": "pkg:npm/%40boardoor/core@0.1.0-alpha.1",
       "licenses": [
         {
           "license": {
@@ -25,12 +25,12 @@
         }
       ],
       "name": "@boardoor/core",
-      "purl": "pkg:npm/%40boardoor/core@0.1.0-alpha.0",
+      "purl": "pkg:npm/%40boardoor/core@0.1.0-alpha.1",
       "type": "library",
-      "version": "0.1.0-alpha.0"
+      "version": "0.1.0-alpha.1"
     },
     {
-      "bom-ref": "pkg:npm/%40boardoor/ui@0.1.0-alpha.0",
+      "bom-ref": "pkg:npm/%40boardoor/ui@0.1.0-alpha.1",
       "licenses": [
         {
           "license": {
@@ -39,9 +39,9 @@
         }
       ],
       "name": "@boardoor/ui",
-      "purl": "pkg:npm/%40boardoor/ui@0.1.0-alpha.0",
+      "purl": "pkg:npm/%40boardoor/ui@0.1.0-alpha.1",
       "type": "library",
-      "version": "0.1.0-alpha.0"
+      "version": "0.1.0-alpha.1"
     },
     {
       "bom-ref": "pkg:npm/boardgame.io@0.50.2",
@@ -302,7 +302,7 @@
         },
         {
           "name": "boardoor:modifications",
-          "value": "Boardoor inlines Johannes Baagøe's Alea algorithm as distributed by seedrandom, converts it to TypeScript, and exposes state capture and restore for deterministic game and bot execution."
+          "value": "Boardoor inlines Johannes Baag\u00f8e's Alea algorithm as distributed by seedrandom, converts it to TypeScript, and exposes state capture and restore for deterministic game and bot execution."
         }
       ],
       "purl": "pkg:npm/seedrandom@3.0.5",
@@ -369,8 +369,8 @@
   "dependencies": [
     {
       "dependsOn": [
-        "pkg:npm/%40boardoor/core@0.1.0-alpha.0",
-        "pkg:npm/%40boardoor/ui@0.1.0-alpha.0"
+        "pkg:npm/%40boardoor/core@0.1.0-alpha.1",
+        "pkg:npm/%40boardoor/ui@0.1.0-alpha.1"
       ],
       "ref": "boardoor-sdk-0.1.0-alpha.0"
     },
@@ -394,17 +394,17 @@
         "pkg:npm/rfc6902@5.2.0",
         "pkg:npm/seedrandom@3.0.5"
       ],
-      "ref": "pkg:npm/%40boardoor/core@0.1.0-alpha.0"
+      "ref": "pkg:npm/%40boardoor/core@0.1.0-alpha.1"
     },
     {
       "dependsOn": [
-        "pkg:npm/%40boardoor/core@0.1.0-alpha.0",
+        "pkg:npm/%40boardoor/core@0.1.0-alpha.1",
         "pkg:npm/react-dom@19.2.7",
         "pkg:npm/react-i18next@17.0.9",
         "pkg:npm/react@19.2.7",
         "pkg:npm/tailwindcss@4.3.3"
       ],
-      "ref": "pkg:npm/%40boardoor/ui@0.1.0-alpha.0"
+      "ref": "pkg:npm/%40boardoor/ui@0.1.0-alpha.1"
     },
     {
       "dependsOn": [],
