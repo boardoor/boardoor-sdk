@@ -1,9 +1,8 @@
 # Release policy
 
 - Public packages use SemVer and begin with prereleases. `@boardoor/core@0.1.0-alpha.0` and
-  `@boardoor/ui@0.1.0-alpha.0` were published on 2026-07-26 with OIDC provenance. Both carry the
-  `next` tag; `latest` also points at them only because no other version exists yet, and it moves
-  to the first stable release.
+  `@boardoor/ui@0.1.0-alpha.0` were published on 2026-07-26 with OIDC provenance. Alpha.1 was published on 2026-09-11 and now carries `next` for both packages;
+  `latest` remains alpha.0 pending a separate stable-promotion decision.
 - Alpha releases may contain breaking changes. Each breaking change requires a changelog entry
   and migration note.
 - `@boardoor/core` and the private `@boardoor/core-server` share an exact tested identity; the
