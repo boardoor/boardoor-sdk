@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0-alpha.1 (release candidate)
+## 0.1.0-alpha.1 (2026-09-11)
 
 - Core: make the development debug-panel toggle text readable in light themes by
   pairing its dark background with explicit light text.
